@@ -1,0 +1,54 @@
+<p>
+  Your Application for the Independent washer program has been received!
+</p>
+
+<p>
+  If your application is accepted, you will receive an email with a link to download the FreshAndTumble Washer App, as well as instructions for completing further Activation Steps.
+</p>
+
+Your Application:
+<br>
+
+Full Name: <%= @washer.full_name.upcase%>
+<br>
+
+Email: <%= @washer.email.upcase%>
+<br>
+
+Phone: <%= @washer.phone.upcase%>
+<br>
+
+Selected Region: <%= @region.area.upcase%>
+<br>
+
+Do you currently live in the city area selected above?: <%= @washer.live_within_region ? "YES" : "NO"%>
+<br>
+
+Are you 21 or older? <%= @washer.min_age ? "YES" : "NO"%>
+<br>
+
+Are you legally able to work in the United States of America? <%= @washer.legal_to_work ? "YES" : "NO"%>
+<br>
+
+Do you have a Washer, Dryer, and clean environment to process Laundry Orders? <%= @washer.has_equipment ? "YES" : "NO"%>
+<br>
+
+Do you have a valid Drivers License? <%= @washer.valid_drivers_license ? "YES" : "NO"%>
+<br>
+
+Do you have valid Car Insurance with Gig Economy Coverage on the vehicle you plan to use for pickup and delivery? <%= @washer.valid_car_insurance_coverage ? "YES" : "NO"%>
+<br>
+
+Do you have reliable and adequate transportation to pick up and deliver FreshAndTumble.com laundry Orders within 24 hours after pickup? <%= @washer.reliable_transportation ? "YES" : "NO"%>
+<br>
+
+Do you have a valid Social Security Number? (SSN) <%= @washer.valid_ssn ? "YES" : "NO"%>
+<br>
+
+If accepted, do you consent to a Criminal Background Check? <%= @washer.consent_to_background_check ? "YES" : "NO"%>
+<br>
+
+Are you able to safely lift up to 30 lbs? <%= @washer.can_lift_30_lbs ? "YES" : "NO"%>
+<br>
+
+Do you have a disability or require special accomodations related to a disability? <%= @washer.has_disability ? "YES" : "NO"%>

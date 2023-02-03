@@ -1,0 +1,59 @@
+<%= tag :input, type: 'hidden', id: 'flash', value: flash.any? ? flash[:notice] : nil %>
+<%= tag :input, type: 'hidden', id: 'form_authenticity_token', value: form_authenticity_token %>
+
+<div class="w-full px-4">
+  <% if current_user.has_active_subscription? %>
+    <div class="max-w-sm bg-white rounded border border-gray-400 mx-auto py-4 px-8 mt-6">
+      <h3 class="text-center font-black mb-2 text-primary">
+        TUMBLE SUBSCRIPTION
+      </h3>
+
+      <div class="flex flex-row justify-between items-center">
+        <h3 class="font-black text-sm text-gray-900">
+          STATUS
+        </h3>
+
+        <h3 class="font-black text-sm text-green-600">
+          ACTIVE
+        </h3>
+      </div>
+
+      <div class="flex flex-row justify-between items-center">
+        <h3 class="font-black text-sm text-gray-900">
+          ACTIVATED
+        </h3>
+
+        <h3 class="font-black text-sm text-gray-900">
+          <%= current_user.readable_subscription_activated_at%>
+        </h3>
+      </div>
+
+      <div class="flex flex-row justify-between items-center">
+        <h3 class="font-black text-sm text-gray-900">
+          PRICE
+        </h3>
+
+        <h3 class="font-black text-sm text-gray-900">
+          $<%= @subscription.price%> /mo
+        </h3>
+      </div>
+
+      <div class="flex flex-row justify-between items-center mb-8">
+        <h3 class="font-black text-sm text-gray-900">
+          AUTOMATICALLY RENEWS
+        </h3>
+
+        <h3 class="font-black text-sm text-gray-900">
+          <%= current_user.readable_subscription_renewell_date%>
+        </h3>
+      </div>
+
+      <%= link_to 'Cancel Subscription', users_dashboards_settings_update_subscriptions_path(id: 1), class: 'block py-1 px-4 rounded bg-white text-sm text-red-600 font-bold border-2 border-red-600 text-center', data: {confirm: 'Are you sure?'},  method: :delete %>
+    </div>
+  <% end %>
+</div>
+
+<%= javascript_pack_tag 'src/components/general/FlashRenderer'%>
+
+
+

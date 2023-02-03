@@ -1,0 +1,39 @@
+<% provide(:title, "REATTEMPT DELIVERIES")%>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+<%= render partial: 'workers/dashboards/item_list_header', locals: { 
+    heading: 'Reattempt Delivery',
+    ion_icon: 'refresh-outline'
+  }%>
+
+<div class="w-full h-screen py-2 px-4 bg-gray-200">
+
+  <div class="w-full mb-2">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @orders.any? %>
+    <%# <%= render 'layouts/workers/dashboards/open_appointments/open-appointment-sort-header'%> 
+    <% @orders.each do |order| %>
+
+      <%= render partial: 'workers/dashboards/reattempt_deliveries/reattempt_delivery_item',
+      locals: {
+        order: order,
+        courier_problems: order.courier_problems
+      }
+      %>
+    <% end %>
+  <% else %>
+    <h2 class="font-bold text-center">
+      There are no reattempts currently.
+    </h2>
+  <% end %>
+</div>
+
+<%= javascript_pack_tag 'workers/courier/tasks/copy-address'%>

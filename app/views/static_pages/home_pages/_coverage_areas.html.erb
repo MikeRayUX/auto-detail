@@ -1,0 +1,32 @@
+<div class="w-full m-auto px-4">
+
+<div class="w-full m-auto">
+  <h1 class="text-gray-900 text-3xl text-center font-bold leading-tight mb-6">
+    Our Coverage Area
+  </h1>
+</div>
+
+  <div class="flex-column justify-center items-center">
+    <% @cities1.each do |c1|%>
+      <h3 class="text-xl text-center mb-4 text-gray-900 lg:text-3xl">
+        <%=c1%>
+      </h3>
+    <% end %>
+
+    <% @cities2.each do |c2|%>
+      <h3 class="text-xl text-center mb-4 text-gray-900 lg:text-3xl">
+        <%=c2%>
+      </h3>
+    <% end %>
+
+    <% @cities3.each do |c3|%>
+      <h3 class="text-xl text-center mb-4 text-gray-900 lg:text-3xl">
+        <%=c3%>
+      </h3>
+    <% end %>
+    
+    <h3 class="text-xl text-center mb-4 text-gray-900 lg:text-3xl">
+    And More...
+    </h3>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
+
+/* How you import this will depend heavily on your build setup
+If using webpack though, `~` refers to node_modules */
+/* @import '~loaders.css/src/animations/line-scale.scss' */
+
+.loader-hidden {
+  display: none;
+  width: 16px;
+  height: 16px;
+}
+.loader-active {
+  display: block;
+}
+
+.flashReg {
+  @apply w-full py-4 px-4 rounded bg-gray-200;
+}
+
+.flashRegText {
+  @apply text-base text-center font-bold text-gray-900;
+}
+
+.flashWhite {
+  @apply w-full py-2 px-4 rounded bg-white;
+}
+
+.flashwhiteText {
+  @apply text-base text-center font-bold text-gray-900;
+}
+
+.flashWarning {
+  @apply w-full py-4 px-4 rounded bg-orange-200;
+}
+
+.flashWarningText {
+  @apply text-base text-center font-bold text-gray-900;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d70cf5;
+}

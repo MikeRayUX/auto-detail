@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= yield(:title) %> | Fresh & Tumble</title>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    <%= render 'layouts/rails_default_head' %>
+    <%= render 'layouts/font_import_links' %>
+    <%= stylesheet_link_tag "application", media: 'all' %>
+
+    <meta name="msvalidate.01" content="0E23E20BA0173B960B134749B26426CF" />
+		    
+    <%= render 'layouts/users/analytics/google'%>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <%= stylesheet_pack_tag 'application' %>
+  </head>
+
+  <body class="bg-gray-100">
+    <%= render 'users/dashboards/customer_navbar'%>
+    <%= yield %>
+    <%= javascript_pack_tag 'users/navbar_toggler'%>
+    <%= javascript_pack_tag 'application' %>
+  </body>
+</html>

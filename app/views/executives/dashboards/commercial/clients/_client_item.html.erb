@@ -1,0 +1,91 @@
+  <div class="w-1/2 bg-white border px-6 py-4">
+    <div class="">
+        <div class="flex flex-row justify-between items-start">
+          <div class="flex-column justify-center items-center">
+            <div class="flex flex-row justify-start items-center mb-1">
+              <h3 class="font-bold text-xl text-left mr-1">
+                <%= link_to client.name.titleize,executives_dashboards_commercial_client_path(client.id), class: 'underline text-link-blue font-bold' %>
+              </h3>
+            </div>
+
+            <div class="">
+              <%= link_to "tel:#{client.phone}", class: "flex flex-row justify-start items-center " do %>
+                <ion-icon name="call" class="font-bold mr-1 text-base text-link-blue"></ion-icon>
+                <span class="text-base text-link-blue font-bold ">
+                  <%=client.readable_phone%>
+              </span> 
+              <% end %>
+            </div>
+
+            <div class="">
+              <h3 class="text-base flex flex-row justify-start items-center">
+                <ion-icon name="home" class="font-bold mr-1 text-base text-gray-900"></ion-icon>
+                <span class="font-bold text-gray-900 ">
+                  Locations (<%= client.addresses.count%>)
+                </span> 
+              </h3>
+            </div>
+
+            <div class="">
+              <h3 class="text-base flex flex-row justify-start items-center">
+                <ion-icon name="person-circle-outline" class="font-bold mr-1 text-base text-gray-900"></ion-icon>
+                <span class="font-bold text-gray-900 ">
+                  <%=client.contact_person.titleize%>
+                </span> 
+              </h3>
+            </div>
+
+            <div class="">
+              <h3 class="text-base flex flex-row justify-start items-center">
+                <ion-icon name="cash-outline" class="font-bold mr-1 text-base text-gray-900"></ion-icon>
+                <span class="font-bold text-gray-900 ">
+                  <%=client.readable_price_per_pound%>
+                </span> 
+              </h3>
+            </div>
+          </div>
+
+          <%# current usage %>
+          <div>
+            <div class="bg-gray-200 px-2 flex flex-row justify-start items-center">
+              <p class="text-base text-gray-900 text-center mr-2 tracking-tighter">
+                Usage:
+              </p>
+
+              <% if client.has_usage?%>
+                <h3 class="text-lg font-bold text-gray-900 tracking-tighter mr-1">
+                  <%= client.readable_current_charge%>
+                </h3>
+
+                <h3 class="text-base font-bold text-gray-900 tracking-tighter">
+                  (<%= client.current_usage%> lbs)
+                </h3>
+              <% else %>
+                <h3 class="text-base font-bold text-gray-900 tracking-tighter">
+                  $0
+                </h3>
+              <% end %>
+            </div>
+          </div>
+      </div>
+
+      <div class="mt-4 h-40">
+        <h3 class="text-base flex justify-start items-center">
+          <ion-icon name="calendar" class="font-bold mr-1 text-base text-gray-900"></ion-icon>
+           
+          <span class="font-bold text-gray-900">
+             Schedule: <%= client.readable_pickup_window%>
+             <%= link_to 'Edit', executives_dashboards_commercial_client_path(id: client.id), class: 'text-xs font-bold text-white py-1 px-2 rounded bg-blue-600'%>
+          </span>
+          
+        </h3>
+        <% client.pickup_days.each do |day|%>
+          <% if day[:pickup] %>
+            <p class="ml-2 text-sm">
+              <%= day[:day].capitalize%>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+</div>

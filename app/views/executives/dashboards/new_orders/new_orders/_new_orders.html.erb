@@ -1,0 +1,56 @@
+<div  class="w-full p-2 flex flex-row justify-start items-center bg-gray-800 ">
+  <p class="w-3/12 text-xs font-black text-white">ORDERS (<%=@orders.count%>) TYPE</p>
+  <p class="w-3/12 text-xs font-black text-white">CUSTOMER</p>
+  <p class="w-3/12 text-xs font-black text-white">WASHER</p>
+  <p class="w-2/12 text-xs font-black text-white">STATUS</p>
+  <p class="w-2/12 text-xs font-black text-white">REGION</p>
+  <p class="w-2/12 text-xs font-black text-white">LAST UPDATED</p>
+</div>
+
+<div style="height: 500px" class="w-full bg-gray-300  overflow-y-scroll mb-2">
+  <% orders.each do |o|%>
+    <% @bg_color = 'bg-gray-300'%>
+
+    <% if o.expired?%>
+      <% @bg_color = 'bg-red-200'%>
+    <% end %>
+
+    <% if o.cancelled_at%>
+      <% @bg_color = 'bg-red-400'%>
+    <% end %>
+
+    <% if o.expires_soon?%>
+    <% @bg_color = 'bg-yellow-200'%>
+    <% end %>
+
+  <div class="block w-full <%=@bg_color %> border-b py-3 px-2 flex flex-row justify-start items-center">
+    <%# TYPE %>
+    <p class="w-3/12 text-xs font-black text-gray-900">
+      <%= link_to "#{o.pickup_type.upcase} (#{o.bag_count} bags)", executives_dashboards_new_orders_new_order_path(id: o.ref_code), class: 'w-2/12 text-xs font-black text-link-blue underline'%>
+    </p>
+
+    <%# CUSTOMER %>
+    <%= link_to o.user.full_name.upcase, executives_dashboards_users_customer_path(id: o.user.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+
+    <%# WASHER %>
+    <% if o.washer.present? %>
+      <%= link_to "#{o.washer.abbrev_name.upcase} ($#{readable_decimal(o.washer_final_pay)})", executives_dashboards_washers_washer_path(id: o.washer.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+    <% else %>
+      <p class="w-3/12 text-xs font-black text-red-600">N/A</p>
+    <% end %>
+
+    <%# STATUS %>
+    <p class="w-2/12 text-xs font-black  text-gray-900">
+      <%= o.status.upcase%>
+    </p>
+
+    <%# REGION %>
+    <%= link_to o.region.area.upcase, executives_dashboards_regions_region_path(o.region.id), class: 'w-2/12 text-xs font-black text-link-blue underline'%>
+
+    <%# CREATED %>
+    <p class="w-2/12 text-xs font-black text-gray-900">
+    <%= readable_date_with_time(o.updated_at).upcase%>
+    </p>
+  </div>
+  <% end %>
+</div>

@@ -1,0 +1,40 @@
+<% provide(:title, "Commercial Laundry Service | FRESHANDTUMBLE.COM ")%>
+
+<% if @banner%>
+  <%= render partial: 'static_pages/banner',
+    locals:  {
+    body_text: @banner.body_text,
+    link_text: @banner.link_text,
+    link_url: @banner.link_url,
+  }
+  %>
+<% end %>
+
+<%= render partial: 'static_pages/commercial_pages/hero_section'%>
+
+<div class="my-10 sm:my-20">
+  <%= render partial: 'static_pages/commercial_pages/pricing_card'%>
+</div>
+
+<div class="my-10 sm:my-20">
+  <%= render partial: 'static_pages/commercial_pages/no_bullshit'%>
+</div>
+
+<div class="my-10 sm:my-20">
+  <%= render partial: 'static_pages/commercial_pages/what_you_need'%>
+</div>
+
+<div class="my-10 sm:my-20">
+  <%= render partial: 'static_pages/home_pages/coverage_areas'%>
+</div>
+
+<div class="mt-10 sm:mt-20 py-4 bg-gray-100">
+  <%= render partial: 'static_pages/commercial_pages/faq/questions'%>
+  <%= render partial: 'static_pages/faq/module'%>
+</div>
+
+<div>
+  <%= render partial: 'static_pages/commercial_pages/footer'%>
+</div>
+
+<%= javascript_pack_tag 'static_pages/faq-module'%>

@@ -1,0 +1,51 @@
+<% provide(:title, "Ready For Delivery")%>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+<%= render partial: 'workers/dashboards/item_list_header', locals: { 
+    heading: 'Ready For Delivery',
+    ion_icon: 'cube-outline'
+  }%>
+
+<div class="w-full h-screen py-2 px-4 bg-gray-200">
+  <div class="w-full mb-2">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+        <%= render partial: 'workers/dashboards/ready_for_deliveries/ready-for-delivery-item',
+          locals: {
+            order: order,
+            address: order.user.address,
+            partner_location: order.partner_location
+          }
+          %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.any?%>
+    <% @commercial_pickups.each do |pickup|%>
+      <%= render partial: 'workers/dashboards/ready_for_deliveries/commercial-ready-for-delivery-item',
+        locals: {
+          pickup: pickup,
+          client: pickup.client,
+          partner_location: pickup.partner_location
+        }
+      %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.none? && @orders.none? %>
+    <h2 class="font-bold text-center">
+      There are no deliveries at the moment. Check back later.
+    </h2>
+  <% end %>
+</div>
+
+<%= javascript_pack_tag 'workers/courier/tasks/copy-address'%>

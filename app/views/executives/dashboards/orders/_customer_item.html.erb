@@ -1,0 +1,22 @@
+<div class="px-4 py-2 border rounded my-2 ">
+  <div class="mb-1 flex justify-between items-center">
+    <h3 class="text-xs text-gray-900">
+        Customer
+    </h3>
+
+    <%= link_to 'View/Edit', '#', class: 'text-xs text-white px-2 rounded bg-blue-600'%>
+  </div>
+
+  <h3 class="text-sm text-gray-900 font-bold flex flex-row justify-start items-center">
+    <%=user.full_name.upcase%>
+  </h3>
+
+  <h3 class="text-sm text-gray-900 font-bold flex flex-row justify-start items-center">
+    <%=user.email.upcase%>
+  </h3>
+
+  <%= link_to user.formatted_phone, "tel:#{user.phone}", class: "flex flex-row justify-start items-center underline font-bold text-link-blue text-sm" %>
+
+  <%= link_to order.full_address.upcase, order.google_nav_link, target: '_blank', class: 'underline text-link-blue font-bold text-sm'%>
+  
+</div>

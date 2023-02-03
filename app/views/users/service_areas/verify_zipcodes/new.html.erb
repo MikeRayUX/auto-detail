@@ -1,0 +1,37 @@
+<% provide(:title, "Sign In")%>
+
+<%# top line %>
+<div class="w-full py-1 bg-primary "></div>
+
+<div class="w-full bg-gray-200 px-2">
+  <% flash.each do |message_type, message| %>
+    <%= render partial: 'users/dashboards/flash_messages', locals: { message: message }%>
+  <% end %>
+</div>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-10 bg-white">
+  <div class="w-full p-4 sm:p-2 max-w-xl mx-auto bg-white flex-column sm:border sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+    <h1 class="font-black text-gray-900 text-lg  text-center mb-4">
+      👋 LET'S CHECK YOUR ZIPCODE
+    </h1>
+
+    <%= form_for :zipcode, url: {controller: 'users/service_areas/verify_zipcodes', action: 'create'} do |f| %>
+      <div class="w-full">
+        <div class="w-full flex-column justify-center items-center">
+
+        <div class="w-full mb-4 sm:mr-4">
+          <%= f.label :zipcode, class: 'hidden'%>
+          <%= f.text_field :zipcode, autofocus: true, :placeholder => "ex: 98321", value: "", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+        </div>
+
+      <%= f.submit 'Check', class: 'w-full block py-4 px-4 bg-primary text-white font-bold text-lg sm:text-xl' %>
+      <% end %>
+    </div>
+      </div>
+  </div>
+
+</div>
+
+
+
+  

@@ -1,0 +1,35 @@
+<div class="w-full border p-4 mb-4 bg-white rounded-lg sm:max-w-xl sm:mx-auto">
+
+  <p class="font-bold text-lg text-left text-gray-900"> 
+    <%= order.formatted_appointment %>
+  </p>
+
+  <div class="mt-2 mb-4">
+      <p class="text-sm">
+        <%= order.user.full_name.upcase %>
+        <% if order.from_new_customer? %>
+          <span class="px-2 rounded-full bg-gray-900 text-white text-center ml-1 text-xs">
+            New!
+          </span>
+        <% end %>
+      </p>
+
+      <span class="hidden"><%=order.reference_code%></span>
+
+      <p class="text-sm">
+        <%= link_to order.full_address.upcase, order.google_nav_link, target: '_blank', class: 'font-bold text-link-blue underline'%>
+        <ion-icon class="text-xs text-link-blue" name="navigate-outline"></ion-icon>
+      </p>
+  </div>
+
+  <div class="flex flex-row justify-between items-center">
+    <button
+      class="copy-address-button block w-1/2 bg-blue-500 rounded-md text-white py-2 mr-6 text-center"
+      data-clipboard-text="<%= order.routable_address%>"
+    >
+      Copy address    
+    </button>
+
+    <%= link_to "Start Pickup", workers_courier_tasks_pickup_from_customer_step1_path(id: order.id), class: "block w-1/2 bg-orange-500 text-white py-2 text-center", data: {confirm: "Viewing this stop will start your pickup, as well as inform the customer that you are enroute to them. This can't be undone. Are you sure?"} %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<%= tag :meta, name: "customer_lat_lng", content: @address.lat_lng %>
+<input type="hidden" id="form_authenticity_token" value="<%=form_authenticity_token %>">
+<%= tag :input, type: 'hidden', name: 'detergent_value', value: @order.detergent %>
+<%= tag :input, type: 'hidden', name: 'softener_value', value: @order.softener %>
+<%= tag :input, type: 'hidden', name: 'bag_count', value: @order.bag_count %>
+
+<%= tag :input, type: 'hidden', name: 'base_url', value: request.base_url%>
+
+<%= render partial: 'users/dashboards/current_address_header', locals: {
+  user: current_user}
+%>
+
+<%= javascript_pack_tag 'src/components/users/dashboards/new_order_flow/scheduled_pickups/New' %>

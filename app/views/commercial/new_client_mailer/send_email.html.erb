@@ -1,0 +1,142 @@
+  <body style="font-family: montserrat, arial;padding: 0;width: 100%;margin: 0;-webkit-text-size-adjust: 100%;-webkit-border-radius: 3px;border-radius: 3px;text-size-adjust: 100%;color: #201F26; padding-left; 10px;padding-right: 10px;">
+    <table style="font-family: montserrat, arial;max-width: 454px;margin: auto;text-align: left;line-height: 25px;font-size: 16px;">
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <th style="font-family: montserrat, arial;padding: 3px 0;font-weight: 400;background: #d70cf5;">
+
+        </th>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 36px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          Hi <%= @client.contact_person.titleize%>,
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-medium" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          Thank you for choosing us to provide laundry service for your distinguished customers.
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-medium" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          Here's your new account details:
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial; text-align: center; ">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 15px;">
+          <span style="font-family: montserrat, arial; padding-right: 10px">
+              Business Name: 
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;">
+              <%= @client.name.titleize %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 15px;">
+          <span style="font-family: montserrat, arial; padding-right: 10px">
+              Phone: 
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;">
+              <%= @client.readable_phone %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 15px;">
+          <span style="font-family: montserrat, arial; padding-right: 10px">
+              Locations For Service(<%=@client.addresses.count%>): 
+          </span>
+        </td>
+      </tr>
+
+      <% @client.addresses.each do |address|%>
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 15px;">
+            <span style="font-family: montserrat, arial; padding-right: 10px; font-weight: 700;">
+                <%= address.full_address.upcase%> 
+            </span>
+          </td>
+        </tr>
+      <% end %>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 15px;">
+          <span style="font-family: montserrat, arial; padding-right: 10px; ">
+              Price: 
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial; font-weight: 700;">
+              <%= @client.readable_price_per_pound %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 15px;">
+          <span style="font-family: montserrat, arial; padding-right: 10px; ">
+              Pickup Window: 
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial; font-weight: 700;">
+              <%= @client.readable_pickup_window %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 10px;">
+          <span style="font-family: montserrat, arial; padding-right: 10px;">
+              Pickup Days: 
+          </span>
+        </td>
+      </tr>
+
+      <% @client.pickup_days.each do |day|%>
+        <% if day[:pickup] %>
+          <tr style="font-family: montserrat, arial;text-align: center;">
+            <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px; padding-bottom: 5px;">
+              <span style="font-family: montserrat, arial; padding-left: 60px; font-weight: 700;">
+                    <%= day[:day].capitalize%>
+              </span>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 10px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          If you spot any errors, don't panic! Call us and we will fix them right away. (206)414-9538
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 10px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          Laundry service is billed once a week on saturdays after 5pm based on your current laundry service usage for that week. 
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 10px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          If you have any questions or concerns, please feel free to call us (8am-5pm) mon-sat (206)414-9538
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-left: 10px; padding-right: 10px; padding-top: 20px;">
+        <span style="font-family: montserrat, arial;font-weight: 700;">
+          
+          Thank You For Choosing FRESHANDTUMBLE.COM!
+        </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="copyright-notice" style="font-family: montserrat, arial;text-align: left;font-size: 12px;color: gray;padding-left: 10px; padding-right: 10px;">
+           © <%= Date.current.year %> Fresh And Tumble LLC
+        </td>
+      </tr>
+
+    </table>
+  </body>

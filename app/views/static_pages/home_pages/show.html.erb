@@ -1,0 +1,15 @@
+<% provide(:title, "Seattle On Demand Laundry Service | No Pickup Fee or Delivery Fee ")%>
+
+<%= render partial: 'static_pages/home_pages/hero_section'%>
+
+<div class="lg:max-w-5xl lg:flex lg:justify-between lg:items-center lg:mx-auto">
+  <%= render partial: 'static_pages/home_pages/pricing_card'%>
+  <%= render partial: 'static_pages/home_pages/how_it_works'%>
+</div>
+
+<div class="mt-20 py-4 bg-gray-100 ">
+  <%= render partial: 'static_pages/faq/questions'%>
+  <%= render partial: 'static_pages/faq/module'%>
+</div>
+  
+<%= javascript_pack_tag 'static_pages/faq-module'%>

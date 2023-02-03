@@ -1,0 +1,22 @@
+<% provide(:title, "Dashboard Home")%>
+
+<%= render partial: 'users/dashboards/current_address_header', locals: {
+  user: current_user}
+%>
+  <% flash.each do |message_type, message| %>
+    <%= render partial: 'users/dashboards/flash_messages', locals: { message: message }%>
+  <% end %>
+
+  <% if current_user.not_ordered_yet? %>
+    <%= render partial: 'users/dashboards/flash_messages', locals: { message: '👋 Welcome to your dashboard!' }%>
+  <% else %>
+    <%= render partial: 'users/dashboards/flash_messages', locals: { message: "👋 Welcome back #{current_user.first_name}!"}%>
+  <% end %>
+
+<div class="w-full py-4 px-4 max-w-4xl mx-auto">
+<% if @order %>
+  <%= link_to 'TRACK YOUR ORDER', users_dashboards_new_order_flow_track_pickup_path(@order.ref_code), class: 'block w-full bg-primary text-center text-lg mt-10 py-4 font-bold text-white rounded-full sm:w-3/5 sm:m-auto sm:mt-10' %>
+<% else %>
+  <%= link_to 'START A PICKUP', users_resolve_setups_path, class: 'block w-full bg-primary text-center text-lg mt-10 py-4 font-bold text-white rounded-full sm:w-3/5 sm:m-auto sm:mt-10' %>
+<% end %>
+</div>

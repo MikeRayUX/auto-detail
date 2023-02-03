@@ -1,0 +1,52 @@
+<div class="w-full lg:max-w-sm rounded bg-white lg:ml-4">
+    <div class="w-full p-2">
+      <h3 class="font-black text-xs text-left flex flex-row justify-center items-center  pt-1">
+        <p class="mr-2  bg-orange-500" style="height: 10px; width: 10px;"></p>  
+        SUPPORT TICKETS
+      </h3>
+    </div>
+    <div style="height: 500px;"class="px-2 overflow-y-scroll ">
+      <% if @support_tickets.any? %>
+        <% @support_tickets.all.each do |ticket|%>
+          <div class="bg-gray-200 py-2 mb-2 px-2">
+            <div class="w-full flex flex-row justify-between items-center">
+              <h3 class="text-xs font-black text-center text-gray-900 ">
+                SUBMITTED: 
+                <%= link_to readable_date_with_time(ticket.created_at).upcase, executives_dashboards_support_support_ticket_path(id: ticket.id), class: 'text-xs font-black text-link-blue underline'%>
+              </h3> 
+
+              <h3 class="text-xs font-black text-left px-1 ">
+                
+              </h3>
+            </div>
+
+            <h3 class="text-xs font-black text-left ">
+              REPLIES: <%= ticket.support_ticket_replies.count%>
+            </h3> 
+
+            <h3 class="text-xs font-black">
+              LAST REPLY:
+              <% if ticket.support_ticket_replies.any?%>
+                <%= readable_date_with_time(ticket.support_ticket_replies.last.created_at)%>
+              <% else %>
+                NEVER
+              <% end %>
+            </h3>  
+
+            <h3 class="text-xs font-black">
+              SUMMARY: 
+            </h3>
+
+            <h3 class="text-xs font-bold">
+              "<%= truncate_attribute(ticket.body, 75) %>" 
+            </h3>
+          </div>
+        <% end %>
+          </div>
+      <% else %>
+        <h3 class="text-xs font-black text-center mb-2 ">
+          Nothing to show
+        </h3>
+      <% end %>
+  </div>
+</div>

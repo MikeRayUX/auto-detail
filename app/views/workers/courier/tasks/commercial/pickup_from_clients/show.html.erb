@@ -1,0 +1,171 @@
+<% provide(:title, "Pickup From Customer")%>
+<div class="h-screen bg-gray-200">
+
+  <div class="w-full bg-gray-900 py-2">
+    <p class="font-bold text-lg text-center text-white">
+      Pick Up From Commercial Customer
+    </p>
+  </div>
+
+  <div class="w-full">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="max-w-lg mx-auto p-4 bg-white">
+    <%= link_to "<Back", workers_dashboards_open_appointments_path, class: "text-link-blue font-bold text-xl py-2 font-bold mb-2" %>  
+
+    <div class="mt-4 py-2 my-2">
+      <p class="text-lg font-bold">
+        <%= @client.name.upcase %>
+      </p>
+
+      <p class="text-lg font-bold">
+        <%= @pickup.formatted_appointment%>
+      </p>
+
+      <p class="text-lg">
+        <%= link_to @pickup.full_address.upcase, @pickup.google_nav_link, target: :_blank, class: 'text-link-blue underline font-bold'%>
+      </p>
+
+      <p class="text-lg font-bold">
+        Contact Person: <%= @client.contact_person.upcase %>
+      </p>
+
+      <div class="my-2">
+        <p class="text-base font-bold mb-2">
+          Instructions:
+        </p>
+
+        <p class="text-base bg-gray-200 rounded py-2 px-2">
+          <% if @pickup.pick_up_directions%>
+            "<%=@pickup.pick_up_directions%>"
+          <% else %>
+            "none"
+          <% end %>
+        </p>
+      </div>
+    </div>
+
+    <div class="w-full border-b my-2 py-2">
+      <div class="w-full flex-column justify-start">
+        <p class="flex flex-row justify-start items-center text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4">
+            1
+          </span>
+          Print Bag Labels
+        </p>
+      </div>
+      <div class="my-2 flex flex-row justify-end items-center">
+        <h2 value="0" class="bagCount text-4xl font-bold mr-8">
+          1
+        </h2>
+        <div>
+          <%= link_to '-', '#', class: 'decrementBagCount bg-gray-200 text-2xl text-black py-1 px-4 font-bold mx-1'%>
+          <%= link_to '+', '#', class: 'incrementBagCount bg-gray-200 text-2xl text-black py-1 px-4 font-bold mx-1'%>
+        </div>
+      </div>
+
+      <div class="max-w-lg mx-auto bg-white py-2 qrLabel">
+        <div class="mx-auto w-full text-center">
+          <h1 class="font-bold text-4xl tracking-wider">
+            <%= @label[:code]%> 
+            <span class="labelBagCount">
+              (1 BAGS)
+            </span>
+          </h1>
+          <h1 class="text-center mb-2">
+            <%= @label[:svg_large].html_safe %>
+          </h1>
+          <h1 class="text-center bg-gray-900 text-white mx-auto" style="width: 275px;">
+            COMMERCIAL
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full border-b my-2 mb-8 py-2">
+      <div class="w-full flex-column justify-start">
+        <p class="flex flex-row justify-start items-center text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4">
+            2 
+          </span>
+          Attach Labels To Bags
+        </p>
+      </div>
+      <div class="my-2">
+        <h2 value="0" class="text-lg mr-8">
+          Attach printed labels to bags before continuing.
+        </h2>
+      </div>
+    </div>
+
+    <%= form_tag workers_courier_tasks_commercial_pickup_from_clients_path, method: :put do %>
+
+    <%= hidden_field_tag :id, @pickup.id%>
+    <%= hidden_field_tag :qr_code, @label[:code]%>
+    <%= hidden_field_tag :bag_count, 1%>
+    
+    <%= submit_tag "Complete Pickup", class: "submitButton block w-full py-4 text-center text-gray-900 bg-orange-500 font-bold text-lg", data: {confirm: 'Finished printing labels?'}%>
+    <% end %>
+
+    <div class="my-4">
+       <%= link_to "There's a problem",workers_courier_tasks_rescue_commercial_pickup_from_clients_path(id: @pickup.id), class: 'font-bold text-red-700 my-4' %>
+    </div>
+  </div>
+</div>
+
+<script>
+	// center the generated svg qr code element
+  document.querySelector('svg').setAttribute('style', 'margin: 0 auto 0 auto;')
+
+  const subtractBagsButton = document.querySelector('.decrementBagCount');
+  const addBagsButton = document.querySelector('.incrementBagCount');
+  const showLabelButton = document.querySelector('.submitBagCount');
+  const labelBagCount = document.querySelector('.labelBagCount');
+  const bagCountFormField = document.getElementsByName('bag_count')[0];
+
+  let bagCountElement = document.querySelector('.bagCount')
+  let bagCount = 1
+
+  subtractBagsButton.addEventListener('click', () => {
+    removeBags();
+  })
+  addBagsButton.addEventListener('click', () => {
+    addBags();
+  })
+
+  const addBags = () => {
+    bagCount++;
+    showLabel();
+    updateBagCount();
+  }
+
+  const removeBags = () => {
+    if(bagCount > 1) {
+      bagCount--;
+      updateBagCount();
+      showLabel();
+    }
+  }
+
+  const showLabel = () => {
+    if(bagCount >= 1) {
+      document.querySelector('.qrLabel').style.display = 'block';
+    }
+  }
+
+  const updateBagCount = () => {
+    bagCountElement.setAttribute('value', bagCount);
+    bagCountElement.textContent = bagCount;
+    labelBagCount.innerText = `(${bagCount} BAGS)`;
+    bagCountFormField.value = bagCount;
+  }
+
+  updateBagCount();
+</script>

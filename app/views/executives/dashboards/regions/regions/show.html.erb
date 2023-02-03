@@ -1,0 +1,76 @@
+<%= tag :meta, :name => "google-api-key", :content => GOOGLE_API_KEY %>
+
+<%= tag :input, type: 'hidden', name: 'region', value:  @region.area.upcase %>
+<%= tag :input, type: 'hidden', name: 'business_open', value:  @region.business_open.upcase %>
+<%= tag :input, type: 'hidden', name: 'business_close', value:  @region.business_close.upcase %>
+<%= tag :input, type: 'hidden', name: 'region_id', value:  @region.id %>
+<%= tag :input, type: 'hidden', name: 'tax_rate', value:  readable_percent(@region.tax_rate) %>
+<%= tag :input, type: 'hidden', name: 'washer_pay_percentage', value:  readable_percent(@region.washer_pay_percentage) %>
+<%= tag :input, type: 'hidden', name: 'washer_ppb', value:  readable_decimal(@region.washer_ppb) %>
+<%= tag :input, type: 'hidden', name: 'washer_count', value: "#{@washers.activated.count}/#{@region.washer_capacity}" %>
+<%= tag :input, type: 'hidden', name: 'customers_count', value: "#{@region.addresses.where.not(user_id: nil).count}" %>
+<%= tag :input, type: 'hidden', name: 'coverage_areas', value: @coverage_areas.count %>
+<%= tag :input, type: 'hidden', name: 'max_concurrent_offers', value: @region.max_concurrent_offers%>
+<%= tag :input, type: 'hidden', name: 'stripe_tax_rate_id', value: @region.stripe_tax_rate_id%>
+<%= tag :input, type: 'hidden', name: 'price_per_bag', value: "$#{readable_decimal(@region.price_per_bag)}" %>
+<%= tag :input, type: 'hidden', name: 'failed_pickup_fee', value: "$#{readable_decimal(@region.failed_pickup_fee)}" %>
+
+<% @customers.each do |customer| %>
+  <%= tag :input, type: 'hidden', name: 'customer-lat-lng', value:  customer.lat_lng %>
+<% end %>
+
+<% @washers.activated.each do |washer| %>
+  <%# if washer has completed all signup steps including creating an address %>
+  <% if washer.address && washer.address.latitude && washer.address.longitude%>
+    <%= tag :input, type: 'hidden', name: 'washer-lat-lng', value:  washer.address.lat_lng %>
+  <% end %>
+<% end %>
+
+<% @washers.inactive.each do |washer| %>
+  <%# if washer has completed all signup steps including creating an address %>
+  <% if washer.address && washer.address.latitude && washer.address.longitude%>
+    <%= tag :input, type: 'hidden', name: 'washer-inactive-lat-lng', value:  washer.address.lat_lng %>
+  <% end %>
+<% end %>
+
+<% @washers.deactivated.each do |washer| %>
+  <%# if washer has completed all signup steps including creating an address %>
+  <% if washer.address && washer.address.latitude && washer.address.longitude%>
+    <%= tag :input, type: 'hidden', name: 'washer-inactive-lat-lng', value:  washer.address.lat_lng %>
+  <% end %>
+<% end %>
+
+<div class="mb-6 w-full max-w-5xl mx-auto">
+  <div class="w-full flex flex-row flex-wrap justify-start items-center">
+
+    <% flash.each do |message_type, message| %>
+      <div class="w-full py-4 px-3 rounded bg-green-500 mb-6">
+        <h1 class="text-base text-center text-white font-normal">
+          <%= message%>
+        </h1>
+      </div>
+    <% end %>
+    <div class="w-full bg-gray-500 py-2 mb-2">
+      <h1 class="text-3xl font-bold text-gray-900 flex justify-start items-center">
+        <%= @region.area.titleize%>
+        <%= link_to 'Edit', edit_executives_dashboards_regions_region_path(id: @region.id), class: 'ml-4 text-xs px-2 rounded bg-indigo-800 text-white font-bold'%>
+      </h1>
+    </div>
+  
+    <div class="w-full rounded flex-column justify-start items-center mb-2">
+      <%# react map container start%>
+      <div id="map" style="height: 400px" class="relative w-full shadow bg-white mb-8"></div>
+      <%# react map container end %>
+    </div>
+
+    <%= render partial: 'executives/dashboards/regions/regions/coverage_areas', locals: {coverage_areas: @coverage_areas, region_id: @region.id }%>
+
+    <%= render partial: 'executives/dashboards/new_orders/new_orders/new_orders', locals: {orders: @orders}%>
+
+    <%= render partial: 'executives/dashboards/regions/regions/customers', locals: {addresses: @customers}%>
+
+    <%= render partial: 'executives/dashboards/washers/washers/washers', locals: {washers: @washers}%>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'src/components/executives/dashboards/regions/regions/Map'%>

@@ -1,0 +1,41 @@
+<div class="w-full border p-4 mb-4 bg-white rounded-lg sm:max-w-xl sm:mx-auto">
+
+    <p class="font-bold text-lg text-left text-gray-900"> 
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <%= order.bags_code %>
+    </p>
+
+    <p class="font-bold text-lg text-left text-gray-900"> 
+       ORDER ID:
+      <%= order.reference_code %>
+    </p>
+
+    <div class="my-2">
+      <p class="text-sm">
+        <%= order.user.full_name.upcase %>
+      </p>
+
+      <p class="text-sm">
+        <%= order.full_address.upcase %>
+      </p>
+      <p class="text-sm"> 
+        Attempts:
+        <%= order.delivery_attempts %>
+      </p>
+      <p class="text-sm"> 
+        Since Last Attempt:
+        <%= time_ago_in_words(courier_problems.last.created_at) %>
+      </p>
+    </div>
+
+    <div class="flex flex-row justify-between items-center">	
+      <button 
+        class="copy-address-button block w-1/2 bg-blue-500 rounded-md text-white py-2 mr-6 text-center"
+        data-clipboard-text="<%=order.routable_address%>"
+        >
+          Copy Address
+      </button>
+
+      <%= link_to  'Start Reattempt',workers_courier_tasks_deliver_to_customer_step1_path(id: order.id), class: "block w-1/2 bg-orange-500 text-white py-2 text-center" %>
+    </div>
+</div>

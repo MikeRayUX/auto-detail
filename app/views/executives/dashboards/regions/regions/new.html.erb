@@ -1,0 +1,68 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-2 px-4 rounded bg-gray-200 mb-6">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+  <div class="bg-white p-2 rounded w-full max-w-2xl mb-4 mr-auto">
+    <h3 class="font-bold text-sm mb-2 text-center">
+      NEW REGION +
+    </h3>
+  <%= form_for :region, url: {controller: 'executives/dashboards/regions/regions', action: 'create'} do |f|%>
+
+  <div class="flex flex-row justify-between items-start">
+    <div class="w-1/3 mr-2">
+      <div class="w-full mb-2">
+        <%= f.text_field :area, placeholder: 'Area Name', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :tax_rate, placeholder: 'Tax Rate (e.g. 0.101)', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :stripe_tax_rate_id, placeholder: 'Stripe Tax Rate ID', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+    </div>
+
+    <div class="w-1/3 mr-2">
+      <div class="w-full mb-2">
+        <%= f.text_field :business_open, value: nil, placeholder: 'Business Open ex: 8:00AM', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :business_close, value: nil, placeholder: 'Business Close ex: 8:00PM', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :washer_capacity, value: nil, placeholder: 'Washer Capacity (whole num)', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :price_per_bag, placeholder: 'Price per bag (float)', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+    </div>
+
+    <div class="w-1/3">
+      <div class="w-full mb-2">
+        <%= f.text_field :max_concurrent_offers, placeholder: 'Max Concurrent Offers', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :washer_pay_percentage, placeholder: 'Washer pay percentage', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.text_field :failed_pickup_fee, placeholder: 'Failed Pickup Fee (e.g 6.50)', class: 'pl-2 text-sm h-8 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end items-center">
+    <%= f.submit 'CREATE REGION', class: 'block font-black mt-2 w-full py-2 px-3 bg-green-600 text-xs text-white rounded'%>
+  </div>
+  <% end %>
+</div>

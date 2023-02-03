@@ -1,0 +1,13 @@
+<div class="w-full h-20 px-6 bg-gray-900 border-b shadow-outer flex flex-row justify-end items-center">
+  <div class="flex flex-row justify-center items-center">
+
+    <h3 class="block mr-2 font-bold text-white text-base">
+      <%=current_executive.email%>
+    </h3>
+
+    <%= link_to 'Sidekiq', sidekiq_web_path, target: '_blank', class: 'text-xs py-1 px-2 bg-red-600 text-white rounded mr-1' %>
+
+    <%= link_to 'Sign Out', destroy_executive_session_path, method: :delete, class: 'text-xs py-1 px-2 bg-gray-800 text-white rounded' %>
+
+  </div>
+</div>

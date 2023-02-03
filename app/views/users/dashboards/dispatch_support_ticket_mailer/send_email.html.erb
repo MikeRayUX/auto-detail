@@ -1,0 +1,23 @@
+<p>
+Subject: <%= @ticket.subject%>
+</p>
+<br>
+<% if @ticket.for_order?%>
+<p>
+Order: <%= @ticket.order_reference_code%>
+</p>
+<p>
+Appointment: <%= @ticket.pick_up_appointment%>
+</p>
+<%end%>
+Customer: <%= @ticket.customer_name%>
+</p>
+<p>
+Customer phone: <%= @ticket.customer_phone %>
+<p>
+Issue experienced:
+</p>
+
+<p>
+<%= @ticket.body %>
+</p>

@@ -1,0 +1,36 @@
+<div class="block lg:flex lg:flex-row lg:justify-start lg:items-start">
+  <div class="w-full lg:max-w-sm rounded bg-white">
+    
+    <div class="w-full p-2">
+      <h3 class="font-black text-xs text-left flex flex-row justify-center items-center  pt-1">
+        <p class="mr-2  bg-primary" style="height: 10px; width: 10px;"></p>  
+        EDIT CUSTOMER INFORMATION
+      </h3>
+    </div>
+
+    <div  class="px-4 mb-2">
+      <div class="mb-2 ">
+        <%= form_for :user, url: {controller: 'executives/dashboards/users/customers', action: 'update'}, method: :patch do |f|%>
+          <%= f.hidden_field :id, value: @user.id%>
+
+          <div class="mb-1">
+            <%= f.label :full_name, class: 'text-xs font-bold'%>
+            <%= f.text_field :full_name, value: @user.full_name.upcase, class: 'w-full block text-xs py-3 pl-2 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="mb-1">
+            <%= f.label :email, class: 'text-xs font-bold'%>
+            <%= f.text_field :email, value: @user.email.upcase, class: 'w-full block text-xs py-3 pl-2 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :phone, class: 'text-xs font-bold'%>
+            <%= f.text_field :phone, value: @user.phone.upcase, class: 'w-full block text-xs py-3 pl-2 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <%= f.submit 'Update', class: 'w-full bg-green-500 py-3 px-4 rounded text-white font-bold text-sm'%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

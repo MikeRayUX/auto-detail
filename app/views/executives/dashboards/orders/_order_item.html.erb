@@ -1,0 +1,57 @@
+<div class="w-1/2 bg-white px-6 py-4">
+
+  <div class="w-full mb-2">
+    <div class="w-full flex justify-between items-center">
+      <h3 class="text-gray-900 font-black text-xl ">
+        <%= o.reference_code%>
+      </h3>
+
+      <h3 class="flex flex-row justify-start items-center font-black text-base">
+        Status: <%=o.global_status.upcase%>
+      </h3>
+    </div>
+
+    <% if o.billed?%>
+      <h3 class="text-gray-900 font-black text-base text-right">
+        <%= o.readable_grandtotal %> (<%= o.readable_courier_weight %>)
+      </h3>
+    <% end %>
+
+    <h3 class="text-base text-right font-black">
+      Bags Code:
+      <% if o.bags_code%>
+        <%= o.bags_code %>
+      <% else %>
+        Not yet created
+      <% end %>
+    </h3>
+  </div>
+
+  <% if o.partner_reported_weight.present?%>
+    <h3 class="text-base font-bold flex flex-row justify-start items-center text-gray-900 ">
+      Partner Weight: <%= o.readable_partner_weight %>
+    </h3>
+  <% end %>
+
+  <h3 class="text-base font-bold flex justify-start items-center text-gray-900">
+    Appointment: <%= o.formatted_appointment%>
+  </h3>
+
+  <% if o.picked_up?%>
+    <h3 class="text-base font-bold flex flex-row justify-start items-center text-gray-900">
+      Picked up: <%= o.readable_picked_up_at %>
+    </h3>
+  <% end %>
+
+  <% if o.dropped_off_to_partner_at.present?%>
+    <h3 class="text-base font-bold flex flex-row justify-start items-center text-gray-900">
+      Partner dropoff: <%= o.readable_dropped_off_to_partner_at %>
+    </h3>
+  <% end %>
+
+  <h3 class="text-base font-bold flex flex-row justify-start items-center text-gray-900">
+    <%=o.delivery_status%>
+  </h3>
+
+  <%= render partial: 'executives/dashboards/orders/customer_item', locals: {user: user, order: order}%>
+</div>

@@ -1,0 +1,46 @@
+<%# top line %>
+<div class="w-full py-1 bg-primary "></div>
+<div class="w-full bg-gray-200 px-2 ">
+  <% flash.each do |message_type, message| %>
+    <%= render partial: 'users/dashboards/flash_messages', locals: { message: message }%>
+  <% end %>
+</div>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-20 bg-white">
+  <div class="w-full p-4 sm:p-2 max-w-xl mx-auto bg-white flex-column sm:border sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+    <div class="flex flex-row justify-center items-center mb-0">
+     <%= link_to root_path do %>
+      <%= image_tag 'sign-up/new-color-icon.png', alt: 'pink fresh and tumble circle laundry logo', class:'w-10 mb-2'%>
+      <% end %>
+    </div>
+
+    <h1 class="font-bold text-gray-900 text-xl  text-center mb-4">
+      📧 Sign up for the wait list 
+    </h1>
+
+    <h1 class="font-medium text-gray-900 text-base  text-center mb-4">
+      We'll never spam you. We'll only email you to let you know once we come to your area!
+    </h1>
+
+    <%= form_for :wait_list, url: {controller: 'users/service_areas/wait_lists', action: 'create'} do |f| %>
+
+      <div class="w-full">
+        <div class="w-full flex-column justify-center items-center">
+
+          <div class="w-full mb-4 sm:mr-4">
+            <%= f.label :zipcode, class: ''%>
+            <%= f.text_field :zipcode, value: @zipcode, autofocus: true, :placeholder => "ex: 98321",  class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+          </div>
+
+          <div class="w-full mb-4 sm:mr-4">
+            <%= f.label :email, class: ''%>
+            <%= f.text_field :email, autofocus: true, :placeholder => "Your Email", value: "", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+          </div>
+
+        <%= f.submit 'Signup', class: 'w-full block py-4 px-4 bg-primary text-white font-bold text-lg sm:text-xl' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>

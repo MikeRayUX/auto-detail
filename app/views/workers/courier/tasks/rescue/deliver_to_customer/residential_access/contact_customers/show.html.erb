@@ -1,0 +1,52 @@
+<% provide(:title, "Contact Customer")%>
+
+<div class="h-screen bg-gray-200">
+
+  <div class="w-full bg-red-600 py-2">
+    <p class="font-bold text-lg text-center text-white">
+      ⚠ Problem - Contact Customer
+    </p>
+  </div>
+
+  <div class="max-w-lg mx-auto p-4 bg-white">
+    <%= link_to "<Back", new_workers_courier_tasks_rescue_deliver_to_customer_residential_access_contact_customers_path(id: @order.id), class: "text-link-blue font-bold text-xl py-1 font-bold mb-2" %>  
+
+    <p class="">
+      Contact The Customer:
+    </p>
+
+    <div class="my-4">
+      <p class="font-bold text-lg">
+        <%= @customer.formatted_name %>
+      </p>
+      <p class="font-bold text-lg">
+        <%= @order.full_address.upcase %>
+      </p>
+      <p class="font-bold text-lg">
+        Instructions: <%=@address.readable_pickup_directions%>
+      </p>
+    </div>
+
+    <p class="my-2 text-lg">
+      You must make 
+      <span class="font-bold">
+        at least 1 attempt
+      </span> 
+      to contact the customer before marking this order as 
+      <span class="font-bold text-red-700">
+        unable to pickup order.
+      </span>
+    </p>
+
+    <object>
+      <%= link_to 'Tap to call customer', "tel:#{@customer.formatted_phone}", class: "block w-full py-2 text-center bg-yellow-500 text-gray-900 font-bold text-lg my-8 rounded-full"%>
+    </object>
+
+    <%= link_to "I've Contacted The Customer", workers_courier_tasks_rescue_deliver_to_customer_residential_access_contact_customers_path(
+      id: @order.id,
+      customer_id: @customer.id,
+      problem_encountered: @problem_encountered
+      ), method: :post, data: { confirm: 'Are you sure that you want to continue?' },class: "block w-full py-4 text-center bg-red-600 text-gray-900 font-bold text-lg mb-4"%>
+
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<% provide(:title, "Transactions")%>
+<% if @user.has_payment_method? %>
+	<%= render partial: 'users/dashboards/payment_method_header', locals: { user: current_user }%>
+<% end %>
+
+<% flash.each do |message_type, message| %>
+	<div class="flashReg sm:w-full sm:mx-auto">
+		<h1 class="flashRegText">
+			<%= message %>
+		</h1>
+	</div>
+<% end %>
+
+<% if @user.transactions.any? %>
+	<% @transactions.each do |t|%>
+		<% if t.stripe_subscription_id.present?%>
+			<%= render partial: 'users/dashboards/billings/subscription_transaction_item', locals: {t: t}%>
+		<% else %>
+			<%= render partial: 'users/dashboards/billings/transaction_item', locals: { t: t }%>
+		<% end %>
+	<% end %>
+<% else %>
+	<div class="block py-6 px-4 sm:max-w-screen-sm sm:m-auto sm:p-16 sm:px-24 sm:rounded-lg sm:mt-4">
+		<h1 class="text-gray-900 font-bold text-lg text-center mb-4 sm:text-xl sm:mb-6">
+			There's nothing here yet.
+		</h1>
+	</div>
+<% end %>

@@ -1,0 +1,29 @@
+<div class="max-w-4xl mx-auto px-4 mb-12" id="faq-section">
+  <div class="w-full">
+    <h1 class="text-gray-900 text-xl lg:text-3xl text-center font-bold leading-tight mb-4 ">
+      FAQ
+    </h1>
+
+    <% @questions.each do |question|%>
+      <button class="font-normal w-full bg-primary border-none outline-none text-left py-4 px-4 text-lg text-white cursor-pointer focus:outline-none accordion hover:bg-primary lg:text-xl">
+       <%= question[:title] %>
+      </button>
+
+      <div class="accordion-content px-4 overflow-hidden border bg-white">
+        <% linify_string(question[:answer]).each do |line|%>
+          <p class=" text-gray-900 text-xl my-4 leading-relaxed ">
+            <%= line %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# for accordion animation %>
+<style>
+  .accordion-content {
+  max-height: 0;
+  transition: max-height 0.2s ease-in-out; 
+}
+</style>

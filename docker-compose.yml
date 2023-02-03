@@ -1,0 +1,110 @@
+version: '3'
+services:
+  app:
+    platform: linux/amd64
+    build:
+      context: .
+    # 1GB = 1000000000
+    mem_limit: '1000000000'
+    mem_reservation: '1000000000'
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0' -p 3001"
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - REDIS_HOST=redis
+      - RAILS_ENV
+      # fixes sync of Time.now/Time.current
+      - TZ=America/Los_Angeles
+    volumes:
+      - ./:/usr/src/app:cached
+      - tmp:/usr/src/app/tmp
+      - gems:/usr/local/bundle
+    ports:
+      # - 127.0.0.1:3001:3001
+      # access from LAN device with 192.168.0.12:3001 (ipconfig IPv4 Addres on windows)
+      # 192.168.0.51 (ifconfig | grep inet) on mac
+      - 0.0.0.0:3001:3001
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  # MUST SET MEMORY LIMIT IN DOCKER DESKTOP APP SETTINGS TO 6GB OR MORE TO FIX MEMORY LEAK
+  webpacker:
+    platform: linux/amd64
+    build:
+      context: .
+    command: bash -c "/usr/src/app/bin/webpack-dev-server --max-old-space-size=1000"
+    ports:
+      - 3035:3035
+    volumes:
+      - ./:/usr/src/app:cached
+      - gems:/usr/local/bundle
+    # 1GB = 1000000000
+    # mem_limit: '500000000'
+    # mem_reservation: '500000000'
+  db:
+    platform: linux/amd64
+    image: postgres:11.18-alpine
+    mem_limit: '500000000'
+    mem_reservation: '500000000'
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_PORT=5432
+      # - PGTZ=America/Los_Angeles
+      - TZ=GMT-8
+
+  redis:
+    platform: linux/amd64
+    image: redis:5.0
+    mem_limit: '500000000'
+    mem_reservation: '500000000'
+    volumes:
+      - redis-data:/data
+  sidekiq:
+    platform: linux/amd64
+    image: auto-detail-app:latest
+    mem_limit: '500000000'
+    mem_reservation: '500000000'
+    command: ['bundle', 'exec', 'sidekiq']
+    volumes:
+      - ./:/usr/src/app:cached
+      - tmp:/usr/src/app/tmp
+      - gems:/usr/local/bundle
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - REDIS_HOST=redis
+      - RAILS_ENV
+      # fixes sync of Time.now/Time.current
+      - TZ=America/Los_Angeles
+    tty: true
+    stdin_open: true
+  mailcatcher:
+    platform: linux/amd64
+    mem_limit: '500000000'
+    mem_reservation: '500000000'
+    image: yappabe/mailcatcher
+    ports:
+      - '1025:1025'
+      - '1080:1080'
+  # stripe_cli:
+  #   platform: linux/amd64
+  #   # will prompt to authorize via link if authorization expired
+  #   command: 'listen --api-key sk_test_0d4LHDkpMBhESxsqudQXGMMW --forward-to 192.168.0.12:3001/stripe-cd4a0db6-36b4-4b6d-baba-58877e618553'
+  #   mem_limit: '500000000'
+  #   mem_reservation: '500000000'
+  #   image: stripe/stripe-cli
+  #   ports:
+  #     - '1026:1026'
+  #     - '1081:1081'
+
+volumes:
+  pg-data:
+  redis-data:
+  tmp:
+  gems:

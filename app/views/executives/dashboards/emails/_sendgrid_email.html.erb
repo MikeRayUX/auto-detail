@@ -1,0 +1,84 @@
+  <div style="min-width: 450px; max-height: 600px" class="w-1/3 rounded bg-white mr-4 mb-4 rounded">
+
+    <%# header start%>
+    <div class="w-full flex justify-between items-center border-b border-gray-400 px-4 py-2 bg-gray-800 rounded-t">
+      <div class="flex justify-start items-center">
+        <h3 class="text-sm font-black text-left mr-2 text-white">
+          <%= truncate_attribute(email.description.upcase, 35)%>
+        </h3>
+      </div>
+
+      <div class="flex justify-start items-center">
+      </div>
+
+      <div class="flex justify-end items-center">
+        <%= link_to 'Create Sends', new_executives_dashboards_email_send_path(sendgrid_email_id: email.id), class: 'text-xs py-1 px-2 rounded bg-gray-300 text-white font-bold text-gray-800'%>
+      </div>
+    </div>
+    <%# header end%>
+
+    <div class="p-2">
+      <div class="w-full mb-1">
+        <h3 class="text-xs font-bold text-left">
+          Created at: 
+          <span class="font-normal">
+            <%= readable_date(email.created_at)%>
+            </span>
+        </h3>
+      </div>
+
+      <div class="w-full mb-1">
+        <h3 class="text-xs font-bold text-left">
+          Sendgrid Template Id: 
+          <span class="font-normal">
+            <%= email.template_id%>
+            </span>
+        </h3>
+      </div>
+
+      <div class="w-full mb-1">
+        <h3 class="text-xs font-bold text-left">
+           Emails Sends: 
+          <span class="font-normal ml-1">
+            <% if email.email_sends.any?%>
+              <%= link_to email.email_sends.count, executives_dashboards_email_sends_path(sendgrid_email_id: email.id), class: 'text-xs underline font-bold text-indigo-700'%>
+            <% else %>
+              Never
+            <% end %>
+          </span>
+        </h3>
+      </div>
+
+      <div class="w-full mb-1">
+        <h3 class="text-xs font-bold text-left">
+          Preview link: 
+          <%= link_to 'View on Sendgrid website', email.preview_url, target: '_blank', class: 'ml-1 text-xs font-bold text-indigo-600 underline'%>
+        </h3>
+      </div>
+
+    <%# content start %>
+    <div class="w-full mb-6 px-2">
+      <h3 class="text-sm font-bold text-center my-2">
+        Content Summary
+      </h3>
+      <div style="height: 275px" class="p-3 rounded border border-gray-600 overflow-y-scroll">
+          <h3 class="text-xs font-normal text-left">
+            <%= simple_format email.content_summary %>
+          </h3>
+      </div>
+    <%# content end %>
+    </div>
+    
+    <div class="w-full my-2 flex justify-between items-center">
+      <div class="mb-1">
+        <h3 class="text-xs font-bold text-left">
+          <span class="ml-1 font-bold py-1 px-2 rounded bg-gray-400 text-gray-800">
+            <%= email.readable_category%>
+            </span>
+        </h3>
+      </div>
+      <%= link_to 'Delete Email', executives_dashboards_email_path(id: email.id), method: :delete, data: {confirm: 'Are you sure?'}, class: 'font-bold text-white px-2 py-1 bg-red-600 text-xs rounded'%>
+    </div>
+
+  </div>
+</div>

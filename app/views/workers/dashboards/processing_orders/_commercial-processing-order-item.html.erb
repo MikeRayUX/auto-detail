@@ -1,0 +1,48 @@
+<div class="w-full border mb-4 bg-white rounded-lg sm:max-w-xl sm:mx-auto">
+  <%= link_to workers_courier_tasks_commercial_pickup_from_partners_path(id: pickup.id), class: "" do %>
+    <div class="px-2 w-full bg-gray-900 text-white text-center">
+      commercial
+    </div>
+
+    <div class="py-2 px-4">
+      <p>
+        <span class="font-bold text-lg text-left text-gray-900">
+          <ion-icon class="text-base" name="qr-code-outline"></ion-icon>
+          <%= pickup.bags_code %> (about <%=pickup.bags_collected%> bags)
+        </span>
+      </p>
+
+      <p>
+        <span class="font-bold">
+          Pickup:
+        </span> 
+        <%= time_ago_in_words(pickup.picked_up_from_client_at)%>
+      </p>
+
+      <p>
+        <span class="font-bold">
+          Washer rec. 
+        </span>
+        <%= time_ago_in_words(pickup.dropped_off_to_partner_at)%>
+      </p>
+
+      <div class="mt-2 mb-2">
+        <p class="text-sm">
+          Location: <%= partner_location.business_name.upcase %>
+        </p>
+        <p class="text-sm">
+          <object>
+            <%= link_to partner_location.formatted_business_phone, "tel:#{partner_location.formatted_business_phone}" %>
+        </object>
+        </p>
+      </div>
+      
+      <p>
+        <object>
+          <%= link_to partner_location.formatted_business_phone, "tel:#{partner_location.formatted_business_phone}", class: 'text-link-blue font-bold text-lg' %>
+        </object>
+      </p>
+    </div>
+
+  <% end %>
+</div>

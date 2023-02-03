@@ -1,0 +1,157 @@
+
+<div class="w-full bg-primary flex flex-row py-6 px-6 items-center justify-between sm:py-6 sm:px-8">
+  <div class="flex flex-row items-center mr-2">
+    <%= link_to root_path, class: 'flex items-center' do %>
+      <span class="text-2xl tracking-widest font-bold text-white sm:hidden">
+          F&T
+      </span>
+
+      <span class="hidden text-2xl tracking-widest font-bold text-white sm:block">
+          FRESHANDTUMBLE
+      </span>
+    <% end %>
+</div>
+  <div class="flex flex-row items-center justify-between w-auto">
+        <%= image_tag 'sign-up/new-color-icon-white@2x.png', style: 'max-width: 30px;', class: 'text-white text-4xl focus:outline-none pb-2 navToggler'%>
+    </div>
+</div>
+
+<!-- hero container-->
+<div class="w-full bg-primary pb-10 pt-6 px-6 flex-column justify-center items-center">
+
+<!-- heading container-->
+  <div class="mx-auto max-w-sm flex-column justify-center items-center w-full
+  ">
+    <div class="mx-auto">
+      <h1 class="text-white text-left text-2xl sm:text-4xl font-normal leading-relaxed sm:leading-snug mb-4">
+        Laundry Service for your distinguished
+        <div class="inline mx-auto relative">
+          <p class="word w1 text-white text-2xl sm:text-4xl font-bold leading-relaxed sm:leading-snug mb-10 ">
+            clients.
+          </p>
+          <p class="word w2 text-white text-2xl sm:text-4xl font-bold leading-relaxed sm:leading-snug mb-10 ">
+            guests.
+          </p>
+
+          <p class="word w3 text-white text-2xl sm:text-4xl font-bold leading-relaxed sm:leading-snug mb-10 ">
+            residents.
+          </p>
+
+          <p class="word w4 text-white text-2xl sm:text-4xl font-bold leading-relaxed sm:leading-snug mb-10 ">
+            clients.
+          </p>
+          <p class="word w5 text-white text-2xl sm:text-4xl font-bold leading-relaxed sm:leading-snug mb-10 ">
+            residents.
+          </p>
+        </div>
+      </h1>
+    </div>
+  </div>
+  <div class="max-w-sm mx-auto sm:max-w-sm">
+    <p class="text-white text-lg sm:text-xl">
+      Same great service, now designed to scale with your business
+      <span class="font-bold">
+        up or down.
+      </span>
+    </p>
+  </div>
+
+</div>
+
+<style>
+
+.word {
+  opacity:0;
+  position: absolute;
+  top: -3px;
+  left: 8px;
+}
+
+@media only screen and (min-width: 640px) {
+  .word {
+    top: 0;
+  }
+}
+
+.w1 {
+  animation: w1anim 15s infinite;
+}
+
+.w2 {
+  animation: w2anim 15s infinite;
+}
+
+.w3 {
+  animation: w3anim 15s infinite;
+}
+
+.w4 {
+  animation: w4anim 15s infinite;
+}
+
+.w5 {
+  animation: w5anim 15s infinite;
+}
+
+@keyframes w1anim {
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity: 1;
+  }
+  20% {
+    opacity:0;
+  }
+}
+
+
+@keyframes w2anim {
+  20%{
+    opacity: 0;
+  }
+  30%{
+    opacity: 1;
+  }
+  40% {
+    opacity:0;
+  }
+}
+
+@keyframes w3anim {
+  40%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  60% {
+    opacity:0;
+  }
+}
+
+@keyframes w4anim {
+  60%{
+    opacity: 0;
+  }
+  70%{
+    opacity: 1;
+  }
+  80% {
+    opacity:0;
+  }
+}
+
+@keyframes w5anim {
+  80%{
+    opacity: 0;
+  }
+  90%{
+    opacity: 1;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+</style>

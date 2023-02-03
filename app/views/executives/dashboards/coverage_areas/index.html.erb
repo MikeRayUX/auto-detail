@@ -1,0 +1,56 @@
+<% flash.each do |message_type, message| %>
+  <div class="flash w-full py-4 px-4 rounded bg-gray-200 mb-6">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+     <%= message %>
+    </h1>
+  </div>
+<% end %>
+
+
+
+<% if @regions.any?%>
+  <%@regions.each do |region|%>
+    <%= render partial: 'executives/dashboards/metric_block_header', locals: {
+    icon_name: 'location',
+    title: "#{region.area.upcase} (#{region.coverage_areas.count} Areas)" 
+    }
+    %>
+    <div class="flex justify-start items-center flex-wrap">
+      <% region.coverage_areas.each do |a|%>
+        <div class="w-1/3 max-w-xl p-6 border bg-white">
+          <div class="flex justify-between items-center">
+            <h3 class="text-2xl font-bold mb-1">
+              <%= a.zipcode%>
+            </h3>
+            
+            <%= link_to 'View on Google', a.google_search_link, target: '_blank', class: 'px-2 text-white rounded bg-blue-600 text-xs'%>
+          </div>
+
+          <h3 class="text-sm font-bold mb-1">
+            State: <%= a.state.upcase%>
+          </h3>
+
+          <h3 class="text-sm font-bold mb-1">
+            Count: <%= a.county.upcase%>
+          </h3>
+
+          <h3 class="text-sm font-bold mb-1">
+            City: <%= a.city.upcase%>
+          </h3>
+
+          <h3 class="text-sm font-bold mb-1">
+            Region Area: <%= a.region.area.upcase%>
+          </h3>
+
+          <div class="flex justify-end items-center">
+            <%= link_to "delete", executives_dashboards_coverage_area_path(a.id), method: :delete, data: {confirm: 'are you sure?'}, class: 'px-2 bg-red-600 text-white text-xs rounded'%>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    
+  <% end %>
+<% end %>
+
+
+

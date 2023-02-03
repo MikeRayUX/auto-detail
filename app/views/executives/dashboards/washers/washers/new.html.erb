@@ -1,0 +1,108 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-4 px-4 rounded bg-green-500 mb-6">
+    <h1 class="text-base text-center text-white font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<div class="bg-white p-4 rounded w-full max-w-2xl mb-4 mx-auto">
+    <h3 class="font-bold text-sm mb-4 text-center">
+      NEW WASHER +
+    </h3>
+  <%= form_for :manual_washer, url: {controller: 'executives/dashboards/washers/washers', action: 'create'} do |f|%>
+
+  <div class="flex flex-column justify-start items-center">
+    <div class="w-full mr-2">
+       <div class="w-full mb-2">
+        <%= f.label :region_id%>
+        <%= f.select :region_id, options_for_select(Region.all.each.map{|region| ["#{region.area.upcase} (#{region.washers.activated.count}/#{region.washer_capacity} washers)", region.id]}, ), {}, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%#= f.label :payoutable_as_ic %>
+        <%= f.hidden_field :payoutable_as_ic, value: false%>
+      </div>
+
+      <h3 class="my-2 font-black text-left text-sm">Washer</h3>
+
+      <div class="w-full mb-2">
+        <%= f.label :full_name%>
+        <%= f.text_field :full_name, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :first_name%>
+        <%= f.text_field :first_name, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full'%>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :middle_name%>
+        <%= f.text_field :middle_name, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :last_name%>
+        <%= f.text_field :last_name, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :email%>
+        <%= f.text_field :email, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :ssn  %>
+        <%= f.text_field :ssn, placeholder: '000-00-0000', class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :drivers_license%>
+        <%= f.text_field :drivers_license, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :date_of_birth%>
+        <%= f.text_field :date_of_birth, placeholder: 'yyyy-mm-dd', class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :phone%>
+        <%= f.text_field :phone, placeholder: '15627872684', class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+
+      <h3 class="my-2 font-black text-left text-sm">Address</h3>
+
+      <div class="w-full mb-2">
+        <%= f.label :street_address%>
+        <%= f.text_field :street_address, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :unit_number%>
+        <%= f.text_field :unit_number, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full'%>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :city%>
+        <%= f.text_field :city, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :state%>
+        <%= f.text_field :state, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+
+      <div class="w-full mb-2">
+        <%= f.label :zipcode%>
+        <%= f.text_field :zipcode, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end items-center">
+    <%=f.submit 'CREATE WASHER', class: 'block font-black mt-4 w-full py-4 px-3 bg-green-600 text-xs text-white rounded'%>
+  </div>
+  <% end %>
+</div>

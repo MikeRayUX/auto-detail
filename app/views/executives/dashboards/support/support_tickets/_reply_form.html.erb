@@ -1,0 +1,23 @@
+<div class="w-full rounded-lg bg-white p-4 my-4 shadow-lg">
+  <h4 class="font-bold mb-2">
+    Reply with:
+  </h4>
+
+  <%= form_for :support_ticket_reply, url: {controller: 'executives/dashboards/support/support_ticket_replies', action: 'create'} do |f|%>
+
+    <%= hidden_field_tag :id, @t.id%>
+    <%= f.text_area :body, autofocus: true, class: 'w-full h-32 rounded border p-4 mb-2' %>
+
+    <div class="mb-4">
+      <p class="text-base text-gray-700 mb-2">
+        If you have any other questions. Please feel free to reply to this email.
+      </p>
+
+      <p class="text-base text-gray-700">
+        Thank You For Choosing FreshAndTumble.com
+      </p>
+    </div>
+
+    <%= f.submit 'Send', class: 'cursor-pointer bg-google-blue text-white rounded py-2 px-6 flex justify-start items-center ' %>
+  <% end %>
+</div>

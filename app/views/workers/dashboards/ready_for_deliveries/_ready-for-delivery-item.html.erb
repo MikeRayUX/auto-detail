@@ -1,0 +1,46 @@
+<div class="w-full border py-2 px-4 mb-4 bg-white rounded-lg sm:max-w-xl sm:mx-auto">
+
+  <p class="font-bold text-xl text-left text-gray-900"> 
+    <ion-icon class="text-base" name="qr-code-outline"></ion-icon>
+    <%= order.bags_code %>
+    (<%= order.bags_collected%> bags)
+  </p>
+
+  <div class="my-2">
+    <p class="text-base font-bold">
+      <%= order.user.full_name.upcase %>
+    </p>
+    <p class="text-base">
+      <%= link_to order.full_address.upcase, order.google_nav_link, target: '_blank', class: 'font-bold text-link-blue text-lg'%>
+    </p>
+  </div>
+
+  <div class="mt-2 mb-4">
+    <p>
+      <span class="font-bold">
+        Pickup Age: 
+      </span>
+      <%= time_ago_in_words(order.picked_up_from_customer_at)%>
+    </p>
+
+    <p>
+      <span class="font-bold">
+        Bags to deliver:
+      </span>
+      <%= order.bags_collected%>
+    </p>
+  </div>
+
+	<div class="flex flex-row justify-between items-center"
+	>	
+
+    <button 
+      class="copy-address-button block w-1/2 bg-blue-500 rounded-md text-white py-2 mr-6 text-center"
+      data-clipboard-text="<%=order.routable_address%>"
+      >
+        Copy Address
+    </button>
+
+		<%= link_to 'Start Delivery', workers_courier_tasks_deliver_to_customer_step1_path(id: order.id), class: "block w-1/2 bg-orange-500 text-white py-2 text-center"%>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="w-full p-2 bg-white flex flex-row justify-start items-center bg-gray-800 relative" >
+    <p class="w-3/12 text-xs font-black text-white">AREA</p>
+    <p class="w-3/12 text-xs font-black text-white">BAG PRICE</p>
+    <p class="w-2/12 text-xs font-black text-white">COVERAGE AREAS</p>
+    <p class="w-2/12 text-xs font-black text-white">WASHERS</p>
+    <p class="w-3/12 text-xs font-black text-white">WASHER PAY PERCENTAGE</p>
+    <p class="w-2/12 text-xs font-black text-white">CUSTOMERS</p>
+
+    <%= link_to "CREATE+", new_executives_dashboards_regions_region_path, style: 'font-size: 10px; padding-top: 2px; padding-bottom: 2px;',class: 'px-2 rounded text-gray-900 font-bold bg-gray-100 text-center absolute top-0 right-0 mt-2 mr-1'%>
+  </div>
+    <% @regions.each do |region|%>
+      <%# region item start %>
+        <div class="block w-full bg-white border-b  py-3 px-2 flex flex-row justify-start items-center">
+
+          <%# AREA %>
+          <p class="w-3/12 text-xs font-black text-gray-900">
+            <%= link_to "#{region.area.upcase}", executives_dashboards_regions_region_path(region.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+          </p>
+
+          <%# BAG PRICE %>
+          <p class="w-3/12 text-xs font-black text-gray-900">
+            $<%= readable_decimal(region.price_per_bag)%>
+          </p>
+
+          <%# COVERAGE AREAS %>
+          <p class="w-2/12 text-xs font-black text-gray-900">
+            <%= region.coverage_areas.count%>
+          </p>
+
+          <%# WASHERS %>
+          <p class="w-2/12 text-xs font-black  text-gray-900">
+            <%= region.washers.activated.count%>/<%=region.washer_capacity%>
+          </p>
+
+          <%# WASHER PAY PERCENTAGE %>
+          <p class="w-3/12 text-xs font-black  text-gray-900">
+            <%= readable_percent(region.washer_pay_percentage)%>%
+          </p>
+
+          <%# CUSTOMERS %>
+          <p class="w-2/12 text-xs font-black text-gray-900">
+            <%= region.addresses.where.not(user_id: nil).count%>
+          </p>
+        </div>
+      <%# region item end %>
+    <% end %>
+  </div>
+  <div class="w-full flex flex-row justify-end items-center font-black text-link-blue">
+    <div>
+      <%#= paginate @regions%>
+    </div>
+  </div>

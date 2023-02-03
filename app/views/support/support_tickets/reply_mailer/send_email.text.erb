@@ -1,0 +1,23 @@
+<% if @user%>
+  Hi, <%= @user.formatted_name%>
+<% else %>
+Hello,
+<% end %>
+
+Thank you for reaching out to us. 
+My name is <%=@agent.first_name%> from FreshAndTumble Support, 
+
+<% @reply.body.split("\n").each do |line|%>
+<%= line%>
+<% end %>
+
+If you have any other questions. Please feel free to reply to this email.
+Thank You For Choosing FreshAndTumble.com
+
+Your message (<%= @ticket.readable_concern%>):
+
+<% @ticket.body.split("\n").each do |line|%>
+<%= line%>
+<% end %>
+
+© <%= Date.today.year%> Fresh And Tumble LLC

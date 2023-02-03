@@ -1,0 +1,108 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-2 px-4 rounded bg-gray-200 mb-6">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+
+<div class="max-w-3xl bg-white py-4 px-2 rounded mx-auto">
+
+  <div class="flex justify-between items-center">
+   <div class="w-1/3">
+      <%= link_to '< Back', executives_dashboards_emails_path, class: 'text-sm font-bold underline text-indigo-700 ml-4'%>
+   </div> 
+
+    <div class="w-1/3 ">
+      <h1 class="text-base font-bold text-center">
+        Sending Email
+      </h1>
+    </div>
+
+    <div class="w-1/3"></div>
+  </div>
+  <%# email preview start %>
+  <div style="min-height: 300px" class="w-full p-4 rounded bg-white mr-2">
+
+    <div class="w-full mb-1">
+      <h3 class="text-sm font-bold text-left">
+        Title: 
+        <span class="font-normal">
+          <%= truncate_attribute(@email.description, 75)%>
+          </span>
+      </h3>
+    </div>
+
+    <div class="w-full mb-1">
+      <h3 class="text-sm font-bold text-left">
+        SendGrid Template ID: 
+        <span class="font-normal">
+          <%= @email.template_id%>
+          </span>
+      </h3>
+    </div>
+
+    <div class="w-full mb-1">
+      <h3 class="text-sm font-bold text-left">
+          Sends: 
+        <span class="font-normal ml-1">
+          <% if @email.email_sends.any?%>
+            <%= link_to @email.email_sends.count, executives_dashboards_email_sends_path(sendgrid_email_id: @email.id), class: 'text-sm underline font-bold text-indigo-700'%>
+          <% else %>
+            Never
+          <% end %>
+        </span>
+      </h3>
+    </div>
+
+    <div class="w-full mb-4">
+      <h3 class="text-sm font-bold text-left">
+        Category:
+        <span class="ml-1 font-bold p-1 rounded bg-green-300 text-gray-900">
+          <%= @email.readable_category%>
+          </span>
+      </h3>
+    </div>
+
+    <div class="w-full mb-1">
+      <div style="max-height: 350px;" class="p-4 rounded border border-gray-600 bg-gray-200 overflow-y-scroll">
+          <%= simple_format truncate_attribute(@email.content_summary, 700) %>
+      </div>
+    </div>
+
+  </div>
+  <%# email preview end %>
+
+  <%# send template_select to all user_model_select from region_select%>
+  <div class="w-full mb-2 px-4">
+
+    <div class="bg-white p-2 rounded w-full mx-auto">
+      <%= form_for :email_send, url: {controller: 'executives/dashboards/email_sends', action: :create} do |f|%>
+        <%= f.hidden_field :sendgrid_email_id, value: @email.id%>
+        <div class="mb-2 wfull">
+          <h1 class="text-sm font-bold text-center mb-2">
+            Send To All
+          </h1>
+          <%= f.select :recipient_type, options_for_select([
+            ["Users", "users"],
+            ["Washers", "washers"],
+          ]), {}, class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+        </div> 
+
+        <div class="mb-2 wfull">
+          <h1 class="text-sm font-bold text-center mb-2">
+            Within Region
+          </h1>
+          <%= f.select :region_id, options_for_select(Region.all.each.map{|region| ["#{region.area.upcase} ", region.id]}, ), {}, class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+        </div> 
+
+        <div class="flex justify-end items-center">
+          <%= f.submit 'Send Email', class: 'block font-black mt-6 w-full py-4 px-3 bg-green-600 text-base text-white rounded'%>
+        </div>
+    
+      <% end %>
+    </div>
+
+  </div>
+</div>

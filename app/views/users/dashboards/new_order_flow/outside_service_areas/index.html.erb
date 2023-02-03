@@ -1,0 +1,20 @@
+<%= render partial: 'users/dashboards/current_address_header', locals: {
+  user: current_user}
+%>
+
+<div class="bg-white p-6 max-w-lg rounded mx-auto sm:mt-4">
+
+  <h1 class="font-black text-lg text-center leading-tight mb-4">
+    We're sorry your current address is not within any of our service areas.
+  </h1>
+
+  <h1 class="font-normal text-lg text-center leading-tight mb-4">
+    You can try another address by tapping your address above or by updating your address.
+  </h1>
+
+  <% if current_user.address.present? %>
+    <%= link_to 'UPDATE YOUR ADDRESS', users_dashboards_settings_update_addresses_path, class: 'block py-4 text-center text-lg font-black w-full bg-primary text-white'%>
+  <% else %>
+    <%= link_to 'ADD YOUR ADDRESS', new_users_resolve_setup_path, class: 'block py-4 text-center text-lg font-black w-full bg-primary text-white'%>
+  <% end %>
+</div>

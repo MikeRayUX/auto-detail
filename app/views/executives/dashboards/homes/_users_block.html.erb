@@ -1,0 +1,39 @@
+<%# block2 %>
+<div class="mb-6">
+  <%= render partial: 'executives/dashboards/metric_block_header',    
+    locals: {
+      title: 'Signups (Overview)',
+      icon_name: 'person-add'
+    }  
+  %>
+  <div class="w-full flex flex-row flex-wrap justify-start items-center">
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Signups (TODAY)", 
+      span: today(),
+      metric_value: User.users_today_count
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Signups (MTD)", 
+      span: mtd(),
+      metric_value: User.users_mtd_count
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: 'Signups (All Time)', 
+      span: nil,
+      metric_value: User.global_count
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: 'Cancelled/Banned Count (Global)', 
+      span: nil,
+      metric_value: User.cancelled_account_count
+      } 
+    %>
+  </div>
+
+</div>

@@ -1,0 +1,423 @@
+<div class="w-full bg-white flex flex-row py-6 px-2 items-center justify-between sm:py-6 sm:px-8">
+  <div class="flex flex-row items-center mr-2">
+    <%= link_to '#', class: 'flex items-center' do %>
+      <span class="text-2xl tracking-widest font-black text-gray-900 sm:hidden">
+        F&T
+      </span>
+
+      <span class="hidden text-2xl tracking-widest font-black text-gray-900 sm:block">
+        FRESHANDTUMBLE
+      </span>
+    <% end %>
+  </div>
+  <div class="flex flex-row items-center justify-between w-auto">
+    <%= image_tag 'landing/black-logo.png', style: 'max-width: 30px;', class: 'text-white text-4xl focus:outline-none pb-2'%>
+  </div>  
+</div>
+  <%# container start %>
+  <div class="flex-row justify-center items-center px-2 mb-24 sm:max-w-xl sm:mx-auto"> 
+      <%# container start %>
+      <div class="bg-white w-full rounded border shadow-lg">
+        <%# hero start %>
+        <div class="w-full bg-gray-900 rounded-t p-4">
+          <div class="flex flex-row justify-center items-center">
+            <h3 class="text-white leading-tight font-bold tracking-widest text-xl ">
+            FRESHANDTUMBLE
+            </h3>
+          </div>
+
+          <div class="flex flex-row justify-center items-center">
+            <h4 class="text-white leading-tight text-center font-bold tracking-widest text-xl ">
+              WASHER
+            </h4>
+            <h3 style="font-size: 10px" class="font-black tracking-widest text-xs px-1 bg-white rounded-full text-gray-900 mb-2 ml-1 ">
+              BETA
+            </h3>
+          </div>
+          <%# hero end %>
+        </div>
+      
+        <h3 class="text-base font-bold text-center font-black text-gray-900 bg-gray-300  border-b border-gray-600">
+          INDEPENDENT WASHER APPLICATION
+        </h3>
+
+      <div class="w-full px-4 py-2 max-w-md mx-auto">
+        <div class="flex-column justify-center items-center mb-2 ">
+          <h3 class="text-left text-sm">
+            Responsibilities
+          </h3>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Pick Up Laundry Orders From Customer's Homes
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-none mb-1">
+            • Wash, Dry & Fold Laundry Orders using your own Washer/Dryer and Folding Space
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Deliver Orders within 24 hours.
+          </p>
+        </div>
+
+        <div class="flex-column justify-center items-center mb-2">
+          <h3 class="text-left  text-sm">
+            Compensation
+          </h3>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Pay is Per Bag Completed
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • You keep 100% of Customer tips
+          </p>
+        </div>
+
+        <div class="flex-column justify-center items-center mb-2">
+          <h3 class="text-left  text-sm">
+            Requirements
+          </h3>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Smartphone (iOS 13+ or Android 10.0+)
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Live within Region where applying
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Washer, Dryer and Clean Folding Space
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Be 21 or older
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Valid Drivers License
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-none mb-1 ">
+            • Car Insurance with Gig Economy Coverage for pickups and deliveries
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Valid Social Security Number
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Pass Criminal Background Check
+          </p>
+
+          <p class="font-bold text-gray-900 text-sm leading-tight mb-1 ">
+            • Must be able to safely lift up to 30 lbs. 
+          </p>
+        </div>
+
+        <%# form start %>
+        <div class="w-full mt-4 max-w-md mx-auto">
+          <%= form_for :washer_application, url: {controller: 'static_pages/washer_pages', action: 'create'} do |f|%>
+            <div class="w-full mt-2 mb-4">
+
+              <h3 class="w-full text-center font-bold mb-2">
+                Select a Region
+              </h3>
+              <%= f.select :region_id, options_for_select(@regions.each.map{|region| ["#{region.area.upcase}", region.id]}, ), {}, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you currently live in the city area selected above?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :live_within_region, "true"%>
+                    <%= f.label :live_within_region, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :live_within_region, "false"%>
+                    <%= f.label :live_within_region, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Are you 21 or older?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :min_age, "true"%>
+                    <%= f.label :min_age, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :min_age, "false"%>
+                    <%= f.label :min_age, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Are you legally able to work in the United States of America?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :legal_to_work, "true"%>
+                    <%= f.label :legal_to_work, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :legal_to_work, "false"%>
+                    <%= f.label :legal_to_work, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you have a Washer, Dryer, and clean environment to process Laundry Orders?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :has_equipment, "true"%>
+                    <%= f.label :has_equipment, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :has_equipment, "false"%>
+                    <%= f.label :has_equipment, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you have a valid Drivers License?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :valid_drivers_license, "true"%>
+                    <%= f.label :valid_drivers_license, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :valid_drivers_license, "false"%>
+                    <%= f.label :valid_drivers_license, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you have valid Car Insurance with Gig Economy Coverage on the vehicle you plan to use for pickup and delivery?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :valid_car_insurance_coverage, "true"%>
+                    <%= f.label :valid_car_insurance_coverage, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :valid_car_insurance_coverage, "false"%>
+                    <%= f.label :valid_car_insurance_coverage, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you have reliable and adequate transportation to pick up and deliver FreshAndTumble.com laundry Orders within 24 hours after pickup?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :reliable_transportation, "true"%>
+                    <%= f.label :reliable_transportation, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :reliable_transportation, "false"%>
+                    <%= f.label :reliable_transportation, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you have a valid Social Security Number? (SSN)
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :valid_ssn, "true"%>
+                    <%= f.label :valid_ssn, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :valid_ssn, "false"%>
+                    <%= f.label :valid_ssn, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  If accepted, do you consent to a Criminal Background Check?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :consent_to_background_check, "true"%>
+                    <%= f.label :consent_to_background_check, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :consent_to_background_check, "false"%>
+                    <%= f.label :consent_to_background_check, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Are you able to safely lift up to 30 lbs?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :can_lift_30_lbs, "true"%>
+                    <%= f.label :can_lift_30_lbs, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :can_lift_30_lbs, "false"%>
+                    <%= f.label :can_lift_30_lbs, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full my-2">
+              <div class="flex flex-row justify-between items-center">
+                <p class="w-2/3">
+                  Do you have a disability or require special accomodations related to a disability?
+                </p>
+
+                <div class="w-1/3 flex flex-row justify-center items-center">
+                  <div class="flex flex-row justify-center items-center mr-2">
+                    <%= f.radio_button :has_disability, "true"%>
+                    <%= f.label :has_disability, "Yes", value: "true", class: "text-lg ml-2"  %>
+                  </div>
+
+                  <div class="flex flex-row justify-center items-center">
+                    <%= f.radio_button :has_disability, "false"%>
+                    <%= f.label :has_disability, "No", value: "false", class: "text-lg ml-2"  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div>
+              <h3 class="w-full text-center font-bold mb-2">
+                Your Information
+              </h3>
+
+              <div class="w-full my-2">
+                <%= f.label :full_name%>
+                <%= f.text_field :full_name, placeholder: 'Your Full Name', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+
+              <div class="w-full my-2">
+                <%= f.label :email, 'Your Email Address' %>
+                <%= f.text_field :email, placeholder: 'sample@sample.com', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+    
+              <div class="w-full my-2">
+                <%= f.label :phone, 'Phone Number' %>
+                <%= f.text_field :phone, placeholder: '1(555)555-5555', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="w-full text-center font-bold mb-2">
+                Your Address
+              </h3>
+
+              <div class="w-full my-2">
+                <%= f.label :street_address %>
+                <%= f.text_field :street_address, placeholder: '123 SAMPLE ST', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+
+              <div class="w-full my-2">
+                <%= f.label :unit_number %>
+                <%= f.text_field :unit_number, placeholder: '(optional)', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+
+              <div class="w-full my-2">
+                <%= f.label :city %>
+                <%= f.text_field :city, placeholder: '', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+
+              <div class="w-full my-2">
+                <%= f.label :state %>
+                <%= f.select :state, options_for_select(states_for_select), {}, class: 'pl-2 text-sm h-10 rounded-sm border bg-white text-gray-900 w-full' %>
+              </div>
+
+              <div class="w-full my-2">
+                <%= f.label :zipcode %>
+                <%= f.text_field :zipcode, placeholder: '12345', class: 'w-full py-2 rounded border pl-2'%>
+              </div>
+            </div>
+
+            <% flash.each do |message_type, message| %>
+              <div class="w-full py-2 my-1">
+                <h1 class="text-base text-center text-red font-normal">
+                  <%= message%>
+                </h1>
+              </div>
+            <% end %> 
+
+        <%= f.submit 'Submit', class: 'bg-gray-900 w-full my-4 py-4 text-center rounded text-white font-bold' %>
+        <% end %>
+        </div>
+        <%# form end %>
+      </div>
+      <%# container end %>
+    </div>
+        
+  </div>
+  <%# container end %>
+</div>

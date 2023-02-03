@@ -1,0 +1,67 @@
+  <body style="font-family: montserrat, arial;padding: 0;width: 100%;margin: 0;-webkit-text-size-adjust: 100%;-webkit-border-radius: 3px;border-radius: 3px;text-size-adjust: 100%;color: #201F26; padding-left; 10px;padding-right: 10px;">
+    <table style="font-family: montserrat, arial;max-width: 454px;margin: auto;text-align: left;line-height: 25px;font-size: 16px;">
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <th style="font-family: montserrat, arial;padding: 3px 0;font-weight: 400;background: #d70cf5;">
+        </th>
+      </tr>
+
+			<tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 36px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+					Hi <%=@user.formatted_name.split(' ').first%>!
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          We hope you are enjoying our service. We constantly strive to improve your order experience.
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          Would you mind leaving us a review?
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          <span class="bold blue" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">A Google Review</span> will help other Seattleites find us on Google search. 
+        </td>
+      </tr>
+
+			<tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          We've made it simple to leave a review, <span class="bold blue" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">if you click the button below</span> it will take you to our <span class="bold blue" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">local business page</span> on Google. 
+        </td>
+      </tr>
+
+						<tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 36px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+        </td>
+      </tr>
+
+			<tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large track-button__cell" style="font-family: montserrat, arial;text-align: center;padding-bottom: 36px;padding-left: 10px; padding-right: 10px;">
+
+          <%= link_to "Give Us A Review", "https://g.page/freshandtumble/review?rc", style: "font-family: montserrat, arial;text-decoration: none;color: white;padding: 20px 40px;font-size: 16px;background: #d70cf5;;border-radius: 3px;"%>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          <span class="bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+          Thank You For Choosing FRESHANDTUMBLE.COM!
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="copyright-notice" style="font-family: montserrat, arial;text-align: left;font-size: 12px;color: gray;padding-left: 10px; padding-right: 10px;">
+           © <%= Date.today.year%> Fresh And Tumble LLC
+
+					 <%= link_to 'Unsubscribe', users_mailing_lists_marketing_emails_url(token: @user.unsub_token)%>
+        </td>
+      </tr>
+
+    </table>
+  </body>

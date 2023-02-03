@@ -1,0 +1,48 @@
+<div style="height: 550px" class="w-full mx-auto lg:max-w-sm rounded bg-white lg:mx-0 lg:mr-4 overflow-y-scroll">
+  <div class="w-full p-2">
+    <h3 class="font-black text-xs text-left flex flex-row justify-center items-center  pt-1">
+      <p class="mr-2  bg-gray-500" style="height: 10px; width: 10px;"></p>  
+      ACTIVITY (<%= events.count %>)
+    </h3>
+  </div>
+  <div style="height: 650px;"class="px-2">
+    <% if events.any?%>
+      <% events.each do |e|%>
+        <% if e.new_order.present?%>
+          <% @order = e.new_order%>
+            <div class="bg-gray-200 py-2 mb-2 px-2">
+
+              <div class="w-full flex flex-row justify-between items-center">
+                <h3 class="text-xs font-bold text-center text-gray-900 ">
+                  <%= link_to "Order: #{@order.ref_code}", executives_dashboards_new_orders_new_order_path(id: @order.ref_code), target: '_blank', class: 'text-xs font-black text-link-blue'%>  
+                </h3> 
+
+                <h3 class="text-xs font-black text-left  px-1 ">
+                  <%= readable_date_with_time(e.created_at).upcase%>
+                </h3>
+              </div>
+
+              <h3 class="text-xs font-black">
+                <%= e.readable_event_type%>
+              </h3> 
+
+              <% if e.feedback%>
+                <h3 class="text-xs font-black text-left ">
+                  <%= e.feedback %>
+                </h3> 
+              <% end %>
+
+              <% if e.event_type == 'delivered' && e.new_order.delivery_photo_base64 %>
+                <img
+                className="mx-auto mb-1"
+                src=<%= "data:image/png;base64,#{e.new_order.delivery_photo_base64}"%>
+                alt="" />
+              <% end %>
+
+            </div>
+          <% end %>
+
+        <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="w-full flex flex-row py-2 px-2 border-b items-center justify-between bg-white sm:py-2 sm:px-8">
+    <div class="flex flex-row items-center mr-2">
+        <%= link_to users_dashboards_homes_path, class: 'flex items-center' do %>
+            <%= image_tag 'sign-up/new-color-icon.png', alt: 'pink fresh and tumble circle laundry logo', class: "block w-8 h-8 mr-2"%>
+            <span class="hidden sm:block text-xl tracking-wider font-extrabold text-primary">
+                FRESHANDTUMBLE
+            </span>
+        <% end %>
+    </div>
+
+    <div class="flex flex-row items-center justify-between w-auto">
+        <%= button_tag '☰', class: 'text-gray-900 text-4xl focus:outline-none pb-2 navToggler'%>
+    </div>
+</div>
+
+<%# nav manu expanded %>
+<div class="hidden z-10 text-xl absolute right-0 top-0 bg-white shadow border-solid border-gray-600 w-full md:w-auto lg:w-auto xl:w-auto" id="navMenu">
+    <div class="">
+        <%# current_class?(users_dashboards_homes_path) %>
+        <div class="block py-8 px-6">
+            <ion-icon class="text-3xl text-gray-900 navToggler cursor-pointer " name="close-outline"></ion-icon>
+        </div>
+
+        <%= link_to users_dashboards_homes_path, class: current_class?(users_dashboards_homes_path)  do  %>
+            <span class="pr-2 font-bold text-gray-900">Home</span>
+            <ion-icon class="text-gray-900 " name="home-outline"></ion-icon>
+        <% end %>
+
+        <%= link_to users_dashboards_orders_overviews_path, class: current_class?(users_dashboards_orders_overviews_path) do  %>
+            <span class="pr-2 font-bold text-gray-900">Orders</span>
+            <ion-icon class="text-gray-900" name="shirt-outline"></ion-icon>
+        <% end %>
+        <%= link_to users_dashboards_billings_path, class: current_class?(users_dashboards_billings_path) do %>
+            <span class="pr-2 font-bold text-gray-900">Billing</span>
+            <ion-icon class="text-gray-900" name="card-outline"></ion-icon>
+        <% end %>
+        <%= link_to users_dashboards_settings_info_summaries_path, class: current_class?(users_dashboards_settings_info_summaries_path) do %>
+            <span class="pr-2 font-bold text-gray-900">Settings</span>
+            <ion-icon class="text-gray-900" name="settings-outline"></ion-icon>
+        <% end %>
+        <%= link_to destroy_user_session_path, method: 'delete', class: "block text-right py-10  border-b border-gray-300 md:pl-64 pr-5"  do %>
+            <span class="pr-2 font-bold text-gray-900">Sign Out</span>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "laundry_boy",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-react": "^7.12.7",
+    "@rails/webpacker": "5.1.1",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.11.0",
+    "axios": "^0.21.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "haversine": "^1.1.1",
+    "loaders.css": "^0.1.2",
+    "luxon": "^1.25.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-google-maps": "^9.4.5",
+    "react-loader-spinner": "^3.1.14",
+    "react-modal": "^3.12.1",
+    "tailwindcss": "^1.4.4"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.3"
+  }
+}

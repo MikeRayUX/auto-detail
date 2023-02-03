@@ -1,0 +1,85 @@
+<% provide(:title, "My User Settings")%>
+
+<div class="w-full border-b">
+  <h2 class="text-lg font-bold py-2 px-4 text-gray-900 sm:px-8 sm:text-2xl">Account</h2>
+</div>
+
+<div class="w-full h-full mb-24">
+
+  <% flash.each do |message_type, message| %>
+    <div class="flashReg sm:w-full sm:mx-auto">
+      <h1 class="flashRegText">
+        <%= message %>
+      </h1>
+    </div>
+  <% end %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_names_path',
+    heading: current_user.formatted_name,
+    sub_heading: 'Change your information'
+  }
+  %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_phones_path',
+    heading: current_user.formatted_phone,
+    sub_heading: 'Change your phone number'
+  }
+  %>
+
+  <%# must have an email confirmation sent to new email to confirm email change before this can go live %>
+  <%#= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_emails_path',
+    heading: current_user.email,
+    sub_heading: 'Change your email'
+  }
+  %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_addresses_path',
+    heading: "Address",
+    sub_heading: 'Change your pickup or delivery address'
+  }
+  %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_payments_path',
+    heading: "Payment Method",
+    sub_heading: 'Change your card information'
+  }
+  %>
+
+  <%#= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_subscriptions_path',
+    heading: "Subscriptions",
+    sub_heading: 'Create or Cancel a Subscription'
+  }
+  %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: '#',
+    heading: "Password",
+    sub_heading: 'Change your password'
+  }
+  %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'users_dashboards_settings_update_notifications_path',
+    heading: "Notifications",
+    sub_heading: 'Change your notification preferences'
+  }
+  %>
+
+  <%= render partial: 'users/dashboards/settings/info_summaries/settings_item', locals: {
+    route: 'new_users_dashboards_support_tickets_path',
+    heading: "Support",
+    sub_heading: 'Let us know if something went wrong'
+  }
+  %>
+
+  <div class="w-full mb-10 py-8 bg-white px-4">
+    <%= link_to "Cancel Account", new_users_dashboards_settings_cancel_accounts_path, class: 'text-red-500 font-light, py-2 px-4 bg-gray-300 my-20' %>
+  </div>
+
+</div>

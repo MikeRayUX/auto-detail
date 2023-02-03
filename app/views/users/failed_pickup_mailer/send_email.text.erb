@@ -1,0 +1,19 @@
+Hi <%= @user.first_name%>
+
+Our Washer was unable to pickup your order.
+
+Reason provided: "<%= @offer_event.feedback%>"
+
+<%= @offer_event.customer_reminder%>
+
+Your Order has been refunded minus our Failed Pickup Fee. Please view your refund details below.
+
+Your Order Total: $<%= NewOrder.readable_decimal(@order.grandtotal)%>
+Failed Pickup Fee: $<%= NewOrder.readable_decimal(@failed_pickup_fee)%>
+Total Refunded Amount: $<%= NewOrder.readable_decimal(@order.refunded_amount)%>
+
+Please allow up to 48 hours for this refund to process. Thank you for your patience.
+
+Thank You For Choosing FRESHANDTUMBLE.COM
+
+© <%= Date.today.year%> Fresh And Tumble LLC

@@ -1,0 +1,37 @@
+<% provide(:title, "Order - #{@order.reference_code}") %>
+
+<div class="py-4 text-center">
+  <h2 class="font-bold text-xl text-gray-900 py-0 mb-8 sm:text-2xl">
+    Order: <%= @order.reference_code%>
+  </h2>
+
+   <% if @order.billed? %>
+    <h2 class="font-bold text-lg text-gray-900 py-0 mb-2 sm:text-xl">
+      <%= @order.readable_grandtotal%> (<%= @order.readable_weight %>)
+    </h2>
+  <% end %>
+
+  <h2 class="font-bold text-lg text-gray-900 py-0 mb-2 sm:text-xl">
+    Placed: <%= @order.readable_created_at%>
+  </h2>
+
+  <h2 class="font-bold text-lg text-gray-900 py-0 mb-2 sm:text-xl">
+    Appt: <%= @order.condensed_appointment%>
+  </h2>
+
+  <h2 class="font-bold text-lg text-gray-900 py-0 mb-2 sm:text-xl">
+    Detergent: <%= @order.readable_detergent %>
+  </h2>
+
+  <h2 class="font-bold text-lg text-gray-900 py-0 mb-2 sm:text-xl">
+    Softener: <%= @order.readable_softener %>
+  </h2>
+  
+  <% if @order.cancellable_by_customer? %>
+    <%= link_to "Cancel Order", users_orders_orders_path(reference_code: @order.reference_code), class: "block w-full py-4 text-lg text-center text-red-600 underline mt-10 sm:w-3/5 mx-auto font-bold", data: {confirm: 'Are you sure you want to cancel this order? This cannot be undone.'}, method: :put %>
+  <% else %>
+    <div class="block w-full py-4  font-bold text-center text-red-600 mt-10">
+      Cancel Order
+    </div>
+  <% end %>
+</div>

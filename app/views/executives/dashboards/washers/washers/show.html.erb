@@ -1,0 +1,19 @@
+<% flash.each do |message_type, message| %>
+  <div class="flash w-full py-4 px-4 rounded bg-green-600 mb-6">
+    <h1 class="text-base text-center text-white font-normal">
+     <%= message %>
+    </h1>
+  </div>
+<% end %>
+
+<div class="w-full lg:flex lg:flex-row lg:justify-start lg:items-start mb-8">
+
+  <%= render partial: 'executives/dashboards/washers/washers/show/info', locals: {w: @w} %>
+
+  <%= render partial: 'executives/dashboards/washers/washers/show/activation', locals: {w: @w} %>
+  
+  <%= render partial: 'executives/dashboards/washers/washers/show/activity_log', locals: {w: @w, events: @events} %>
+
+</div>
+
+

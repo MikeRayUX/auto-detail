@@ -1,0 +1,30 @@
+<div class="border-b py-4 px-4 sm:px-8">
+  <p class="text-lg text-gray-900 py-0 sm:text-lg">
+    <%= t.order_reference_code %>
+  </p>
+
+  <p class="text-lg text-gray-900 py-0 sm:text-lg">
+    <%= t.readable_created_at %>
+  </p>
+
+  <p class="text-lg text-gray-900 py-0 sm:text-lg">
+    <%= t.readable_grandtotal %>
+  </p>
+
+  <p class="text-lg text-gray-900 py-0 sm:text-lg">
+    <%= t.condensed_payment_method %>
+  </p>
+
+  <p class="text-lg text-gray-900 py-0 sm:text-lg">
+    <% case t.paid %>
+    <% when 'paid'%>
+      <span class="px-2 bg-green-500 rounded text-white text-xs">
+        PAID
+      </span>
+    <% when 'failed'%>
+      <span class="px-2 bg-red-500 rounded text-white text-xs">FAILED</span>
+    <% when 'refunded'%>
+      <span class="px-2 bg-gray-300 rounded text-gray-900 text-xs">REFUNDED</span>
+    <% end %> 
+  </p>
+</div>

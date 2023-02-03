@@ -1,0 +1,72 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-2 px-4 rounded bg-gray-200 mb-6">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<div class="mb-6 w-full max-w-5xl mx-auto">
+  <div class="bg-white p-2 rounded w-full max-w-2xl mb-4 mx-auto">
+
+    <h3 class="font-bold text-sm mb-2 text-center">
+      New Holiday
+    </h3>
+    <%= form_for :holiday, url: {controller: 'executives/dashboards/holidays', action: :create } do |f|%>
+      <%= f.hidden_field :date, id: 'date-field'%>
+      <div class="w-full p-4 mx-auto">
+        <div class="w-full mb-4">
+          <%= f.label :title, class: 'font-bold text-xs mb-1'%>
+          <%= f.text_field :title, placeholder: 'Example: Xmas 2021', id: 'title-field', class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+        </div>
+
+        <div class="w-full mb-4">
+          <%= f.label :date, class: 'font-bold text-xs mb-1'%>
+          <input 
+            type="text" 
+            id="datepicker" 
+            placeholder="Select a date" 
+            class="pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full"
+          >
+        </div>
+
+        <div class="flex justify-end items-center">
+          <%= f.submit 'Create', id: 'submit-btn', disabled: 'disabled', class: 'block font-black mt-4 w-full py-3 px-4 bg-gray-300 text-base text-gray-900 rounded cursor-pointer'%>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  // datepicker functionality and validate form
+  let hidden_field = document.querySelector('#date-field');
+  let title_field = document.querySelector('#title-field');
+  let datepicker_field = document.querySelector('#datepicker');
+  let submit_btn = document.querySelector('#submit-btn')
+
+  title_field.addEventListener('change', function(e) {
+    console.log(title_field.value);
+    validateForm();
+  })
+
+  let picker = new Pikaday(
+    { 
+      field: datepicker_field,
+      minDate: moment().toDate(),
+      onSelect: function() {
+        hidden_field.value = moment().format(datepicker_field.value, 'YYYY-MM-DD')
+        validateForm();
+      }
+    }
+  )
+
+  const validateForm = () => { if (hidden_field.value.length && title_field.value.length) { submit_btn.removeAttribute('disabled');
+      submit_btn.className = "block font-black mt-4 w-full py-3 px-3 bg-green-600 text-base text-white rounded cursor-pointer"
+    } else {
+      submit_btn.setAttribute('disabled', 'disabled');
+      submit_btn.className = "block font-black mt-4 w-full py-3 px-4 bg-gray-300 text-base text-gray-900 rounded cursor-pointer"
+    }
+  }
+</script>

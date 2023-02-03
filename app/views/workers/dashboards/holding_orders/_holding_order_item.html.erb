@@ -1,0 +1,47 @@
+<%= link_to  workers_courier_tasks_checkout_holding_order_step1_path(id: order.id), class: "open-appointment__item" do %>
+
+  <p>
+    <span class="blue bold">
+      ORDER ID:
+      <%= order.reference_code %>
+    </span>
+  </p>
+
+  <p>
+    <span class="bold">
+      Customer Name:
+    </span>
+      <%= customer.formatted_name %>
+  </p>
+
+  <p>
+    <span class="bold">
+      Phone:
+    </span>
+    <object>
+      <%= link_to customer.formatted_phone, "tel:#{customer.formatted_phone}" %>
+    </object>
+  </p>
+
+  <p> 
+    <span class="bold">
+      Previous Attempts:
+    </span>
+    <%= order.delivery_attempts %>
+  </p>
+
+  <p> 
+    <span class="bold">
+      Since Last Attempt:
+    </span>
+    <%= time_ago_in_words(courier_problems.last.created_at) %>
+  </p>
+
+  <p>
+    <span class="bold">
+    Address:
+    </span>
+    <%= order.full_address %>
+  </p>
+
+<% end %>

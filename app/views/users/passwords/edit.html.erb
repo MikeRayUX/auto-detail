@@ -1,0 +1,41 @@
+<% provide(:title, "Change My Password")%>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-20 bg-gray-200">
+
+  <div class="w-full p-4 max-w-xl mx-auto bg-white flex-column sm:border  sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+    <h1 class="font-regular text-xl text-left mb-4">Enter A New Password</h1>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="w-full flex-column justify-center items-center">
+        <div class="w-full mb-4">
+          <%= f.label :password, class: 'hidden' %>
+          <%= f.label :password, "New password", class: "block text-left" %>
+          <% if @minimum_password_length %>
+            <em class='block mb-2'>
+              (<%= @minimum_password_length %> characters minimum)
+            </em>
+          <% end %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4' %>
+        </div>
+      </div>
+
+      <div class="w-full flex-column justify-center items-center">
+        <div class="w-full">
+          <%= f.label :password_confirmation, "Confirm new password", class: "block text-left" %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4' %>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <%= render "devise/shared/error_messages", resource: resource %>
+      </div>
+
+      <%= f.submit "Change my password", class: 'w-full block py-4 px-4 bg-primary text-white font-bold text-base rounded-full sm:text-xl' %>
+    <% end %>
+
+    <%= render "users/shared/links" %>
+  </div>
+</div>
+
+

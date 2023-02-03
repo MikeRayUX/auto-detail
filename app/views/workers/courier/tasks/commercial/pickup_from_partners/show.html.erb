@@ -1,0 +1,186 @@
+<% provide(:title, "Pickup From Washer")%>
+<div class="h-screen bg-gray-200">
+  <div class="w-full bg-gray-900 py-2">
+    <p class="font-bold text-lg text-center text-white">
+      Pickup From Washer
+    </p>
+  </div>
+
+  <div class="w-full">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="max-w-lg mx-auto p-4 bg-white">
+    <%= link_to "<Back", workers_dashboards_processing_orders_path, class: "text-link-blue font-bold text-xl py-1 font-bold mb-2" %>  
+
+    <%= form_tag workers_courier_tasks_commercial_pickup_from_partners_path, id: 'weightForm', method: :put do %>
+      <%= hidden_field_tag :id, @pickup.id%>
+
+      <div class="my-4">
+        <p class="font-bold text-2xl">
+          <ion-icon class="text-base" name="qr-code-outline"></ion-icon> 
+          <%= @pickup.bags_code%>
+          (about <%= @pickup.bags_collected%> bags)
+        </p>
+      <p class="text-lg">
+          Location:
+          <span class="font-bold text-lg">
+            <%= @partner.business_name.upcase %>
+          </span>
+        </p>
+        <p class="text-lg">
+          <%= link_to @partner.full_address.upcase, @partner.google_nav_link, target: '_blank', class: 'text-link-blue font-bold'%>
+        </p>
+      </div>
+      <div class="w-full border-b my-2 py-2">
+      <div class="w-full flex-column justify-start">
+        <p class="flex flex-row justify-start items-center text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4">
+            1
+          </span>
+          How Many Bags?
+        </p>
+      </div>
+      <div class="flex flex-row justify-end items-center">
+        <h2 value="0" class="bagCount text-4xl font-bold mr-8">
+          1
+        </h2>
+        <div>
+          <%= link_to '-', '#', class: 'decrementBagCount bg-gray-200 text-2xl text-black py-1 px-4 font-bold mx-1'%>
+          <%= link_to '+', '#', class: 'incrementBagCount bg-gray-200 text-2xl text-black py-1 px-4 font-bold mx-1'%>
+        </div>
+      </div>
+
+      <div class="w-full flex-column justify-start">
+        <p class="flex flex-row justify-start items-center text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4">
+            2
+          </span>
+          Enter Weights (ex: 12.45)
+        </p>
+        <p class="weightDisplay text-right text-xl font-bold px-2 py-1 mt-2 bg-gray-900 text-white">
+          Weight: 0.0 lbs
+        </p>
+      </div>
+      <div class="weightFieldsContainer flex-column justify-end items-center">
+        <%= text_field_tag '', '', placeholder: 'Enter Weight', class: 'weightField w-full px-2 py-2 rounded border text-lg my-2'%>
+      </div>
+
+      <%= hidden_field_tag :weight, '', class: 'finalWeightField border' %>
+
+      <%= hidden_field_tag :bags_collected, '', class: 'bagCountField' %>
+      <%= hidden_field_tag :id, @pickup.id %>
+
+      <%= submit_tag "Complete Pickup", class: 'block w-full py-4 text-center bg-orange-500 text-gray-900 font-bold text-lg mb-4', data: {confirm: "Are you sure?"}%>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  const weightFieldsContainer = document.querySelector('.weightFieldsContainer')
+  const subtractBagsButton = document.querySelector('.decrementBagCount');
+  const addBagsButton = document.querySelector('.incrementBagCount');
+  const showLabelButton = document.querySelector('.submitBagCount');
+  const finalWeightField = document.querySelector('.finalWeightField');
+  const weightDisplay = document.querySelector('.weightDisplay');
+  const bagCountField = document.querySelector('.bagCountField')
+
+  let bagCountElement = document.querySelector('.bagCount')
+  let bagCount = 1
+
+  subtractBagsButton.addEventListener('click', () => {
+    removeBags();
+  })
+  addBagsButton.addEventListener('click', () => {
+    addBags();
+  })
+
+  const addBags = () => {
+    bagCount++;
+    updateBagCount();
+    addWeightField();
+  }
+
+  const removeBags = () => {
+    if(bagCount > 1) {
+      bagCount--;
+      updateBagCount();
+      removeWeightField();
+    }
+  }
+
+  const refreshListeners = () => {
+    document.querySelectorAll('.weightField').forEach(field => {
+      field.addEventListener('input', () => {
+        updateWeight();
+      })  
+    });
+  }
+
+  const updateWeight = () => {
+    let totalWeight = 0;
+    let result = 0;
+    document.querySelectorAll('.weightField').forEach(field => {
+      let value = field.value
+      if (value) {
+        totalWeight += parseFloat(value); 
+      }
+    });
+
+    result = totalWeight.toFixed(2)
+    weightDisplay.innerText = `Weight: ${result} lbs`
+    finalWeightField.value = result;
+  }
+
+  const updateWeightDisplay = () => {
+    weightDisplay.innerText = weight;
+  }
+
+  const updateBagCount = () => {
+    bagCountElement.setAttribute('value', bagCount);
+    bagCountElement.textContent = bagCount;
+    bagCountField.value = bagCount;
+
+    // console.log(bagCount);
+  }
+
+  const addWeightField = () => {
+    let weightField = document.createElement('input');
+    weightField.setAttribute('placeholder', 'Enter Weight');
+    weightField.setAttribute('class', 'weightField');
+    [
+      'weightField',
+      'w-full',
+      'px-2',
+      'py-2',
+      'rounded',
+      'border',
+      'text-lg',
+      'my-2',
+    ].forEach(style => {
+      weightField.classList.add(style)
+    })
+
+    weightFieldsContainer.appendChild(weightField);
+    refreshListeners();
+  }
+
+  const removeWeightField = () => {
+    let fields = document.querySelectorAll('.weightField')
+    fields[fields.length - 1].remove();
+    updateWeight();
+  }
+
+  refreshListeners();
+  updateBagCount();
+</script>
+
+
+
+

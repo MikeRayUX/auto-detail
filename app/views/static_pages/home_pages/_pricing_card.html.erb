@@ -1,0 +1,78 @@
+<%# pricing section start %>
+<div class="px-6 flex-column justify-center items-center max-w-sm m-auto lg:max-w-2xl my-20">
+  <%# pricing card start %>
+  <div style="max-width: 310px" class="w-full mx-auto flex-column items-center justify-center p-4 border border-gray-200 max-w-xs rounded-lg shadow-sm sm:py-6 sm:px-6 mb-4">
+
+    <div class="my-2 flex justify-center items-center">
+    <%# for centering %>
+      <div>
+        <div class="flex justify-center items-center mb-3">
+          <ion-icon class="mr-1 text-base text-green-500" name="leaf"></ion-icon>
+          <p class="text-center text-gray-900 text-base font-black leading-none">
+            ECO-FRIENDLY DETERGENTS
+          </p>
+        </div>
+
+        <div class="flex justify-start items-center mb-3">
+          <ion-icon class="mr-1 text-base text-primary" name="checkmark-circle"></ion-icon>
+          <p class="text-center text-gray-900 text-base font-black leading-none">
+            FLAT-RATE PRICING
+          </p>
+        </div>
+
+        <div class="flex justify-start items-center mb-3">
+          <ion-icon class="mr-1 text-base text-primary" name="checkmark-circle"></ion-icon>
+          <p class="text-center text-gray-900 text-base font-black leading-none">
+            FREE NEXT-DAY DELIVERY
+          </p>
+        </div>
+
+        <div class="flex justify-start items-center mb-3">
+          <ion-icon class="mr-1 text-base text-primary" name="checkmark-circle"></ion-icon>
+          <p class="text-center text-gray-900 text-base font-black leading-none">
+            REUSABLE LAUNDRY BAGS
+          </p>
+        </div>
+        
+      </div>
+    </div>
+    <div class="flex flex-row justify-center mb-2">
+      <h5 class="text-primary text-xl font-bold leading-none">$</h5>
+      <h5 class="text-6xl font-bold text-primary leading-none tracking-tight">
+        25
+      </h5>
+      <h5 class="mt-10 text-primary text-base tracking-tigher leading-none font-black">
+        /BAG
+      </h5>
+    </div>
+
+    <h3 class="text-center text-sm font-normal text-gray-700 my-2 leading-none">
+      *holds 2-3 standard loads
+    </h3>
+  </div>
+
+  <div class="w-full flex-column justify-center items-center">
+      <%= link_to 'https://apps.apple.com/us/app/fresh-and-tumble/id1561882267', target: '_blank' do %>
+        <%= image_tag 'landing/app-store-badge.svg', style: 'width: 150px;', class: 'mx-auto mb-2'%>
+      <% end %>
+
+      <%= link_to 'https://play.google.com/store/apps/details?id=com.freshandtumble.customerapp', target: '_blank' do %>
+        <%= image_tag 'landing/play-store-badge.png', style: 'width: 175px;', class: 'mx-auto'%>
+      <% end %>
+  </div>
+
+  <div class="w-full flex-column justify-center items-center">
+    <h1 class="text-center text-lg font-bold text-gray-900 mb-2">
+      OR
+    </h1>
+
+    <% if current_user %>
+      <%= link_to 'ORDER ONLINE', users_resolve_setups_path, class: 'py-2 px-6 rounded bg-primary text-white text-center block mx-auto font-bold text-sm', style: "max-width: 160px" %>
+    <% else %>
+      <%= link_to 'ORDER ONLINE', new_users_service_areas_verify_zipcodes_path, class: 'py-2 px-6 rounded bg-primary text-white text-center block mx-auto font-bold text-sm', style: "max-width: 160px" %>
+    <% end %>
+  </div>
+
+     
+  </div>
+<%# pricing section end %>

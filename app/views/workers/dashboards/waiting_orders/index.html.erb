@@ -1,0 +1,47 @@
+<% provide(:title, "WAITING ORDERS")%>
+
+<%= render partial: 'workers/dashboards/item_list_header', locals: { 
+    heading: 'Waiting For Courier',
+    ion_icon: 'hourglass-outline'
+  }%>
+
+<div class="w-full h-screen py-2 px-4 bg-gray-200">
+
+  <div class="w-full mb-2">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+      <%= render partial: 'workers/dashboards/waiting_orders/waiting-order-item',
+        locals: {
+          order: order
+        }
+      %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.any?%>
+    <% @commercial_pickups.each do |pickup| %>
+      <%= render partial: 'workers/dashboards/waiting_orders/commercial-waiting-order-item',
+        locals: {
+          pickup: pickup
+        }
+        %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.none? && @orders.none? %>
+    <h2 class="font-bold text-center">
+      There are no upcoming pickups currently. Check back later.
+    </h2>
+  <% end %>
+</div>
+
+ 

@@ -1,0 +1,87 @@
+
+<div style="height: 550px;" class="w-full mx-auto lg:mx-0 lg:max-w-sm rounded bg-white lg:mr-4 overflow-y-scroll">
+  <div class="w-full p-2">
+    <h3 class="font-black text-xs text-left flex flex-row justify-center items-center pt-1">
+      <p class="mr-2  bg-primary" style="height: 10px; width: 10px;"></p>  
+      INFO
+    </h3>
+  </div>
+
+  <div  class="px-4 mb-2 lg:mb-0 overflow-y-scroll">
+    <div class="mb-2 border-b pb-2">
+      <h3 class="font-black text-xs text-left mb-1">
+        INFO 
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        <%#= link_to "EDIT INFO", edit_executives_dashboards_users_customer_path(@user.id), class:'text-link-blue font-black underline'%>
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        FULL NAME: <%= @w.full_name.upcase%>
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        PHONE: 
+        
+        <% if @w.phone %>
+          <%= link_to @w.formatted_phone, "tel:#{@w.phone}", class: "underline font-black text-link-blue text-sm" %>
+        <% else %>
+          N/A
+        <% end %>
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        EMAIL: <%= @w.email %>
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        CREATED: <%= readable_date(@w.created_at).upcase%>
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        ACCOUNT AGE: <%= time_ago_in_words(@w.created_at).upcase%>
+      </h3>
+
+    </div>
+
+    <div class="mb-2 border-b pb-2">
+      <h3 class="font-black text-xs text-left mb-1">
+        ADDRESS
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        REGION: 
+        <% if @w.region %>
+          <%= link_to @w.region.area.upcase, executives_dashboards_region_path(@w.region.id), class: 'text-link-blue underline mr-4 font-black'%>
+        <% else %>
+          N/A
+        <% end %>
+        
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        ADDRESS: 
+        <% if @w.address %>
+          <%= link_to @w.address.full_address.upcase, @w.address.google_nav_link, class: 'text-link-blue underline mr-4 font-black'%>
+        <% else %>
+          N/A
+        <% end %>
+      </h3>
+    </div>
+
+    <div class="mb-2 border-b pb-2">
+      <h3 class="text-xs font-black mb-1">
+        OFFERS
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        LIFETIME OFFERS: <%= @w.new_orders.count%>
+      </h3>
+
+      <h3 class="text-xs font-bold leading-tight">
+        LIFETIME EARNINGS: <%= @w.new_orders.delivered.any? && @w.payoutable_as_ic ? "$#{@w.summed_earnings(@w.new_orders)}" : "N/A"%>
+      </h3>
+    </div>
+  </div>  
+</div>

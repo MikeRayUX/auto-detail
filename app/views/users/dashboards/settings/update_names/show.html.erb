@@ -1,0 +1,21 @@
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-8 bg-gray-200">
+  <div class="w-full mx-auto p-6 sm:max-w-lg">
+    <%= form_for current_user, :url => users_dashboards_settings_update_names_path, method: :put do |f| %>
+      <div class="my-2">
+        <%= f.label :full_name, "Full name", class: "block font-bold mb-2 text-lg" %>
+        <%= f.text_field :full_name, class: "w-full py-3 pl-2 border rounded appearance-none text-gray-900 sm:py-4 sm:text-xl sm:pl-3" %>
+      </div>
+
+      <div class="my-4">
+        <% flash.each do |message_type, message| %>
+          <div class="flashWhite bg-white sm:w-full sm:mx-auto">
+            <h1 class="flashWhiteText">
+              <%= message %>
+            </h1>
+          </div>
+        <% end %>
+      </div>
+      <%= f.submit "Save", class: "w-full block py-4 px-4 bg-green-500 text-white font-bold text-lg rounded sm:text-xl"%>
+   <% end %>
+  </div>
+</div>

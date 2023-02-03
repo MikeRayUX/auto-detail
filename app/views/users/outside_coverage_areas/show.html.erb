@@ -1,0 +1,29 @@
+<div class='h-full'>
+  <div class=''>
+    <div
+      class='w-full border-t border border-gray-200 rounded bg-white py-2 px-4 sm:max-w-lg sm:mt-8 sm:py-8 sm:px-12 mx-auto'
+    >
+      <div class='py-2 border-gray-200 mb-4'>
+        <div class="flex flex-row justify-center items-center mb-4">
+          <div class="">
+            <p class='text-lg font-black text-gray-900 text-center leading-0'>
+             😢 We're sorry, your address is outside our service area. We are expanding to more areas soon, so please check back later.
+            </p>
+          </div>
+        </div>
+
+        <div class="mx-auto flex flex-row justify-center items-center">
+          <div>
+            <div class="flex flex-row justify-start items-center">
+              <p class='text-base font-black text-gray-900    tracking-tight '>
+               You also can try another address by changing your address in your dashboard.
+              </p>
+            </div>
+
+            <%= link_to 'Change Address',users_dashboards_settings_info_summaries_path, class: 'w-full block py-4 px-4 bg-primary mt-8 text-white text-center font-bold text-lg rounded sm:text-xl font-bold' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

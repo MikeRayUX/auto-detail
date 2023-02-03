@@ -1,0 +1,28 @@
+<% provide(:title, "Reset My Password")%>
+
+<%# top line %>
+<div class="w-full py-1 bg-primary"></div>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-20 bg-gray-200">
+  <div class="w-full p-4 max-w-xl mx-auto bg-white flex-column sm:border  sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+    <h2 class="font-regular text-xl text-left mb-4">Forgot Your Password?</h2>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
+    <div class="w-full flex-column justify-center items-center">
+      <div class="w-full">
+        <%= f.label :email, class: 'hidden' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class:"border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4" %>
+      </div>
+    </div>
+
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="my-4">
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message, class: "block w-full py-2 px-4 bg-gray-200 text-gray-900 txt-base text-center") %>
+    <% end %>
+  </div>
+
+  <%= f.submit "Send me reset password instructions", class: "w-full block py-4 px-4 bg-primary text-white font-bold text-base rounded-full sm:text-xl" %>
+  <% end %>
+</div>

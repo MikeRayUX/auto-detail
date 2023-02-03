@@ -1,0 +1,11 @@
+Hi <%= @user.first_name%>,
+
+Your Order (#<%=@order.ref_code%>) has been cancelled successfully.
+
+Refunded Amount: $<%= format('%.2f', @order.grandtotal) %>
+
+To Card: <%= @user.readable_payment_method%>
+
+Please allow up to 48 hours for your refund to process, though it is common that you will receive your refund sooner.
+Thank You For Choosing FRESHANDTUMBLE.COM
+© <%= Date.today.year%> Fresh And Tumble LLC

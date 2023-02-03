@@ -1,0 +1,13 @@
+  <%= link_to eval(route), class: 'bg-white w-full flex flex-row items-center justify-between border-solid border-gray-100 py-8 px-4 border-b border-solid border-1 border-gray-300 sm:px-8' do %>
+    <div class="flex-column">
+      <h2 class="font-bold text-xl text-gray-900 py-0">
+        <%= heading %>
+      </h2>
+
+      <h2 class="font-normal text-gray-700 text-normal text-gray-900">
+          <%= sub_heading %>
+      </h2>
+    </div>
+
+    <ion-icon class="text-2xl text-gray-700" name="chevron-forward-outline"></ion-icon>
+<% end %>

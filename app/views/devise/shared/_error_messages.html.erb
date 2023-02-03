@@ -1,0 +1,15 @@
+<% if resource.errors.any? %>
+  <div class="w-full py-1 my-2">
+    <%# <h2> %>
+      <%# <%= I18n.t("errors.messages.not_saved",
+                 count: resource.errors.count,
+                 resource: resource.class.model_name.human.downcase)
+       %> 
+    <%# </h2> %>
+    <ul>
+      <% resource.errors.full_messages.each do |message| %>
+        <li class="block text-align text-center text-lg text-red-700 w-full py-2 rounded"><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

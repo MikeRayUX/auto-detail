@@ -1,0 +1,47 @@
+<%# block2 %>
+<div class="mb-6 max-w-5xl mx-auto">
+  <%= render partial: 'executives/dashboards/metric_block_header',    
+    locals: {
+      title: 'Customers',
+      icon_name: 'people'
+    }  
+  %>
+  <div class="w-full flex flex-row flex-wrap justify-start items-center">
+    
+    <%= render partial: 'executives/dashboards/metric', locals: {
+        title: 'Active Customers', 
+        span:"1+ orders within last 14 days",
+        metric_value: User.active_customer_count
+        } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "New Users (TODAY)", 
+      span: today(),
+      metric_value: User.customer_today_count
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "New Users (MTD)", 
+      span: mtd(),
+      metric_value: User.customer_mtd_count
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: 'Customers (global)', 
+      span: User.global_customer_to_order_rate,
+      metric_value: User.global_customer_count
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: 'Avg. Order Frequency', 
+      span: 'days between orders',
+      metric_value: User.average_order_frequency
+      } 
+    %>
+  </div>
+
+</div>

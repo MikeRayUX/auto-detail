@@ -1,0 +1,23 @@
+<div class="flex flex-row justify-start items-center w-full bg-gray-300 py-2 mb-2">
+  <h1 class="text-3xl font-bold text-gray-900 mr-4">
+    All Clients
+  </h1>
+  <%= link_to 'New Client +', new_executives_dashboards_commercial_new_client_path, class: 'py-1 px-2 bg-green-600 text-white rounded'%>
+</div>
+
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-4 px-4 rounded bg-green-500 mb-6">
+    <h1 class="text-base text-center text-white font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<%= render partial: 'executives/dashboards/metric_block_header', locals: {icon_name: 'briefcase', title: 'All Clients'}%>
+
+<div class="flex flex-row flex-wrap">
+  <% @clients.each do |client|%>
+    <%= render partial: 'executives/dashboards/commercial/clients/client_item', locals: {client: client}%>
+  <% end %>
+</div>
+

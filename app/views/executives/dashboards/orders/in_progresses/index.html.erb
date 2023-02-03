@@ -1,0 +1,15 @@
+<% if @orders.any?%>
+  <div class="mb-6">
+    <%= render partial: 'executives/dashboards/metric_block_header', locals: {
+    icon_name: 'cube-outline',
+    title: "In Progress (#{@orders.count})"
+  }
+  %>
+
+    <div class="flex flex-wrap">
+      <% @orders.all.each do |order| %>
+        <%= render partial: 'executives/dashboards/orders/order_item', locals: {order: order, user: order.user}%>
+      <% end %>
+    </div>
+  </div>
+<% end %>

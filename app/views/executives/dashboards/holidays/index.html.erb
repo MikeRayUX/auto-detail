@@ -1,0 +1,55 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-2 px-4 rounded bg-gray-200 mb-6">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<div class="mb-6 w-full max-w-5xl mx-auto">
+  <div class="w-full bg-gray-500 py-2 mb-2">
+    <h1 class="text-3xl font-bold text-gray-900 flex justify-start items-center">
+      Holidays/Closed
+      <%= link_to 'Add Holiday', new_executives_dashboards_holiday_path, class: 'ml-4 text-xs px-2 rounded bg-indigo-800 text-white font-bold'%>
+    </h1>
+  </div>
+
+  <div class="w-full flex flex-row justify-start items-center py-2 px-2 bg-gray-800 border-b border-gray-500 rounded-t">
+
+    <div class="flex justify-start items-center">
+      <ion-icon class="mr-1 text-white" name="calendar"></ion-icon>
+
+      <h3 class="pl-1 text-left text-white text-xs font-bold  ">
+        <%= "Upcoming Holidays (#{@upcoming.count})" %>
+      </h3>
+    </div>
+  </div>
+
+  <%# tickets container %>
+  <div class="w-full bg-white mb-12">
+    <% @upcoming.each do |holiday|%>
+      <%= render partial: 'executives/dashboards/holidays/holiday', locals: { holiday: holiday } %>
+    <% end %>
+
+    <% if @upcoming.none?%>
+      <h3 class="text-sm font-bold text-center py-2">
+        There are no upcoming holidays.
+      </h3> 
+    <% end %>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

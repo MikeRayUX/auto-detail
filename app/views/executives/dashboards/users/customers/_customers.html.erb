@@ -1,0 +1,59 @@
+<div class="w-full p-2 flex flex-row justify-start items-center bg-gray-800">
+  <p class="w-3/12 text-xs font-black text-white">CUSTOMERS (<%= @all_users.count %>) NAME</p>
+  <p class="w-3/12 text-xs font-black text-white">EMAIL</p>
+  <p class="w-2/12 text-xs font-black text-white">PHONE</p>
+  <p class="w-2/12 text-xs font-black text-white">REGION</p>
+  <p class="w-3/12 text-xs font-black text-white">ORDERS</p>
+  <p class="w-2/12 text-xs font-black text-white">SIGNED UP</p>
+</div>
+
+  <div style="height: 600px" class="w-full bg-gray-300 overflow-y-scroll mb-2">
+    <% @users.each do |user|%>
+      <div class="block w-full bg-gray-300 border-b py-3 px-2 flex flex-row justify-start items-center">
+
+      <%# NAME %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+        <%= link_to "#{user.full_name.upcase}", executives_dashboards_users_customer_path(id: user.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+      </p>
+
+      <%# EMAIL %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+        <%= truncate_attribute(user.email.upcase, 20)%>
+      </p>
+
+      <%# PHONE %>
+      <p class="w-2/12 text-xs font-black text-gray-900">
+        <% if user.phone %>
+          <%= user.formatted_phone%> 
+        <% else %>
+          N/A
+        <% end %>
+      </p>
+
+      <%# REGION %>
+      <p class="w-2/12 text-xs font-black  text-gray-900">
+      <% if user.address && user.address.region %>
+        <% @region = user.address.region%>
+          <%= link_to "#{@region.area.upcase}", executives_dashboards_regions_region_path(@region.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+      <% else %>
+        N/A
+      <% end %>
+      </p>
+
+      <%# ORDERS %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+      <% if user.new_orders.any? || user.orders.any? %>
+        <%= user.new_orders.count + user.orders.count %>
+      <% else %>
+        NEVER
+      <% end %>
+      </p>
+      
+      <%# SIGNED UP %>
+      <p class="w-2/12 text-xs font-black text-gray-900">
+        <%= readable_date(user.created_at)%>
+      </p>
+    </div>
+  <% end %>
+  </div>
+</div>

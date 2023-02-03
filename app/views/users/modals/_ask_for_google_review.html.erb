@@ -1,0 +1,38 @@
+<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+  <%# overlay/backdrop %>
+  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-25"></div>
+
+  <%# container %>
+  <div class="modal-container bg-white w-11/12 md:max-w-lg max-auto rounded shadow-lg z-50 overflow-y-auto p-4 sm:px-12">
+      <h3 class="w-full text-gray-900 font-bold text-center text-lg mb-2 sm:text-xl">
+        👋 Hey <%= current_user.first_name.capitalize%>! 
+      </h3>
+
+      <h3 class="w-full text-center text-xl mb-4 sm:text-xl">
+        ⭐⭐⭐⭐⭐
+      </h3>
+      <h3 class="w-full text-center text-gray-900 sm:text-lg ">
+        Would you like to help other <span class="font-bold text-primary">Seattleites</span> hear about us by <span class="font-bold text-primary">rating us on Google?</span>
+      </h3>
+
+      <p class="text-base sm:text-md text-center mb-4">
+        (takes just a few seconds)
+      </p>
+
+     
+
+      <div class="w-full flex justify-between items-center">
+        <%= link_to 'Not now', '', id:"modalDismiss", class: 'px-4 py-2 rounded text-gray-900 bg-white border sm:text-lg'%>
+
+        <%= link_to 'https://g.page/freshandtumble/review?rc', target: '_blank', id:'confirmBtn', class: 'py-2  px-10 rounded bg-primary text-white sm:text-lg font-bold' do %>
+          <div class="flex justify-start items-center">
+              Sure!
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= javascript_pack_tag 'users/modals/popup'%>

@@ -1,0 +1,32 @@
+<div class="w-full mb-4 bg-white rounded-md sm:max-w-xl sm:mx-auto">
+  <div class="px-2 w-full bg-gray-900 text-white text-center">
+    commercial
+  </div>
+  <div class="py-2 px-4">
+    <p class="font-bold text-lg text-left text-gray-900"> 
+      <%= pickup.formatted_appointment %>
+    </p>
+
+    <div class="mt-2 mb-4">
+      <p class="text-sm">
+        <%= pickup.client.name.upcase%>
+      </p>
+
+      <p class="text-sm">
+        <%= link_to pickup.full_address.upcase, pickup.google_nav_link, target: '_blank', class: 'font-bold text-link-blue underline'%>
+        <ion-icon class="text-xs text-link-blue" name="navigate-outline"></ion-icon>
+      </p>
+    </div>
+
+    <div class="flex flex-row justify-between items-center">
+      <button
+        class="copy-address-button block w-1/2 bg-blue-500 rounded-md text-white py-2 mr-6 text-center"
+        data-clipboard-text="<%= pickup.routable_address%>"
+      >
+        Copy address    
+      </button>
+
+      <%= link_to "Start Pickup", workers_courier_tasks_commercial_pickup_from_clients_path(id: pickup.id), class: "block w-1/2 bg-orange-500 text-white py-2 text-center" %>
+    </div>
+  </div>
+</div>

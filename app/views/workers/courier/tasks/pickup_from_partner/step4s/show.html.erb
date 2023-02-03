@@ -1,0 +1,56 @@
+<% provide(:title, "Pickup From Partner")%>
+
+<div class="courier-stop-container__outer">
+
+  <div class="courier-stop-container__inner">
+    <%= link_to "<Back", workers_courier_tasks_pickup_from_partner_step3_path(id: @order.reference_code), class: "stop-back-button" %>  
+
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message) %>
+    <% end %>
+
+    <p class="bag-weight__header">
+      Enter Weight For Each Bag:
+    </p>
+
+    <p class="bag-weight__header">
+      <ion-icon name="qr-code-outline"></ion-icon> <%=@order.bags_code%>
+    </p>
+
+		<p class="bag-weight__header">
+      Reference weight: <%= @order.courier_weight%> lbs
+    </p>
+
+    <p>
+      Enter only decimals (Example: 12.6)
+    </p>
+
+    <% @bag_index = 1 %>
+
+    <% @order.bags_collected.times do %>
+    <p>
+      Bag <%= @bag_index%>:
+      <input type="number" class="bag-weight__field" placeholder="0">
+    </p>
+
+    <% @bag_index += 1%>
+
+    <% end %>
+
+    <p class="weight-output__section">
+      <span class="bold">
+        Total Weight:
+      </span>
+      <span class="weight-total">0</span>
+      lbs
+    </p>
+
+    <%= form_tag workers_courier_tasks_pickup_from_partner_step4_path, method: :patch, class: "stop-form" do |f|%>
+      <%= hidden_field_tag :weight %>
+      <%= hidden_field_tag :id, @order.reference_code %>
+      
+      <%= submit_tag "Complete", class: "form-submit-button confirm-button", data: {confirm: 'Are you sure the above information in valid?' }%>
+    <% end %>
+  </div>
+
+</div>

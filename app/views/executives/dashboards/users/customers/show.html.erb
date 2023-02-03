@@ -1,0 +1,8 @@
+<div class="block w-full lg:flex lg:flex-row lg:justify-start lg:items-center">
+
+  <%= render partial: 'executives/dashboards/users/customers/show/info', locals: { user:@user} %>
+
+  <%= render partial: 'executives/dashboards/users/customers/show/order_history', locals: { orders:@orders} %>
+
+  <%= render partial: 'executives/dashboards/users/customers/show/support_tickets', locals: { support_tickets:@support_tickets} %>
+</div>

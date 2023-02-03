@@ -1,0 +1,30 @@
+<div class="courier-stop-container__outer">
+
+  <div class="courier-stop-container__inner">
+    <%= link_to "<Back", workers_courier_tasks_checkout_holding_order_step2_path(id: @order.reference_code) , class: "stop-back-button" %>  
+
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message) %>
+    <% end %>
+
+    <p class="bold bags-to-scan-container">
+      Code To Scan: <span class="requiredCode" marked-as-scanned='false'><%= @order.bags_code %></span><br>
+      Bags to collect: <%= @order.bags_collected%>
+    </p>
+
+    <%= form_tag workers_courier_tasks_checkout_holding_order_step3_path(id: @order.reference_code), method: :patch, class: "stop-form" do |f|%>
+     <%= hidden_field_tag :bags_code %>
+     <%= hidden_field_tag :id, @order.reference_code %>
+     <%= label_tag :manually_entered_code %>
+     <%= text_field_tag :manually_entered_code, '',class: 'manually_entered_code' %>
+
+     <p class="scan-notice">
+        Scan the code on a single bag. Make sure that all bags are present when dropping off to partner. If scan function does not work, you can manually enter the code in the field above.
+      </p>
+
+      <canvas class="scan-viewer"></canvas>
+
+      <%= submit_tag "Confirm", class: "form-submit-button", data: {confirm: 'Are you sure?' }%>
+    <% end %>
+
+</div>

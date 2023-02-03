@@ -1,0 +1,30 @@
+<div class="bg-white p-4 rounded w-full max-w-xl mb-8 mx-auto">
+  <h3 class="font-bold text-base mb-4">
+    New Coverage Area
+  </h3>
+  <%=form_for :coverage_area, url: {controller: 'executives/dashboards/coverage_areas', action: 'create'} do |f|%>
+
+  <%= f.hidden_field :region_id, value: @region.id%>
+
+  <div class="w-full mb-4">
+    <%= f.text_field :zipcode, placeholder: 'Zipcode', class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+  </div>
+
+  <div class="w-full mb-4">
+    <%= f.text_field :state, placeholder: 'State', class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+  </div>
+
+  <div class="w-full mb-4">
+    <%= f.text_field :city, placeholder: 'City', class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+  </div>
+
+  <div class="w-full mb-4">
+    <%= f.text_field :county, placeholder: 'County', class: 'pl-2 text-sm h-12 rounded-sm border bg-white text-gray-900 w-full' %>
+  </div>
+
+  <div class="flex justify-end items-center">
+    <%=f.submit 'Create', class: 'py-2 px-3 bg-green-600 text-xs text-white rounded'%>
+  </div>
+
+  <% end %>
+</div>

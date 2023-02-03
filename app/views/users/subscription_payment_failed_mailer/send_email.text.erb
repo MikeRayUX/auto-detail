@@ -1,0 +1,22 @@
+Hi <%= @user.formatted_name%>,
+
+We're were unable to renew your Tumble subscription due to an issue with your payment method.
+
+Currently Due: 
+
+Tumble Subscription: Inactive
+
+Billing date: <%= @user.readable_subscription_expiry%>
+
+PRICE: $<%= @subscription.price%>
+
+TAX (<%= @region.tax_rate_percentage%>%) $<%= @tax %>
+
+GRANDTOTAL $<%= "#{format('%.2f', @grandtotal)}" %>
+
+PAYMENT METHOD <%= @user.readable_payment_method%>
+
+Please update your payment method by <%= link_to 'Visiting Your Dashboard', users_dashboards_settings_update_payments_url %>
+© <%= Date.today.year%> Fresh And Tumble LLC
+
+Thank You For Choosing FRESHANDTUMBLE.COM

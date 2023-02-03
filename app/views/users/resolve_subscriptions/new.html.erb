@@ -1,0 +1,130 @@
+<%= tag :input, type: 'hidden', name: 'subscription_name', value: @subscription.name %>
+<%= tag :input, type: 'hidden', name: 'subscription_price', value: @subscription.price %>
+<%= tag :input, type: 'hidden', name: 'grandtotal', value: readable_decimal(@grandtotal) %>
+<%= tag :input, type: 'hidden', id: 'form_authenticity_token', value: form_authenticity_token %>
+<%= tag :input, type: 'hidden', id: 'payment_method_required', value: current_user.stripe_customer_id.blank? %>
+
+<%= tag :input, type: 'hidden', id: 'flash', value: flash.any? ? flash[:notice] : nil %>
+
+<%= tag :input, type: 'hidden', id: 'existing_payment_method', value: current_user.stripe_customer_id.present? ? current_user.readable_payment_method : nil %>
+
+<div class='h-full bg-white'>
+  <div
+    class='w-full border-t border border-gray-400 rounded bg-white py-2 px-4 sm:max-w-lg sm:mt-8 sm:py-8 sm:px-12 mx-auto'
+  >
+    <div class='py-2 mb-4'>
+      <div class="flex flex-row justify-center items-center mb-4">
+        <div class="">
+          <% if current_user.subscription_expired?%>
+            <p class='text-lg font-black text-gray-900 text-center leading-0'>
+            REACTIVATE YOUR 
+          </p>
+          <p class='text-lg font-black text-gray-900 leading-none'>
+            <span class="text-primary">
+              TUMBLE
+            </span> 
+            SUBSCRIPTION
+          </p>
+        <% else %>
+          <p class='text-lg font-black text-gray-900 text-center leading-0'>
+            ACTIVATE YOUR 
+          </p>
+          <p class='text-lg font-black text-gray-900 leading-none'>
+            <span class="text-primary">
+              TUMBLE
+            </span> 
+            SUBSCRIPTION
+          </p>
+        <% end %>
+        </div>
+      </div>
+
+      <div class="mx-auto flex flex-row justify-center items-center">
+        <div>
+          <div class="flex flex-row justify-start items-center">
+            <ion-icon class="mr-1 text-lg text-primary" name="checkmark-circle"></ion-icon>
+            <p class='text-sm sm:text-base font-black text-gray-900 tracking-tight '>
+              ACCESS TO SERVICE
+            </p>
+          </div>
+
+          <div class="flex flex-row justify-start items-center">
+            <ion-icon class="mr-1 text-lg text-primary" name="checkmark-circle"></ion-icon>
+            <p class='text-sm sm:text-base font-black text-gray-900 tracking-tight '>
+              REUSABLE TUMBLE BAGS
+            </p>
+          </div>
+
+          <div class="flex flex-row justify-start items-center">
+            <ion-icon class="mr-1 text-lg text-primary" name="checkmark-circle"></ion-icon>
+            <p class='text-sm sm:text-base font-black text-gray-900 tracking-tight '>
+              24 HOUR TURNAROUND
+            </p>
+          </div>
+
+          <div class="flex flex-row justify-start items-center">
+            <ion-icon class="mr-1 text-lg text-primary" name="checkmark-circle"></ion-icon>
+            <p class='text-sm sm:text-base font-black text-gray-900 tracking-tight '>
+              FREE PICKUP & DELIVERY
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='pt-2  border-gray-400'>
+      <div class=' flex flex-row justify-between items-center '>
+        <p class='text-sm sm:text-base font-black text-gray-900 '>
+          PRICE
+        </p>
+
+        <p class='text-sm sm:text-base font-black text-gray-900'>
+          $<%= @subscription.price %> /mo
+        </p>
+      </div>
+
+      <div class=' flex flex-row justify-between items-center '>
+        <p class='text-sm sm:text-base font-black text-gray-900 '>
+          TAX (<%= @region.tax_rate_percentage%>%)
+        </p>
+
+        <p class='text-sm sm:text-base font-black text-gray-900'>
+          $<%= @tax %>
+        </p>
+      </div>
+
+      <div class=' flex flex-row justify-between items-center '>
+        <p class='text-sm sm:text-base font-black text-gray-900 '>
+          GRANDTOTAL
+        </p>
+
+        <p class='text-sm sm:text-base font-black text-gray-900'>
+          $<%= readable_decimal(@grandtotal) %>
+        </p>
+      </div>
+
+      <div class=' flex flex-row justify-between items-center '>
+        <p class='text-sm sm:text-base font-black text-gray-900 '>
+          AUTOMATICALLY RENEWS ON
+        </p>
+
+        <p class='text-sm sm:text-base font-black text-gray-900'>
+          <%= @next_renew_date %>
+        </p>
+      </div>
+    </div>
+
+    <div id="stripe_container"></div>
+
+    <div class=' flex flex-row justify-between items-center '>
+      <p class='text-sm font-bold text-gray-900 '>
+        *A Tumble subscription is required to use Fresh And Tumble.
+      </p>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'src/components/users/resolve_subscriptions/StripeForm'%>
+
+
+

@@ -1,0 +1,8 @@
+<%= link_to eval(route), class: current_worker_class?(eval(route))  do  %>
+  <span class="pr-2 text-white">
+    <%=title%>
+  </span>
+  <span class="text-orange-500 text-sm px-2 bg-white rounded-full">
+    <%= metric %>
+  </span>
+<% end %>

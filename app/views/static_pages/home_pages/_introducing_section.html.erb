@@ -1,0 +1,19 @@
+<div class="px-6 flex-column justify-center items-center max-w-xl m-auto mb-48 lg:max-w-3xl">
+  <h4 class="text-xl text-gray-900 text-center mt-20 mb-2 lg:text-2xl">
+    Introducing
+  </h4>
+
+  <h1 class="text-gray-900 text-4xl text-left font-bold leading-tight mb-4 lg:text-center">
+    Seattle's mobile laundromat.
+  </h1>
+
+  <p class="text-gray-900 text-xl text-left mb-8 lg:text-2xl">
+    Pickup & Deliver Laundry service doesn't have to be expensive or complicated. We make it <span>Simple, Fast and Affordable.</span>
+  </p>
+
+  <% if current_user %>
+    <%= link_to "GIVE US A TRY", users_resolve_setups_path, class: "bg-primary text-white py-4 block rounded-full text-center text-xl font-bold"%>
+  <% else %>
+    <%= link_to "GIVE US A TRY", signup_path, class: "bg-primary text-white py-4 block rounded-full text-center text-xl font-bold"%>
+  <% end %>
+</div>

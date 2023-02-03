@@ -1,0 +1,82 @@
+<% provide(:title, "Manual Checkout")%>
+<div class="courier-stop-container__outer">
+
+  <div class="courier-stop-container__inner">
+    <%= link_to "<Back", workers_dashboards_holding_orders_path, class: "stop-back-button" %>  
+
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message) %>
+    <% end %>
+    
+    <p class="bold">
+      Manual Order Checkout
+    </p>
+
+    <p class="bold">
+      Order ID:
+    </p>
+    <p>
+      <span class="blue bold">
+        <%= @order.reference_code%>
+      </span>
+    </p>
+
+    <p class="bold">
+      Customer details:
+    </p>
+    <p>
+      <%= @order.user.full_name.upcase %>
+    </p>
+    <p>
+      <%= @order.full_address.upcase %>
+    </p>
+
+    <p>
+      <span class="bold">
+        Phone:
+      </span>
+      <object>
+        <%= link_to @order.user.formatted_phone, "tel:#{@order.user.formatted_phone}" %>
+      </object>
+    </p>
+
+    <p>
+      <span class="bold">
+        Email:
+      </span>
+      <%= @order.user.phone %>
+    </p>
+
+    <p> 
+      <span class="bold">
+        Previous Attempts:
+      </span>
+      <%= @order.delivery_attempts %>
+    </p>
+
+    <p> 
+      <span class="bold">
+        Since Last Attempt:
+      </span>
+      <%= time_ago_in_words(@order.courier_problems.last.created_at) %>
+    </p>
+
+    <p class="bold">
+      Status:
+    </p>
+    <p>
+      Unable to deliver.
+    </p>
+
+    <p class="bold">
+      Bags to Deliver: <%= @order.bags_collected%>
+    </p>
+
+    <%= text_field_tag "", @order.routable_address, class: "stop-address"%>
+
+    <button class="stop-travel-to-customer__button" data-clipboard-target=".stop-address">Copy Address To Clipboard</button>
+    
+    <%= link_to "Next", workers_courier_tasks_checkout_holding_order_step2_path(id: @order.reference_code), class: "stop-ive-arrived__button stop-next-step__button"%>
+  </div>
+
+</div>

@@ -1,0 +1,5 @@
+<% if o.cancelled? %>
+  <%= render partial: 'users/dashboards/orders_overviews/legacy/cancelled_order_item', locals: { o: o }%>
+<% else %>
+  <%= render partial: 'users/dashboards/orders_overviews/legacy/order_item', locals: { o: o }%>
+<% end %>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= yield(:title) %> | Fresh & Tumble</title>
+    <%= render 'layouts/rails_default_head' %>
+    <%= render 'layouts/font_import_links' %>
+    <%= stylesheet_link_tag "application", media: 'all' %> 
+  </head>
+
+  <body>
+
+    <%= yield %>
+    
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<% flash.each do |message_type, message| %>
+  <div class="flashReg w-full">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<div class="block lg:flex lg:flex-row lg:justify-start lg:items-start">
+  <div class="w-full lg:max-w-xl mx-auto rounded bg-white">
+
+    <%# header start%>
+    <div class="w-full flex justify-between items-center border-b border-gray-400 px-4 py-2 bg-gray-800 rounded-t">
+
+      <div>
+        <%= link_to '< Back', executives_dashboards_regions_region_path(id: @region.id), class: 'text-xs px-2 rounded bg-gray-800 underline text-white font-bold'%>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <h3 class="text-sm font-black text-center mr-2 text-white">
+          EDIT REGION: <%= @region.area.upcase%> 
+        </h3>
+      </div>
+
+      <div></div>
+
+    </div>
+    <%# header end%>
+
+    <div class="px-4 pt-4 mb-2 w-full">
+      <div class="mb-2 ">
+        <%= form_for :region, url: {controller: 'executives/dashboards/regions/regions', action: 'update'}, method: :patch do |f|%>
+          <%= f.hidden_field :id, value: @region.id%>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :area, value: 'Area Name', class: 'text-xs'%>
+            <%= f.text_field :area, value: @region.area, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :business_open, value: 'Business Open', class: 'text-xs'%>
+            <%= f.text_field :business_open, value: @region.business_open, placeholder: 'Business Open ex: 8:00AM', class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :business_close, value: 'Business Close', class: 'text-xs'%>
+            <%= f.text_field :business_close, value: @region.business_close, placeholder: 'Business Close ex: 8:00PM', class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :tax_rate, class: 'text-xs'%>
+            <%= f.text_field :tax_rate, value: @region.tax_rate, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :washer_capacity, class: 'text-xs'%>
+            <%= f.text_field :washer_capacity, value: @region.washer_capacity, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :price_per_bag, class: 'text-xs'%>
+            <%= f.text_field :price_per_bag, value: @region.price_per_bag, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :washer_pay_percentage, class: 'text-xs'%>
+            <%= f.text_field :washer_pay_percentage, value: @region.washer_pay_percentage, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <div class="">
+              <%= f.label :stripe_tax_rate_id, class: 'text-xs'%>
+              <%= link_to 'View/Create on Stripe', 'https://dashboard.stripe.com/tax-rates', class: 'underline text-indigo-700 font-bold text-xs'%>
+            </div>
+
+            <%= f.text_field :stripe_tax_rate_id, value: @region.stripe_tax_rate_id, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :max_concurrent_offers, value: 'Max Washer Simulataneous Offers', class: 'text-xs'%>
+            <%= f.text_field :max_concurrent_offers, value: @region.max_concurrent_offers, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full mb-2 px-4">
+            <%= f.label :failed_pickup_fee, class: 'text-xs'%>
+            <%= f.text_field :failed_pickup_fee, value: @region.failed_pickup_fee, class: 'w-full block text-sm px-2 py-3 font-bold leading-tight h-full border rounded border-gray-900' %>
+          </div>
+
+          <div class="w-full flex justify-end items-center">
+            <%= f.submit 'Save Changes', class: 'font-bold text-indigo-700 text-sm underline bg-white my-4'%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

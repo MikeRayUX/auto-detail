@@ -1,0 +1,26 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-2 px-4 rounded bg-gray-200 mb-6">
+    <h1 class="text-base text-center text-gray-900 font-normal">
+      <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<div class="w-full bg-gray-500 py-2 mb-2">
+  <h1 class="text-3xl font-bold text-gray-900 flex justify-start items-center">
+    Email Templates
+    <%= link_to 'Add Template', new_executives_dashboards_email_path, class: 'ml-4 text-xs px-2 rounded bg-indigo-800 text-white font-bold'%>
+  </h1>
+</div>
+
+<div class="w-full flex justify-start items-start flex-wrap">
+  <% if @emails.any?%>
+    <% @emails.all.each do |email|%>
+      <%= render partial: '/executives/dashboards/emails/sendgrid_email', locals: { email: email } %>
+    <% end%>
+  <% else %>
+    <h1 style="text-xl text-center">
+      No emails to show.
+    </h1>
+  <% end%>
+</div>

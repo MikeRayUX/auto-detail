@@ -1,0 +1,17 @@
+Hi <%= @user.first_name%>,
+
+Our Washer indicated that one or more bags were missing from your order while attempting to pickup your laundry.
+
+On your next FreshAndTumble Order, please ensure that the number of bags you leave out for pickup match the number of bags for your order.
+
+Bags Our Washer Attempted To Pickup: <%= @old_bag_count%>
+Bags Missing: <%= @missing_bags_count%>
+Bags Picked Up: <%= @new_order.bag_count%>
+
+If you feel that you encountered this issue in error, don't worry, we're here to help! You can contact support directly by visiting your dashboard and navigating to the support section where you can contact us directly.
+
+Track your order <%= link_to 'HERE', users_dashboards_new_order_flow_track_pickup_url(id: @new_order.ref_code)%>
+
+Thank You For Choosing FRESHANDTUMBLE.COM
+
+© <%= Date.today.year%> Fresh And Tumble LLC

@@ -1,0 +1,72 @@
+<%# metric block %>
+<div class="mb-6 max-w-5xl mx-auto">
+
+  <%= render partial: 'executives/dashboards/metric_block_header',    
+    locals: {
+      title: 'Revenue',
+      icon_name: 'logo-usd'
+    }  
+  %>
+
+  <div class="w-full flex flex-row flex-wrap justify-start items-center">
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Revenue (TODAY)", 
+      span: Date.current.strftime('%m/%d/%y'),
+      metric_value: "$#{NewOrder.revenue_today}"
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Revenue (MTD)", 
+      span: mtd(),
+      metric_value: "$#{NewOrder.revenue_mtd}"
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Revenue (YTD)", 
+      span: ytd(),
+      metric_value: "$#{NewOrder.revenue_ytd}"
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Sales Tax (TODAY)", 
+      span: Date.current.strftime('%m/%d/%y'),
+      metric_value: "$#{NewOrder.tax_collected_today}"
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Sales Tax (MTD)", 
+      span: Date.current.strftime('%m/%d/%y'),
+      metric_value: "$#{NewOrder.tax_collected_mtd}"
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric', locals: {
+      title: "Sales Tax (YTD)", 
+      span: Date.current.strftime('%m/%d/%y'),
+      metric_value: "$#{NewOrder.tax_collected_ytd}"
+      } 
+    %>
+
+    <%= render partial: 'executives/dashboards/metric',
+      locals: {
+        title: 'Avg. Order Value',
+        span: 'total rev / order count',
+        metric_value: "$#{NewOrder.average_purchase_value}"
+      }
+    %>
+
+    <%= render partial: 'executives/dashboards/metric',
+      locals: {
+        title: 'Avg. Customer Orders Per Month',
+        span: '30 day order rate',
+        metric_value: NewOrder.average_order_frequency_per_month
+      }
+    %>
+  </div>
+
+</div>

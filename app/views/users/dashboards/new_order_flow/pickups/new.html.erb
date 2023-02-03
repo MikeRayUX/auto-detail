@@ -1,0 +1,21 @@
+<% provide(:title, "New Pickup")%>
+
+<%= tag :input, type: 'hidden', name: 'current_address', value: current_user.address.truncated_street_address(23) %>
+<%= tag :input, type: 'hidden', name: 'base_url', value: request.base_url%>
+
+<input type="hidden" id="form_authenticity_token" value="<%=form_authenticity_token %>">
+<input type="hidden" id="ppb" value="<%= @price_per_bag %>">
+
+<% flash.each do |message_type, message| %>
+  <div class="flashReg sm:max-w-screen-sm sm:mx-auto sm:mt-4">
+    <h1 class="text-base text-center text-gray-900  font-normal">
+      <%= message %>
+    </h1>
+  </div>
+<% end %>
+
+<%= render partial: 'users/dashboards/current_address_header', locals: {
+  user: current_user}
+%>
+  
+<%= javascript_pack_tag 'src/components/users/dashboards/new_order_flow/pickups/new/New' %>

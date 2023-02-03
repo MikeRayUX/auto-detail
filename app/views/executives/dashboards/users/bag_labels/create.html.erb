@@ -1,0 +1,82 @@
+
+<div class=" w-full flex flex-row justify-start items-center">
+  <% @codes.each do |code| %>
+
+  <div class="bg-white w-full max-w-xs mr-2 p-4">
+
+    <%# square 1 start %>
+    <div class="max-w-lg h-64 mx-auto border flex flex-column justify-center items-center py-2 px-2 mb-4">
+      <div class="w-full text-center my-auto">
+        <h1 class="text-base tracking-widest font-bold text-black leading-none">
+          FRESHANDTUMBLE.COM
+        </h1>
+        <h1 class="text-base tracking-widest font-bold text-black leading-none mb-4">
+          LAUNDRY BAG
+        </h1>
+        <h1 class="font-bold text-base">
+          <%=@customer.full_name.upcase%>
+        </h1>
+        <h1 class="font-bold text-base leading-none">
+          <%=@customer.address.full_address.upcase%>
+        </h1>
+      </div>
+    </div>
+    <%# square 1 end %>
+
+    <%# square 2 start %>
+    <div class="max-w-lg h-64 mx-auto bg-white border flex-column justify-center items-center py-2 mb-4">
+      <div class="mx-auto w-full text-center">
+        <h1 class="font-bold text-5xl tracking-widest leading-none">
+          <%= code[:code]%> 
+        </h1>
+        <h1 class="text-center mb-1">
+          <%= code[:svg_small].html_safe %>
+        </h1>
+      </div>
+    </div>
+    <%# square 2 end %>
+
+    <%# square 3 start %>
+    <div class="max-w-lg h-64 border py-2 mb-4 flex justify-between items-center">
+      <div class="w-1/2 h-full">
+        <h1 class="mb-10 mr-10">
+          <%= code[:svg_mini].html_safe%>
+        </h1>
+
+        <h1 class="mr-10">
+          <%= code[:svg_mini].html_safe%>
+        </h1>
+      </div>
+
+      <div class="w-1/2 h-full">
+        <h1 class="mb-10 ml-10">
+          <%= code[:svg_mini].html_safe%>
+        </h1>
+
+        <h1 class="ml-10">
+          <%= code[:svg_mini].html_safe%>
+        </h1>
+      </div>
+    </div>
+    
+    <%# square 3 end %>
+  </div>
+
+
+  <% end %>
+
+
+</div>
+
+
+<div class="w-full flex flex-row justify-start items-start">
+  <%= link_to 'DONE PRINTING LABELS', executives_dashboards_users_customer_path(@customer.id), class: 'block w-full max-w-xs py-4 text-center bg-yellow-500 text-gray-900 font-bold text-lg mt-4' %>
+</div>
+
+
+<script>
+	// center the generated svg qr code element
+	document.querySelectorAll('svg').forEach(svg => {
+    svg.setAttribute('style', 'margin: 0 auto 0 auto;')
+  })
+</script>

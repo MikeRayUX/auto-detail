@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: availability_mailing_lists
+#
+#  id         :bigint           not null, primary key
+#  zipcode    :string
+#  email      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  subscribed :boolean          default(TRUE)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  zipcode: MyString
+  email: MyString
+
+two:
+  zipcode: MyString
+  email: MyString

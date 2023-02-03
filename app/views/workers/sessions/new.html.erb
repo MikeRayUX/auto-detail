@@ -1,0 +1,45 @@
+<% provide(:title, "Worker Log in")%>
+<%# top line %>
+<div class="w-full py-1 bg-orange-500 "></div>
+
+  <div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-20 bg-white">
+    <div class="w-full p-4 max-w-xl mx-auto bg-white flex-column sm:border  sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+
+      <h1 class="font-regular text-2xl text-center mb-8">
+        Courier Log In
+      </h1>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="w-full">
+          <div class="w-full flex-column justify-center items-center">
+
+            <div class="w-full mb-4 sm:mr-4">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none'%>
+            </div>
+
+            <div class="w-full mb-4 sm:mr-4">
+              <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none'%>
+            </div>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="worker-login-remember-me-container">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+
+            <%= f.submit "Log in", class: 'w-full block py-4 px-4 bg-orange-500 text-white font-bold text-lg sm:text-xl' %>
+            <% end %>
+            
+            <div class="w-full py-1 my-4">
+              <% flash.each do |message_type, message| %>
+                <%= content_tag(:p, message, class: 'text-align text-center text-lg text-red-700 w-full py-2 rounded') %>
+              <% end %>
+              <%= render "workers/shared/links" %>
+            </div>
+
+          </div>
+      </div>
+  </div>
+</div>

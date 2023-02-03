@@ -1,0 +1,34 @@
+
+<div class="w-full bpickup pb-2 mb-4 bg-white rounded-lg sm:max-w-xl sm:mx-auto">
+
+  <%= link_to workers_courier_tasks_commercial_dropoff_to_partners_path(id: pickup.id) do %>
+    <div class="px-2 mb-2 w-full bg-gray-900 text-white text-center">
+      commercial
+    </div>
+
+    <div class="px-2">
+      <p class="font-bold text-xl text-left text-gray-900">
+        <ion-icon class="text-base" name="qr-code-outline"></ion-icon> 
+        <%= pickup.bags_code %>
+      </p>
+
+      <p class="font-bold text-lg text-left text-gray-900">
+        <%= pickup.bags_collected%> BAGS
+      </p>
+      
+      <p class="text-sm">
+        Picked up: <%= time_ago_in_words(pickup.picked_up_from_client_at) %>
+      </p>
+
+      <div class="sm:flex sm:flex-row sm:justify-start sm:items-center">
+        <p class="text-center my-2 text-sm py-1 px-2 rounded-full bg-blue-500 text-white sm:mr-2">
+          <%= pickup.readable_detergent%>
+        </p>
+        <p class="text-center my-2 text-sm py-1 px-2 rounded-full bg-orange-500 text-white">
+          <%= pickup.readable_softener%> 
+        </p>
+      </div>
+    </div>
+
+  <% end %>
+</div>

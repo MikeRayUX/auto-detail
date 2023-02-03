@@ -1,0 +1,18 @@
+<%= tag :meta, name: "customer_lat_lng", content: @address.lat_lng %>
+<input type="hidden" id="form_authenticity_token" value="<%=form_authenticity_token %>">
+<%= tag :input, type: 'hidden', name: 'detergent', value: @order.short_detergent %>
+<%= tag :input, type: 'hidden', name: 'detergent_value', value: @order.detergent %>
+<%= tag :input, type: 'hidden', name: 'softener', value: @order.short_softener %>
+<%= tag :input, type: 'hidden', name: 'softener_value', value: @order.softener %>
+<%= tag :input, type: 'hidden', name: 'bag_count', value: @order.bag_count %>
+<%= tag :input, type: 'hidden', name: 'current_address', value: @address.full_address.upcase %>
+<%= tag :input, type: 'hidden', name: 'est_delivery', value: @order.readable_est_delivery %>
+<%= tag :input, type: 'hidden', name: 'pick_up_directions', value: @address.pick_up_directions %>
+<%= tag :input, type: 'hidden', name: 'subtotal', value: @subtotal%>
+<%= tag :input, type: 'hidden', name: 'tax', value: @tax%>
+<%= tag :input, type: 'hidden', name: 'tax_rate', value: "#{@tax_rate}%"%>
+<%= tag :input, type: 'hidden', name: 'tip_options', value: NewOrder::TIP_OPTIONS %>
+
+<%= tag :input, type: 'hidden', name: 'base_url', value: request.base_url%>
+
+<%= javascript_pack_tag 'src/components/users/dashboards/new_order_flow/asap_pickups/New' %>

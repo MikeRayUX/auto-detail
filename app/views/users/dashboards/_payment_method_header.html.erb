@@ -1,0 +1,9 @@
+<div class="flex bg-white flex-row w-full py-2 px-4 border-b justify-center items-center sm:justify-between sm:px-8">
+  <h1 class="hidden text-lg font-bold text-gray-900 sm:block sm:text-2xl">Transactions</h1>
+  <div class="">
+    <p class="text-sm text-gray-900 font-bold sm:text-xl">
+      <%= user.payment_method %>
+      <%= link_to 'Update', users_dashboards_settings_update_payments_path, data: {confirm: 'This will take you to your settings page. Continue?'}, class: 'text-xs py-1 px-2 rounded bg-blue-700 text-white font-normal ml-2 sm:text-sm'%>
+    </p>
+  </div>
+</div>

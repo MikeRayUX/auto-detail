@@ -1,0 +1,25 @@
+Hi <%= @user.formatted_name%>,
+
+Your Fresh & Tumble Subscription: Thank You!
+
+You can start a pickup immediately by visiting your dashboard and clicking <%= link_to 'Start A Pickup', users_dashboards_homes_url %>
+
+Your Receipt:
+
+Tumble Subscription: Active
+
+Activated on: <%= @user.readable_subscription_activated_at%>
+
+Automatically renews on: <%= @user.readable_subscription_renewell_date %>
+
+PRICE: $<%= @subscription.price%>
+
+TAX (<%= @region.tax_rate_percentage%>%): $<%= @tax %>
+
+GRANDTOTAL: $<%= "#{format('%.2f', @grandtotal)}" %>
+
+CHARGED WITH <%= @user.readable_payment_method%>
+
+Thank You For Choosing FRESHANDTUMBLE.COM
+
+© <%= Date.today.year%> Fresh And Tumble LLC

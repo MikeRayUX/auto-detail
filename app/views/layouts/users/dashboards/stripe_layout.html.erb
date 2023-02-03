@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= yield(:title) %> | Fresh & Tumble</title>
+    <%= favicon_link_tag asset_path('favicon.png') %>
+    <%= render 'layouts/rails_default_head' %>
+    <%= render 'layouts/font_import_links' %>
+    <%= stylesheet_link_tag "application", media: 'all' %> 
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <%= tag :meta, :name => "stripe_public_key", :content => STRIPE_PUBLIC_KEY %>
+
+    <%= render 'layouts/users/analytics/google'%>
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <%= stylesheet_pack_tag 'application' %>
+  </head>
+
+  <body class="bg-gray-100">
+    <%= render 'users/dashboards/customer_navbar'%>
+    <%= yield %>
+
+    <%= javascript_pack_tag 'users/navbar_toggler'%>
+    <%= javascript_pack_tag 'application' %>
+  </body>
+</html>

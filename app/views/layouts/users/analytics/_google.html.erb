@@ -1,0 +1,7 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<% if Rails.env.production?%>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156048164-1">
+  </script>
+  <%= javascript_pack_tag 'analytics/google-tag-manager' %>
+  <% end %>

@@ -1,0 +1,61 @@
+<% provide(:title, "Cancel Account Questionaire")%>
+<%# top line %>
+<div class="w-full py-1 bg-primary"></div>
+
+<div class="w-full h-screen flex-column justify-center items-center sm:py-8 bg-gray-200 ">
+
+  <div class="w-full mx-auto p-6 sm:max-w-lg  lg:rounded">
+
+    <div class="w-full my-6">
+      <h1 class="text-xl text-center text-gray-900 font-bold">
+      <span class="text-2xl">
+        😢
+      </span> 
+      We're sad to see you go!
+    </h1>
+      <h1 class="text-lg text-center text-gray-900">
+        Before you cancel, please let us know why you're leaving.
+      </h1>
+    </div>
+
+    <%= form_for :questionaire, url: users_dashboards_settings_cancel_accounts_path, method: :post do |f| %>
+
+      <%= f.hidden_field :subject, value: "account_cancellation"%>
+
+      <div class="my-4">
+        <div class="my-2">
+          <%= f.radio_button :answer_selection, "too_expensive", class: 'radioButton' %>
+          <%= f.label :answer_selection, "It's too expensive.", value: "too_expensive", class: "text-xl pl-2", for: "questionaire_answer_selection_too_expensive"%>
+        </div>
+
+        <div class="my-2">
+          <%= f.radio_button :answer_selection, "poor_service", class: 'radioButton' %>
+          <%= f.label :answer_selection, "I'm not satisfied with the service.", value: "poor_service", class: "text-xl pl-2", for: "questionaire_answer_selection_poor_service"%>
+        </div>
+
+        <div class="my-2">
+          <%= f.radio_button :answer_selection, "takes_too_long", class: 'radioButton' %>
+          <%= f.label :answer_selection, "It takes too long to receive my laundry.", value: "takes_too_long", class: "text-xl pl-2", for: "questionaire_answer_selection_takes_too_long"%>
+        </div>
+
+        <div class="my-2">
+          <%= f.radio_button :answer_selection, "something_else", class: 'radioButton' %>
+          <%= f.label :answer_selection, "Something else.", value: "something_else", class: "text-xl pl-2", for: "questionaire_answer_selection_something_else"%>
+        </div>
+      </div>
+
+     <div class="w-full">
+        <div class="hiddenField hidden">
+          <%= f.label :elaboration, "What could we do better?", value: '', class: 'text-lg text-gray-900'%>
+          <%=f.text_area :elaboration, class: 'w-full h-32 p-2 rounded text-xl text-gray-900'%>
+        </div>
+        
+        <%= f.submit "Cancel Account", class: "w-full block my-4 py-4 px-4 bg-red-500 text-white font-bold text-lg rounded sm:text-xl", data: { confirm: "Are you sure you want to cancel your account?" } %>
+        <% end %>
+
+        <%= link_to "Nevermind, Keep My Account", users_dashboards_homes_path, class: 'block text-center text-lg text-link-blue font-bold my-2' %>
+     </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'users/dashboards/settings/cancel_accounts/append_field_to_form'%>

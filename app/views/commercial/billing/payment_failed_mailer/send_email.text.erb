@@ -1,0 +1,17 @@
+We were unable to charge the payment method you have on file with us for laundry service.
+
+FreshAndTumble Laundry Service: 
+
+Dates Of Laundry Service: <%= @t.date_range %> 
+Total Pounds: <%= @t.readable_weight%>
+Price: <%= @t.readable_price_per_pound%>
+Subtotal: <%= @t.readable_subtotal%>
+Tax: <%= @t.readable_tax%>
+Amount Due: <%= @t.readable_grandtotal%>
+Charge Attempted On: <%= @t.readable_created_at%>
+
+Your service has been paused until the Amount Due above is paid in full.
+
+Please contact us to arrange payment for the peformed service below. (206)414-9538
+
+FreshAndTumble.com

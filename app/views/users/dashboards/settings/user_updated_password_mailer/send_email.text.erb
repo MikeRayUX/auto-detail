@@ -1,0 +1,9 @@
+Hi <%= @user.formatted_name%>,
+
+Your password was recently updated.
+
+Account Email: <%= @user.email %>
+
+If you did not request this change or feel that your account may have been compromised, log in to your account by visiting <%= new_user_session_url %> and reset your password by clicking the "Forgot your password?" link.
+
+© <%= Date.current.year %> Fresh And Tumble LLC

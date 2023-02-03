@@ -1,0 +1,55 @@
+<div class="w-full p-2 bg-gray-800 flex flex-row justify-start items-center relative">
+  <p class="w-3/12 text-xs font-black text-white">WASHERS (<%= @washers.count%>) NAME</p>
+  <p class="w-3/12 text-xs font-black text-white">EMAIL</p>
+  <p class="w-2/12 text-xs font-black text-white">PHONE</p>
+  <p class="w-3/12 text-xs font-black text-white">REGION</p>
+  <p class="w-3/12 text-xs font-black text-white">STATUS</p>
+  <p class="w-2/12 text-xs font-black text-white">CREATED</p>
+
+
+  <%= link_to "CREATE+", new_executives_dashboards_washers_washer_path, style: 'font-size: 10px; padding-top: 2px; padding-bottom: 2px;',class: 'px-2 rounded text-gray-900 font-bold bg-gray-100 text-center absolute top-0 right-0 mt-2 mr-1'%>
+</div>
+
+<div style="height: 250px" class="w-full overflow-y-scroll mb-2 bg-gray-300">
+  <% @washers.each do |washer|%>
+    <div class="block w-full bg-gray-300 border-b py-3 px-2 flex flex-row justify-start items-center">
+
+      <%# NAME %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+        <%= link_to "#{truncate_attribute(washer.full_name.upcase, 20)}", executives_dashboards_washers_washer_path(washer.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+      </p>
+
+      <%# EMAIL %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+        <%= truncate_attribute(washer.email.upcase, 20)%>
+      </p>
+
+      <%# PHONE %>
+      <p class="w-2/12 text-xs font-black text-gray-900">
+        <%= washer.formatted_phone%> 
+      </p>
+
+      <%# REGION %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+      <% if washer.region %>
+        <%= link_to washer.region.area.upcase, executives_dashboards_regions_region_path(washer.region.id), class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+      <% else %>
+        N/A
+      <% end %>
+      </p>
+
+      <%# STATUS %>
+      <p class="w-3/12 text-xs font-black  text-gray-900">
+        <%= washer.activation_status.upcase%>
+      </p>
+      
+      <%# CREATED ACCOUNT %>
+      <p class="w-2/12 text-xs font-black text-gray-900">
+        <%= readable_date(washer.created_at).upcase %>
+      </p>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+

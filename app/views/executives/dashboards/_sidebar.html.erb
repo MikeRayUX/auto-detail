@@ -1,0 +1,115 @@
+<div class="w-40 min-h-screen flex-column justify-center items-center bg-gray-800">
+
+  <div class="bg-gray-900 h-20 mb-6 flex justify-center items-center">
+    <%=link_to executives_dashboards_homes_path, class: executive_highlight?(executives_dashboards_homes_path) do %>
+      <%= image_tag 'sign-up/new-color-icon.png', class: "w-8"%>
+      <h1 class="text-white text-sm font-bold text-center py-2">
+        F&T
+      </h1>
+    <% end %>
+  </div>
+
+  <div class="w-full mb-4 px-2">
+    <h3 class="flex justify-start items-center px-2 text-left text-gray-100 text-xs font-bold mb-1">
+      <ion-icon class="text-sm " name="location"></ion-icon>
+      <span class="pl-2">
+        REGIONS (<%= Region.count%>)
+      </span>
+    </h3>
+
+    <% if Region.any?%>
+      <% Region.all.each do |region|%>
+        <%=link_to executives_dashboards_regions_region_path(id: region.id), class: executive_highlight?(executives_dashboards_regions_region_path(id: region.id)) do %><%= region.area.titleize%><% end %>
+      <% end %>
+    <% end %>
+
+    <%=link_to "All", executives_dashboards_regions_regions_path, class: executive_highlight?(executives_dashboards_regions_regions_path) %>
+  </div>
+
+  <div class="w-full mb-4 px-2">
+    <h3 class="flex justify-start items-center px-2 text-left text-gray-100 text-xs font-bold mb-1">
+      <ion-icon class="text-sm " name="people"></ion-icon>
+      <span class="pl-2">
+        CUSTOMERS
+      </span>
+    </h3>
+
+    <div class="w-full flex-column justify-end items-end">
+      <%= link_to executives_dashboards_users_customers_path, class: executive_highlight?(executives_dashboards_users_customers_path) do %>
+        All (<%= User.count%>)
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="w-full mb-4 px-2">
+    <h3 class="flex justify-start items-center px-2 text-left text-gray-100 text-xs font-bold mb-1">
+      <ion-icon class="text-sm " name="person-circle"></ion-icon>
+      <span class="pl-2">
+        WASHERS 
+      </span>
+    </h3>
+
+    <div class="w-full flex-column justify-end items-end">
+      <%=link_to executives_dashboards_washers_washers_path, class: executive_highlight?(executives_dashboards_washers_washers_path) do %>
+        All (<%= Washer.count%>)
+      <% end %>
+    </div>
+  </div>
+
+  <div class="w-full mb-4 px-2">
+    <h3 class="flex justify-start items-center px-2 text-left text-gray-100 text-xs font-bold">
+      <ion-icon class="text-sm " name="basket"></ion-icon>
+      <span class="pl-2">
+        ORDERS
+      </span>
+    </h3>
+
+    <%=link_to executives_dashboards_new_orders_new_orders_path(sorted: 'all'), class: executive_highlight_with_params?(executives_dashboards_new_orders_new_orders_url(sorted: 'all')) do %>
+      All 
+    <% end %>
+
+    <%=link_to executives_dashboards_new_orders_new_orders_path(sorted: 'in_progress'), class: executive_highlight_with_params?(executives_dashboards_new_orders_new_orders_url(sorted: 'in_progress')) do %>
+      In Progress (<%=NewOrder.in_progress.count%>)
+    <% end %>
+  </div>
+
+    <div class="w-full mb-4 px-2">
+      <h3 class="flex justify-start items-center px-2 text-left text-gray-100 text-xs font-bold mb-1">
+        <ion-icon class="text-sm " name="mail"></ion-icon>
+        <span class="pl-2">
+          SUPPORT
+        </span>
+      </h3>
+
+      <%=link_to executives_dashboards_support_support_tickets_path, class: executive_highlight?(executives_dashboards_support_support_tickets_path) do %>
+        Tickets (<%= SupportTicket.open.count%>)
+      <% end %>
+    </div>
+
+    <div class="w-full mb-4 px-2">
+      <h3 class="flex justify-start items-center px-2 text-center text-gray-100 text-xs font-bold mb-1">
+        <ion-icon class="text-sm " name="settings"></ion-icon>
+        <span class="pl-2">
+          OTHER
+        </span>
+      </h3>
+
+      <%= link_to executives_dashboards_emails_path, class: executive_highlight?(executives_dashboards_emails_path) do %>
+        Marketing (<%= SendgridEmail.count%>)
+      <% end %>
+
+      <%=link_to executives_dashboards_wait_lists_path, class: executive_highlight?(executives_dashboards_wait_lists_path) do %>
+        Waitlist (<%= WaitList.waiting.count%>)
+      <% end %>
+
+      <%=link_to executives_dashboards_holidays_path, class: executive_highlight?(executives_dashboards_holidays_path) do %>
+        Holidays (<%= Holiday.upcoming.count%>)
+      <% end %>
+
+      <%=link_to '#', class: executive_highlight?('#') do %>
+        Banners
+      <% end %>
+    </div>
+
+</div>

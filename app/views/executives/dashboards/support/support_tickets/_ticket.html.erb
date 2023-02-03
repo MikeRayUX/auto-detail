@@ -1,0 +1,32 @@
+    <div class="w-full h-full p-2 flex justify-between items-center border-b border-gray-400 <%= ticket.unread? || ticket.open? ? 'bg-white' : 'bg-gray-300' %>"> 
+      <div class="h-full mr-4">
+        <%= check_box_tag 'ticket_ids[]', ticket.id, false, class: 'item' %> 
+
+      </div>
+
+      <%= link_to executives_dashboards_support_support_ticket_path(ticket.id), class: "w-full h-full flex justify-between items-center #{ticket.unread? || ticket.open? ? "bg-white" : "bg-gray-300"}" do %>
+        <div class="flex justify-start items-center">
+          <h4 class="text-xs mr-12 <%= ticket.unread? || ticket.open? ? "font-bold" : "font-regular" %>">
+            <%=ticket.readable_concern%>
+          </h4>
+
+          <h4 class="text-xs <%= ticket.unread? || ticket.open? ? "font-bold" : "font-regular" %>">
+           "<%= truncate_attribute(ticket.body, 100)%>" 
+          </h4>
+        </div>
+
+        <h4 class="text-xs flex justify-start items-center <%= ticket.unread? ? "font-bold" : "font-regular" %>">
+          <span class="flex justify-start items-center mr-2">
+            <ion-icon class="mr-1" name="chatbox-outline"></ion-icon>
+            (<%= ticket.support_ticket_replies.count%>)
+          </span>
+          <%= ticket.readable_created_at%>
+        </h4>
+      <% end %>
+
+      <div class="flex justify-center items-center h-full pl-4 <%= ticket.unread? ? "bg-white" : "bg-gray-300"%>">
+        <%= link_to  executives_dashboards_support_support_ticket_path(id: ticket.id), class: 'leading-none underline font-bold text-xs text-gray-700', data: {confirm: 'Are you sure?'}, method: :delete do %>
+          delete
+        <% end %>
+      </div>
+    </div>

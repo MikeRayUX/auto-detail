@@ -1,0 +1,40 @@
+<div class="w-full p-2 bg-gray-300 flex flex-row justify-start items-center bg-gray-800 relative" >
+  <p class="w-3/12 text-xs font-black text-white">COVERAGE AREAS (<%=@coverage_areas.count %>) ZIPCODE </p>
+  <p class="w-2/12 text-xs font-black text-white">CITY</p>
+  <p class="w-2/12 text-xs font-black text-white">COUNTY</p>
+  <p class="w-3/12 text-xs font-black text-white">STATE</p>
+  <p class="w-2/12 text-xs font-black text-white">DELETE</p>
+
+  <%= link_to "CREATE+", new_executives_dashboards_coverage_area_path(region_id: region_id), style: 'font-size: 10px; padding-top: 2px; padding-bottom: 2px;',class: 'px-2 rounded text-gray-900 font-bold bg-gray-100 text-center absolute top-0 right-0 mt-2 mr-1'%>
+</div>
+
+<div style="height: 250px" class="bg-gray-300 w-full overflow-y-scroll mb-2 bg-gray-300">
+  <% @coverage_areas.each do |coverage_area|%>
+    <div class="block w-full bg-gray-300 border-b py-3 px-2 flex flex-row justify-start items-center">
+
+      <%# ZIPCODE %>
+      <p class="w-3/12 text-xs font-black text-gray-900">
+        <%= link_to "#{coverage_area.zipcode}", coverage_area.google_search_link, class: 'w-3/12 text-xs font-black text-link-blue underline'%>
+      </p>
+
+      <%# CITY %>
+      <p class="w-2/12 text-xs font-black text-gray-900">
+        <%= coverage_area.city.upcase%>
+      </p>
+
+      <%# COUNTY %>
+      <p class="w-2/12 text-xs font-black text-gray-900">
+        <%= coverage_area.county.upcase%>
+      </p>
+
+      <%# STATE %>
+      <p class="w-3/12 text-xs font-black  text-gray-900">
+        <%= coverage_area.state.upcase%>
+      </p>
+     
+      <p class="w-2/12 text-xs font-black  text-gray-900">
+        <%= link_to 'DELETE', executives_dashboards_coverage_area_path(coverage_area.id), class: 'w-full text-xs font-black text-white bg-red-600 px-1 rounded', method: :delete, data: {confirm: 'Are you sure?' }%>
+      </p>
+    </div>
+  <% end %>
+</div>

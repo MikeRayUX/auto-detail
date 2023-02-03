@@ -1,0 +1,64 @@
+<% provide(:title, "Contact Us") %>
+
+<div class="flex-column items-center jsutify-center content-center w-full py-8 px-8 bg-gray-200 lg:py-16"> <div class="w-full sm:max-w-xl sm:mx-auto">
+    <h1 class="font-bold text-2xl my-2 mx-auto leading-snug">
+      Questions? 
+    </h1>
+
+    <h2 class="font-normal my-2 mx-auto text-xl leading-tight">
+      Call Us: <%= link_to @contact_phone, "tel:#{@contact_phone}", class: 'text-link-blue font-bold' %>
+    </h2>
+    <h2 class="font-normal my-2 mb-8 mx-auto text-base leading-tight">
+      (8AM - 8PM Mon-Sat)
+    </h2>
+  </div>
+
+   <%= form_for :support_ticket, url: { controller: 'static_pages/contact_pages', action: 'create'}, html: {
+      class: 'w-full', id: 'contact-form'
+    } do |f| %>
+
+    <div class="w-full mx-auto max-w-xl flex-column items-center sm:max-w-xl sm:mx-auto">
+      <div class="flex-column w-full mb-4 justify-center items-center">
+        <%= f.label :customer_email, 'Your Email', class: 'block font-bold pb-2'%>
+        <%= f.text_field :customer_email, placeholder: 'Your Email', class: "block w-full  py-4 pl-2 rounded-md border appearance-none"%>
+      </div>
+
+      <div class="w-full flex-column justify-center items-center">
+        <%= f.label :body, 'Message', class: 'block font-bold pb-2'%>
+        <%= f.text_area :body, placeholder: 'Your Message', class: 'block w-full  py-3 pl-2 rounded-md h-48 border appearance-none'%>
+      </div>
+
+      <div class="w-full py-1 my-2">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:p, message, class: 'text-align text-center text-lg text-gray-900 w-full bg-white py-2 rounded') %>
+        <% end %>
+      </div>
+      <div 
+        class="g-recaptcha w-full mb-6" 
+        data-sitekey="<%= RECAPTCHA_V2_PUBLIC_KEY %>"
+        sitekey="<%= RECAPTCHA_V2_PUBLIC_KEY %>"
+        data-callback="submitForm" 
+        g-recaptcha-response="submitForm"
+        >
+       </div>
+
+      <%# recaptcha v2 %>
+      <input 
+        type="submit"
+        class="g-recaptcha font-bold w-full rounded py-4 text-center bg-primary text-xl text-white cursor-pointer" 
+        value="Submit"
+        disabled="disabled"
+        id="submitBtn"
+      />
+      <% end %>
+  </div>
+</div>
+
+<script>
+  var onLoadCallback = function() {
+    grecaptcha.render(document.querySelector('.g-recaptcha'))
+  }
+  function submitForm(recaptcha_token) {
+    document.querySelector('#submitBtn').removeAttribute('disabled')
+  }
+</script>

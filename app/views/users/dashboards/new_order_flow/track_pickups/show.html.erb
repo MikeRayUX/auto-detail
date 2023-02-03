@@ -1,0 +1,24 @@
+<% if @order%>
+  <%= tag :input, type: 'hidden', name: 'detergent', value: @order.short_detergent %>
+  <%= tag :input, type: 'hidden', name: 'softener', value: @order.short_softener %>
+  <%= tag :input, type: 'hidden', name: 'bag_count', value: @order.bag_count %>
+  <%= tag :input, type: 'hidden', name: 'current_address', value: @order.full_address.upcase %>
+  <%= tag :input, type: 'hidden', name: 'est_delivery', value: @order.readable_est_delivery %>
+  <%= tag :input, type: 'hidden', name: 'pick_up_directions', value: @order.directions %>
+  <%= tag :input, type: 'hidden', name: 'order_grandtotal', value: "$#{NewOrder.readable_decimal(@order.grandtotal)}" %>
+  <%= tag :input, type: 'hidden', name: 'base_url', value: request.base_url%>
+  <input type="hidden" id="form_authenticity_token" value="<%=form_authenticity_token %>">
+
+  <%= tag :meta, name: "customer_lat_lng", content: @order.lat_lng %>
+  <%= tag :input, type: 'hidden', name: 'ref_code', value: @order.ref_code %>
+
+  <%= javascript_pack_tag 'src/components/users/dashboards/new_order_flow/track_pickups/Show' %>
+<% else %>
+  <div class="flex-1 flex-column justify-center items-center w-full">
+    <h1 class="font-black text-sm text-center">
+      This order is either expired or doesn't exist
+    </h1>
+  </div>
+
+<% end %>
+

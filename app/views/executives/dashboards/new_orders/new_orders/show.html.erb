@@ -1,0 +1,317 @@
+<div class="block lg:flex lg:flex-row lg:justify-start lg:items-start">
+  <div class="w-full mb-4 lg:mb-0 lg:max-w-lg p-4 rounded bg-white">
+    <div class="mb-2">
+      <h3 class="font-black text-xs text-left flex flex-row justify-center items-center leading-none mb-3">
+        <p class="bg-primary mr-1 leading-none" style="height: 10px; width: 10px; border-radius: 50%;"></p>  STATUS: <%= @order.status.upcase%>
+      </h3>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="text-xs font-black mb-1">
+          INFO
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PICKUP TYPE: <%= @order.pickup_type.upcase%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          REF CODE: <%= @order.ref_code%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          DETERGENT: <%= @order.readable_detergent%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          SOFTENER: <%= @order.readable_softener%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          BAG COUNT: <%= @order.bag_count ? @order.bag_count : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          BAG CODES: <%= @order.bag_codes ? @order.bag_codes : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-none italic">
+          WASH NOTES: <%= @order.wash_notes ? "'#{@order.wash_notes}'" : 'N/A'%>
+        </h3>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="text-xs font-black mb-1">
+          PICKUP DATES
+        </h3>
+  
+        <h3 class="text-xs font-bold leading-tight">
+          CREATED: <%= readable_date_with_time(@order.created_at).upcase%>
+        </h3>
+        
+        <h3 class="text-xs font-bold leading-tight">
+          EST PICKUP BY: <%= readable_date_with_time(@order.est_pickup_by).upcase%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ACCEPT_BY: <%= readable_date_with_time(@order.accept_by).upcase%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          EST. DELIVERY: <%= readable_date_with_time(@order.est_delivery).upcase%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ARRIVED FOR PICKUP AT: <%= @order.arrived_for_pickup_at ? readable_date_with_time(@order.arrived_for_pickup_at).upcase : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PICKED UP AT: <%= @order.picked_up_at ? readable_date_with_time(@order.picked_up_at).upcase : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          COMPLETED AT: <%= @order.completed_at ? readable_date_with_time(@order.completed_at).upcase : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          DELIVERED AT: <%= @order.delivered_at ? readable_date_with_time(@order.delivered_at).upcase : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          DELIVERY LOCATION: <%= @order.delivery_location%>
+        </h3>
+
+        <% if @order.delivery_photo_base64%>
+        <h3 class="text-xs font-bold leading-tight">
+          DELIVERY PHOTO: <img
+            className="mx-auto mb-1"
+            src=<%= "data:image/png;base64,#{@order.delivery_photo_base64}"%>
+            alt=""
+          />
+        </h3>
+        <% end %>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="font-black text-xs text-left mb-1">
+          CUSTOMER
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          NAME: <%= link_to @order.user.full_name.upcase, executives_dashboards_users_customer_path(@order.user.id), class:'text-link-blue font-black underline'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          EMAIL: <%= @order.user.email.upcase %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PHONE NUMBER: <%= link_to @order.user.formatted_phone, "tel:#{@order.user.phone}", class: 'text-xs font-black underline text-link-blue' %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          SUBSCRIPTION: <%= @order.user.subscription_status%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ADDRESS: <%= link_to @order.full_address.upcase, "https://www.google.com/maps/dir//#{@order.address_lat},#{@order.address_lng}", class:'text-link-blue font-black underline' %>
+        </h3>
+
+        <h3 class="text-xs font-bold italic">
+          ADDRESS NOTES: "<%= @order.directions%>"
+        </h3>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="text-xs font-black mb-1">
+          WASHER
+        </h3>
+        <% if @order.washer%>
+
+        <h3 class="text-xs font-bold leading-tight">
+          NAME: <% if @order.washer%>
+            <%= link_to @order.washer.abbrev_name.upcase, executives_dashboards_washers_washer_path(id: @order.washer.id), class: 'text-xs font-black underline text-link-blue'%>  
+          <% else %>
+            N/A
+          <% end %>
+        </h3>
+          
+        <h3 class="text-xs font-bold leading-tight">
+          PHONE NUMBER: <%= link_to @order.washer.phone, "tel:#{@order.washer.phone}", class: 'text-xs font-black underline text-link-blue' %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ADDRESS: <%= link_to @order.washer.address.full_address.upcase, @order.washer.address.google_nav_link, class: 'text-xs font-black underline text-link-blue' %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ENROUTE FOR PICKUP AT: <%= @order.enroute_for_pickup_at ? readable_date_with_time(@order.enroute_for_pickup_at).upcase : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PICKED UP AT: <%= @order.picked_up_at ? readable_date_with_time(@order.picked_up_at).upcase : 'N/A'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          COMPLETED AT: <%= @order.completed_at ? readable_date_with_time(@order.completed_at).upcase : 'N/A'%>
+        </h3>
+        
+        <h3 class="text-xs font-bold leading-tight">
+          ARRIVED FOR PICKUP AT: <%= @order.arrived_for_pickup_at ? readable_date_with_time(@order.arrived_for_pickup_at).upcase : 'N/A'%>
+        </h3>
+        <% else %>
+          <h3 class="text-xs font-bold leadin-tight">
+            N/A
+          </h3>
+        <% end %>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="text-xs font-black mb-1">
+          MONEY
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          BAG COUNT: <%= @order.bag_count%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          BAG PRICE: $<%= readable_decimal(@order.bag_price)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          SUBTOTAL: $<%= readable_decimal(@order.subtotal)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          TAX: $<%= readable_decimal(@order.tax)%> (<%= readable_percent(@order.tax_rate) %>%)
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          GRANDTOTAL: $<%= readable_decimal(@order.grandtotal)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PROCESSING FEE: $<%= readable_decimal(@order.pmt_processing_fee)%> (2.9 % + .30)
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          WASHER PAY PERCENTAGE: <%= "#{readable_percent(@order.region.washer_pay_percentage)}%"%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          WASHER PPB: $<%= readable_decimal(@order.washer_ppb)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          WASHER PAY: $<%= readable_decimal(@order.washer_pay)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          CUSTOMER TIP: $<%= readable_decimal(@order.tip)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          WASHER FINAL PAY: $<%= readable_decimal(@order.washer_final_pay)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight rounded text-white">
+          <span class="bg-black px-2 rounded">
+            PROFIT: $<%= readable_decimal(@order.profit)%>
+          </span>
+        </h3>
+      </div>
+      
+      <div class="mb-2">
+        <h3 class="text-xs font-black mb-1">
+          STRIPE
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PROCESSING FEE: $<%= readable_decimal(@order.pmt_processing_fee)%> (2.9 % + .30)
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE CHARGE ID: 
+          <% if @order.stripe_charge_id%>
+            <%= link_to @order.stripe_charge_id, "https://dashboard.stripe.com/payments/#{@order.stripe_charge_id}", class:'text-link-blue font-black underline'%>
+          <% else %>
+            N/A
+          <% end %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE REFUND ID: 
+          <% if @order.stripe_refund_id%>
+            <%= link_to @order.stripe_refund_id, "https://dashboard.stripe.com/payments/#{@order.stripe_charge_id}", class:'text-link-blue font-black underline'%>
+          <% else %>
+            N/A
+          <% end %>        
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE TRANSFER ID: 
+          <% if @order.stripe_transfer_id %>
+            <%= link_to @order.stripe_transfer_id, "https://dashboard.stripe.com/connect/transfers/#{@order.stripe_transfer_id}", class:'text-link-blue font-black underline'%>
+          <% else %>
+            N/A
+          <% end %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE TRANSFER ERROR: <%= @order.stripe_transfer_error ? @order.stripe_transfer_error : 'N/A'%>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="w-full mx-auto lg:max-w-sm rounded bg-white lg:ml-4">
+    <div class="w-full p-2">
+      <h3 class="font-black text-xs text-left flex flex-row justify-center items-center  pt-1">
+        <p class="mr-2  bg-gray-500" style="height: 10px; width: 10px;"></p>  
+        ACTIVITY (<%= @events.count%>)
+      </h3>
+    </div>
+    <div style="height: 650px;"class="px-2 overflow-y-scroll ">
+      <% if @events.any?%>
+        <% @events.each do |e|%>
+          <div class="bg-gray-200 py-2 mb-2 px-2">
+
+            <div class="w-full flex flex-row justify-between items-center">
+
+              <h3 class="text-xs font-bold text-center text-gray-900 ">
+                <%= link_to e.washer.abbrev_name.upcase, executives_dashboards_washers_washer_path(id: e.washer.id), class: 'text-xs font-black text-link-blue'%>  
+              </h3> 
+
+               <h3 class="text-xs font-black text-left  px-1 ">
+                <%= readable_date_with_time(e.created_at).upcase%>
+              </h3>
+            
+            </div>
+
+            <h3 class="text-xs font-black">
+              <%= e.readable_event_type%>
+            </h3> 
+            <% if e.feedback%>
+              <h3 class="text-xs font-black text-left ">
+                <%= e.feedback %>
+              </h3> 
+            <% end %>
+
+            <% if e.event_type == 'delivered' && e.new_order.delivery_photo_base64%>
+              <img
+              className="mx-auto mb-1"
+              src=<%= "data:image/png;base64,#{@order.delivery_photo_base64}"%>
+              alt="" />
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <h3 class="text-xs font-black text-center mb-2 ">
+          Nothing to show
+        </h3>
+      <% end %>
+    
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<% provide(:title, "Holding Orders")%>
+
+<div class="open-appointment-items-container__outer">
+  <div class="open-appointment-items-container__inner">
+    <% if @orders.any? %>
+      <%# <%= render 'layouts/workers/dashboards/open_appointments/open-appointment-sort-header'%> 
+      <% @orders.each do |order| %>
+
+        <%= render partial: 'workers/dashboards/holding_orders/holding_order_item',
+        locals: {
+          order: order,
+          courier_problems: order.courier_problems,
+          customer: order.user
+        }
+        %>
+      <% end %>
+
+    <% else %>
+      <h2 class="font-bold text-center">
+        There are no reattempts currently.
+      </h2>
+    <% end %>
+  </div>
+</div>

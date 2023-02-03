@@ -1,0 +1,33 @@
+<% provide(:title, "My Orders")%>
+<div class="w-full border-b">
+  <h1 class="text-lg font-bold py-2 px-4 text-gray-900 sm:px-8 sm:text-2xl">Your Orders</h1>
+</div>
+
+<% flash.each do |message_type, message| %>
+  <div class="flashReg sm:w-full sm:mx-auto">
+    <h1 class="flashRegText">
+      <%= message %>
+    </h1>
+  </div>
+<% end %>
+
+<% if @orders.any? %>
+  <% @orders.each do |o| %>
+    <%= render partial: 'users/dashboards/orders_overviews/legacy/legacy_order', locals: {o: o} %>
+  <% end %>
+<% end %>
+
+<% if @new_orders.any? %>
+  <% @new_orders.each do |o|%>
+    <% if o.cancelled_at %>
+      <%= render partial: 'users/dashboards/orders_overviews/cancelled_new_order_item', locals: {o: o} %>
+    <% else %>
+      <%= render partial: 'users/dashboards/orders_overviews/new_order_item', locals: {o: o} %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @orders.none? && @new_orders.none?%>
+  <h2 class="text-gray-900 font-regular text-lg text-center px-4 mt-4 sm:text-xl">Once you place an order, you will be able to track it's progress here!</h2>
+    <ion-icon class="block m-auto mt-4 text-4xl" name="shirt-outline"></ion-icon>
+<% end %>

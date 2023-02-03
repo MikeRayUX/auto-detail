@@ -1,0 +1,79 @@
+<% provide(:title, "Create An Account")%>
+
+<%# top line %>
+<div class="w-full py-1 bg-primary "></div>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-20 bg-white">
+  <div class="w-full p-4 max-w-xl mx-auto bg-white flex-column sm:border  sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+
+    <div class="flex flex-row justify-center items-center mb-0">
+      <%= image_tag 'sign-up/new-color-icon.png', alt: 'pink fresh and tumble circle laundry logo', class: 'w-10 mb-2'%>
+    </div>
+
+    <h1 class="font-regular text-xl leading-tight text-center mb-4 ">
+      Create your free account to get started.
+    </h1>
+
+    <%= form_for(:user, url: { controller: 'users/registrations', action: 'create'}) do |f| %>
+
+    <div class="w-full">
+
+      <div class="w-full flex-column justify-center items-center sm:flex sm:flex-row">
+        <div class="w-full mb-4 sm:mr-4">
+          <%= f.label :full_name, class: 'hidden' %>
+          <%= f.text_field :full_name, placeholder: 'Full name', class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+        </div>
+
+        <div class="w-full mb-4 ">
+          <%= f.label :phone, class: 'hidden' %>
+          <div class="flex justify-start items-center bg-white border rounded">
+            <div class="h-full py-3 px-4 flex justify-center items-center bg-gray-200 sm:bg-white ">
+              <p class="font-bold sm:text-lg">+1</p>
+            </div>
+            <%= f.telephone_field :phone, placeholder: 'Phone number', class: 'phoneField block h-full pl-2 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none py-3' %>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="w-full mb-4">
+        <div class="inputItem">
+          <%= f.label :email, class: 'hidden' %>
+          <%= f.text_field :email, placeholder: 'Email', class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+        </div>
+      </div>
+
+      <div class="w-full">
+        <div class="inputItem">
+          <%= f.label :password, class: 'hidden' %>
+          <%= f.password_field :password, placeholder: 'Password', class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full py-1">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:p, message, class: 'text-align text-center text-lg text-red-700 w-full py-2 rounded') %>
+        <% end %>
+      </div>
+    
+    <div class="mb-2 text-base">
+      <p class="text-center text-sm sm:text-lg">
+        By signing up, you agree to our 
+        <%= link_to 'terms of service', termsofservice_path, target: '_blank', class: 'text-link-blue underline font-bold' %> and <%= link_to 'privacy policy', privacypolicy_path, target: '_blank', class: 'text-link-blue underline font-bold text-link-blue font-bold' %>
+      </p>
+    </div>
+
+    <%= f.submit 'Create Account', class: 'w-full block py-4 px-4 bg-primary mt-4 text-white font-bold text-lg sm:text-xl' %>
+
+    <div class="mt-2">
+      <p class="text-center text-lg">Already have an account? 
+        <%= link_to "Sign In", signin_path, class: 'text-lg text-link-blue font-bold' %>
+      </p>
+    </div>
+  <% end %>
+  </div>
+
+</div>
+
+<%= javascript_pack_tag 'utilities/phone_input_mask'%>

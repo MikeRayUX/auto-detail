@@ -1,0 +1,86 @@
+
+    <body style="font-family: montserrat, arial;padding: 0;width: 100%;margin: 0;-webkit-text-size-adjust: 100%;-webkit-border-radius: 3px;border-radius: 3px;text-size-adjust: 100%;color: #201F26; padding-left; 10px;padding-right: 10px;">
+    <table style="font-family: montserrat, arial;max-width: 454px;margin: auto;text-align: left;line-height: 25px;font-size: 16px;">
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <th style="font-family: montserrat, arial;padding: 3px 0;font-weight: 400;background: #d70cf5;">
+        </th>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top " style="font-family: montserrat, arial;text-align: left;padding-top: 36px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          <% if @user%>
+            Hi <%= @user.formatted_name%>,
+          <% else %>
+            Hello,
+          <% end %>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="" style="font-family: montserrat, arial;text-align: left;padding-left: 10px; padding-right: 10px;">
+          Thank you for reaching out to us. My name is 
+          <%=@agent.first_name%> from FreshAndTumble Support, 
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="" style="font-family: montserrat, arial;text-align: left;padding-left: 10px; padding-right: 10px;">
+          <% @reply.body.split("\n").each do |line|%>
+            <p style="">
+              <%= line%>
+            </p>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat,arial;text-align: left;padding-top: 10px;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          If you have any other questions. Please feel free to reply to this email.
+        </td>
+      </tr>
+      
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          Thank You For Choosing FreshAndTumble.com
+        </td>
+      </tr>
+
+      <tr style="">
+        <td class="" style="background: #d70cf5; height: 1px">
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="" style="font-family: montserrat, arial; text-align: left;padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+          Your message
+          <span  style="font-family: montserrat, arial;font-weight: 700;color: black;">
+            (<%= @ticket.readable_concern%>):
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          <% @ticket.body.split("\n").each do |line|%>
+            <p style="">
+              <%= line%>
+            </p>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr style="">
+        <td class="" style="background: #d70cf5; height: 1px">
+        </td>
+      </tr>
+
+      
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="copyright-notice" style="font-family: montserrat, arial;text-align: left;font-size: 12px;color: gray;padding-left: 10px; padding-right: 10px;">
+           © <%= Date.today.year%> Fresh And Tumble LLC
+        </td>
+      </tr>
+
+    </table>
+  </body>

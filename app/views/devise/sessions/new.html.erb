@@ -1,0 +1,41 @@
+<% provide(:title, "Log in")%>
+  
+  <div class="user-login-container__outer">
+
+    <div class="user-login-container__inner">
+    
+      <h1>Log in to <span class="blue">Fresh & Tumble</span></h1>
+
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="log-in-field">
+          <%# <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Email", value: "mike@mike.com" %>
+        </div>
+
+        <div class="log-in-field">
+          <%# <%= f.label :password %>
+          <%= f.password_field :password, autocomplete: "current-password", :placeholder => "Password", value: "password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="log-in-field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <%= f.submit "Sign In" %>
+        <p>Don't have an account? <%= link_to "Sign Up", order_new_customer_path, class: 'blue' %></p>
+      <% end %>
+        <%# <%= render "devise/shared/error_messages", resource: resource %>
+
+        <%= render 'layouts/devise_alerts' %>
+
+
+  </div>
+
+</div>
+  
+  
+  

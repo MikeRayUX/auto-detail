@@ -1,0 +1,31 @@
+<div class="mb-6 w-full max-w-5xl mx-auto">
+  <div class="w-full bg-gray-500 py-2 mb-2">
+    <h1 class="text-3xl font-bold text-gray-900">
+      Customers
+    </h1>
+  </div>
+
+  <div class="w-full flex flex-row flex-wrap justify-start items-center">
+
+  <div class="w-full flex flex-row justify-between items-center mb-2 ">
+
+    <%# anchor for sort container align to right %>
+    <div></div>
+    
+    <div class="flex flex-row justify-start items-center">
+      <%= link_to 'All', executives_dashboards_users_customers_path(sorted: 'all'), class: highlighted_sort?(executives_dashboards_users_customers_url(sorted: 'all'))%>
+
+      <%= link_to 'Newest', executives_dashboards_users_customers_path(sorted: 'newest'), class: highlighted_sort?(executives_dashboards_users_customers_url(sorted: 'newest'))%>
+
+      <%= link_to 'Oldest', executives_dashboards_users_customers_path(sorted: 'oldest'), class: highlighted_sort?(executives_dashboards_users_customers_url(sorted: 'oldest'))%>
+
+      <%= link_to 'Cancelled', executives_dashboards_users_customers_path(sorted: 'cancelled'), class: highlighted_sort?(executives_dashboards_users_customers_url(sorted: 'cancelled'))%>
+    </div>
+  </div>
+
+  <%= render partial: 'executives/dashboards/users/customers/customers', locals: {users:@users}%>
+
+  <div class="w-full flex flex-row justify-end items-center font-black text-link-blue">
+    <div><%= paginate @users%></div>
+  </div>
+</div>

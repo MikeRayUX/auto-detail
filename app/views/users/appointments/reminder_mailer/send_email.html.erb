@@ -1,0 +1,90 @@
+  <body style="font-family: montserrat, arial;padding: 0;width: 100%;margin: 0;-webkit-text-size-adjust: 100%;-webkit-border-radius: 3px;border-radius: 3px;text-size-adjust: 100%;color: #201F26; padding-left; 10px;padding-right: 10px;">
+    <table style="font-family: montserrat, arial;max-width: 454px;margin: auto;text-align: left;line-height: 25px;font-size: 16;">
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <th style="font-family: montserrat, arial;padding: 3px 0;font-weight: 400;background: #d70cf5;">
+
+        </th>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 36px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          Hi <%= @user.formatted_name%>,
+        </td>
+
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-medium" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          This is a reminder that your <span class="bold blue" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">Laundry Pickup is scheduled for today! </span>Here's a quick summary of your appointment:
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span class="bold" style="font-family: montserrat, arial;font-weight: 700;">
+              Order ID: 
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+              <%= @order.reference_code %>
+          </span>
+
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span class="bold" style="font-family: montserrat, arial;font-weight: 700;">
+              Appointment:
+          </span>
+          <%= @order.formatted_appointment %>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span class="bold" style="font-family: montserrat, arial;font-weight: 700;">
+              Address:
+          </span>
+          <%= @order.full_address.upcase%>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+       
+          Before your appointment time, place your laundry <span style="font-family: montserrat, arial;color: #d70cf5;">in plastic bags</span> and place them in a secure place that we will be able to easily find. We find that the <span style="font-family: montserrat, arial;color: #d70cf5;">front door</span> is usually a good place. We will pickup your order at the specified appointment time.
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large" style="font-family: montserrat, arial;text-align: left;padding-bottom: 36px;padding-left: 10px; padding-right: 10px;">
+          You can track your order by 
+          <%= link_to "logging in", new_user_session_url, style: "font-family: montserrat, arial;text-decoration: none;color: #d70cf5;" %>
+          with the email and password that you used to sign up with.
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large track-button__cell" style="font-family: montserrat, arial;text-align: center;padding-bottom: 36px;padding-left: 10px; padding-right: 10px;">
+
+          <%= link_to "Track your order", new_user_session_url, style: "font-family: montserrat, arial;text-decoration: none;color: white;padding: 20px 40px;font-size: 16;background: #d70cf5;border-radius: 3px;"%>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+         <span class="bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+          Thank You For Choosing FRESHANDTUMBLE.COM!
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="copyright-notice" style="font-family: montserrat, arial;text-align: left;font-size: 12px;color: gray;padding-left: 10px; padding-right: 10px;">
+           © <%= Date.current.year %> Fresh And Tumble LLC
+        </td>
+      </tr>
+
+    </table>
+  </body>
+ 

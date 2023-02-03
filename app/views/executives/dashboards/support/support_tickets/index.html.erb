@@ -1,0 +1,57 @@
+<% flash.each do |message_type, message| %>
+  <div class="w-full py-4 px-4 rounded bg-green-500 mb-6">
+    <h1 class="text-base text-center text-white font-normal">
+    <%= message%>
+    </h1>
+  </div>
+<% end %>
+
+<div class="mb-6 w-full max-w-5xl mx-auto">
+  <div class="w-full bg-gray-500 py-2 mb-2">
+    <h1 class="text-3xl font-bold text-gray-900">
+      Support Tickets
+    </h1>
+  </div>
+
+  <div class="w-full flex flex-row justify-start items-center py-2 px-2 bg-gray-800 border-b border-gray-500 rounded-t">
+
+    <div class="flex justify-start items-center">
+      <ion-icon class="mr-1 text-white" name="mail"></ion-icon>
+
+      <h3 class="pl-1 text-left text-white text-xs font-bold  ">
+        <%= "Support Tickets (#{@tickets.open.count})" %>
+      </h3>
+    </div>
+  </div>
+
+  <div class="w-full bg-white h-full border-b p-2 flex justify-start items-center">
+    <div class="flex justify-start items-center mr-4">
+      <input type="checkbox" name="select_all">
+      <h3 class="text-xs text-gray-900 font-bold pl-2">
+        All
+      </h3>
+    </div>
+    <div class="flex justify-start items-center">
+      <%= link_to 'Delete All', '#', class: 'text-xs underline font-bold text-indigo-700', id: 'delete_selected_btn'%>
+    </div>
+  </div>
+
+  <%# tickets container %>
+  <div class="w-full bg-white mb-12">
+    <%= form_tag executives_dashboards_support_delete_selected_support_tickets_path, class: 'form', method: :delete  do %>
+      <% @tickets.each do |ticket|%>
+        <%= render partial: 'executives/dashboards/support/support_tickets/ticket', locals: {ticket: ticket}%>
+      <% end %>  
+
+      <%= submit_tag 'button_text', type: 'hidden'%>
+    <% end %>
+
+    <% if @tickets.none?%>
+    <h3 class="text-sm font-bold text-center py-2">
+      There are no tickets to show.
+    </h3> 
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'executives/dashboards/support/support_tickets/select_tickets'%>

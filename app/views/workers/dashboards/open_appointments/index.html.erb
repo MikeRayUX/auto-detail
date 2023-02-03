@@ -1,0 +1,48 @@
+<% provide(:title, "OPEN APPOINTMENTS")%>
+
+  <%= render partial: 'workers/dashboards/item_list_header', locals: { 
+    heading: 'Open Appointments',
+    ion_icon: 'calendar-outline'
+  }%>
+
+<div class="w-full h-screen py-2 px-4 bg-gray-200">
+  <div class="w-full mb-2">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+        <%= render partial: 'workers/dashboards/open_appointments/open-appointment-item',
+        locals: {
+          order: order,
+        }
+        %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.any? %>
+    <% @commercial_pickups.each do |pickup| %>
+        <%= render partial: 'workers/dashboards/open_appointments/commercial-open-appointment-item',
+        locals: {
+          pickup: pickup,
+        }
+        %>
+    <% end %>
+  <% end %>
+  
+  <% if @commercial_pickups.none? && @orders.none? %>
+    <h2 class="font-bold text-center">
+      There are no upcoming pickups currently. Check back later.
+    </h2>
+  <% end %>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+<%= javascript_pack_tag 'workers/courier/tasks/copy-address'%>

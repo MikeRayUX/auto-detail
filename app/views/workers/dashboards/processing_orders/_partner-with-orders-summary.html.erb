@@ -1,0 +1,98 @@
+<%= link_to  "", class: "open-appointment__item" do %>
+
+  <p>
+    <span class="blue bold">
+      <%= partner.business_name.upcase%>
+    </span>
+  </p>
+
+  <p>
+    <%= get_formatted_address(partner)%>
+  </p>
+
+  <p>
+    <object>
+      <%= link_to partner.formatted_business_phone, "tel:#{partner.formatted_business_phone}" %>
+    </object>
+  </p>
+
+   <p>
+    <span class="bold">
+      Hours:
+    </span>
+  </p>
+
+  <p>
+    <span class="bold">
+      Mon:
+    </span>
+    <%= partner.monday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Tues:
+    </span>
+    <%= partner.tuesday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Wed:
+    </span>
+    <%= partner.wednesday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Thurs:
+    </span>
+    <%= partner.thursday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Fri:
+    </span>
+    <%= partner.friday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Sat:
+    </span>
+    <%= partner.saturday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Sun:
+    </span>
+    <%= partner.sunday_hours%>
+  </p>
+
+  <p>
+    <span class="bold">
+      Currently Has:
+    </span>
+
+    <%= partner.has_count %>
+    Orders
+  </p>
+
+  <% partner.orders.each do |order| %>
+
+  <p>
+    <%= order.reference_code%>
+    <span class="bold">
+      Age: 
+    </span>
+    <%= time_ago_in_words(order.dropped_off_to_partner_at) %>
+  </p>
+  <% end %>
+
+
+ 
+  
+
+<% end %>

@@ -1,0 +1,53 @@
+<% provide(:title, "Worker Create Account") %>
+
+<div class="worker-signup__container">
+
+  <div class="worker-signup__form-container">
+
+    <div class="worker-signup-form-heading-container">
+      <h1>Worker Create Account</h1>
+    </div>
+
+    <%= render 'shared/generic_error_messages', object: @worker%>
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message, class: "alert__availability-container") %>
+    <% end %>
+
+    <%= form_for @worker, :url =>  workers_registration_with_codes_path do |f| %>
+
+      <div class="field">
+        <%= f.label "Personal Information" %>
+        <%= f.text_field :full_name, autofocus: true, placeholder: "Full name"%>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "Email address"%>
+        <%= f.text_field :phone, placeholder: "Phone number"%>
+      </div>
+
+      <div class="field">
+        <%= f.label "Address Information"%>
+        <%= f.text_field :street_address, placeholder: "Street address"%>
+        <%= f.text_field :unit_number, placeholder: "Unit number"%>
+        <%= f.text_field :city, placeholder: "City"%>
+        <%= f.text_field :state, placeholder: "State"%>
+        <%= f.text_field :zipcode, placeholder: "Zipcode"%>
+      </div>
+
+      <div class="field">
+        <%= f.label "Create Password" %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, placeholder: "Password"%>
+        <%= f.password_field :password_confirmation, placeholder: "Confirm password"%>
+      </div>
+
+      <div class="field">
+        <%= f.label "Activation code" %>
+        <%= f.text_field :activation_code, placeholder: "Activation code"%>
+      </div>
+
+        <%= f.submit "Create Account" %>
+    <% end %>
+
+  </div>
+
+</div>

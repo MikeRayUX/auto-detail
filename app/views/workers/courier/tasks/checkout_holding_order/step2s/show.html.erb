@@ -1,0 +1,30 @@
+<div class="courier-stop-container__outer">
+
+  <div class="courier-stop-container__inner">
+    <%= link_to "<Back", workers_courier_tasks_checkout_holding_order_step1_path(id: @order.reference_code), class: "stop-back-button" %>  
+
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message) %>
+    <% end %>
+
+    <p class="bold">
+      Bags To Scan: <%= @order.bags_collected %>
+    </p>
+    <p class="bold">
+      Step 1:
+    </p>
+    <p>
+      Locate bags with tag codes that match the ones listed above.
+    </p>
+
+    <p class="bold">
+      Step 2:
+    </p>
+    <p>
+      Tap ‘Acknowledge And Scan’ to move on to the next step.
+    </p>
+    
+    <%= link_to "Acknowledge And Scan", workers_courier_tasks_checkout_holding_order_step2_path(id: @order.reference_code), method: :patch, class: "stop-acknowledge-scan-direcitons__button stop-next-step__button"%>
+  </div>
+
+</div>

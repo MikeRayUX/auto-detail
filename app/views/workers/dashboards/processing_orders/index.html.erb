@@ -1,0 +1,49 @@
+<% provide(:title, "PROCESSING ORDERS")%>
+
+<%= render partial: 'workers/dashboards/item_list_header', locals: { 
+    heading: 'In Progress (Washing)',
+    ion_icon: 'hammer-outline'
+  }%>
+
+<div class="w-full h-screen py-2 px-4 bg-gray-200">
+
+  <div class="w-full mb-2">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if @orders.any? %>
+    <% @orders.each do |order| %>
+      <%= render partial: 'workers/dashboards/processing_orders/processing-order-item',
+      locals: {
+        order: order,
+        address: order.user.address,
+        partner_location: order.partner_location
+      }
+      %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.any?%>
+    <% @commercial_pickups.each do |pickup|%>
+      <%= render partial: 'workers/dashboards/processing_orders/commercial-processing-order-item',
+        locals: {
+          pickup: pickup,
+          partner_location: pickup.partner_location
+        }
+      %>
+    <% end %>
+  <% end %>
+
+  <% if @commercial_pickups.none? && @orders.none? %>
+    <h2 class="font-bold text-center">
+      There are no processing pickups at the moment. Check back later.
+    </h2>
+  <% end %>
+</div>
+

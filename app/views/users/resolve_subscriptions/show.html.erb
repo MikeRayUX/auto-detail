@@ -1,0 +1,33 @@
+<div class='h-full bg-white'>
+  <div
+    class='w-full border-t border border-gray-400 rounded bg-white py-2 px-4 sm:max-w-lg sm:mt-8 sm:py-8 sm:px-12 mx-auto'
+  >
+    <div class='py-2'>
+      <div class="flex flex-row justify-center items-center mb-4">
+        <div class="">
+          <p class='text-lg font-black text-primary text-center leading-none mb-4'>
+            THANK YOU FOR YOUR PURCHASE!
+          </p>
+          
+          <p class='text-base text-center font-black text-gray-900 leading-none my-2 sm:leading-tight'>
+            YOUR 
+            <span class="text-primary">
+              TUMBLE SUBSCRIPTION 
+            </span>
+            IS NOW ACTIVE, AND YOU CAN START YOUR FIRST LAUNDRY PICKUP IMMEDIATELY!
+          </p>
+
+          <p class='text-sm text-center font-black text-gray-900 leading-none mt-4'>
+            YOUR SUBSCRIPTION WILL AUTOMATICALLY RENEW ON 
+          </p>
+
+          <p class="text-primary text-base text-center font-black">
+            <%= @next_renew_date %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <%= link_to 'START A LAUNDRY PICKUP', new_users_dashboards_new_order_flow_pickups_path, class: 'block w-full py-4 bg-primary text-white text-sm sm:text-base font-black mb-4 text-center'%>
+  </div>
+</div>

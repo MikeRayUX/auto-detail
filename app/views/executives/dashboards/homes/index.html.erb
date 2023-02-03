@@ -1,0 +1,13 @@
+<% provide(:title, 'Dashboard Home')%>
+<div class="mb-6 max-w-5xl mx-auto">
+  <div class="w-full mx-auto bg-gray-500 py-2 mb-2">
+    <h1 class="text-3xl font-bold text-gray-900">
+      Dashboard Home
+    </h1>
+  </div>
+
+  <%# page container %>
+  <%= render partial: 'executives/dashboards/homes/customers_block'%>
+
+  <%= render partial: 'executives/dashboards/homes/revenue_block'%>
+</div>

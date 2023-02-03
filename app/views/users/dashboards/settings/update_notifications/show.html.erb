@@ -1,0 +1,35 @@
+<%# <div class="settings-header__outer">
+  <div class="settings-header__inner">
+    <h1>Notifications</h1>
+  </div>
+</div> %>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-8 bg-gray-200">
+  <div class="w-full mx-auto p-6 sm:max-w-lg">
+    <% flash.each do |message_type, message| %>
+      <%= content_tag(:p, message, class: "dashboard-errors") %>
+    <% end %>
+
+    <%= form_for :notifications, url: { controller: 'users/dashboards/settings/update_notifications', action: 'update'
+    }, method: :patch do |f|%>
+    
+    <div class="my-4">
+      <p class="text-lg font-bold text-gray-900">Email</p>
+      <div class="">
+        <%= f.label :promotional_emails, class: 'text-lg mr-2' %>
+        <%= f.check_box :promotional_emails, checked: current_user.promotional_emails,class: ''  %>
+      </div>
+    </div>
+
+    <div class="my-4">
+      <p class="text-lg font-bold text-gray-900">SMS Notifications</p>
+      <div class="">
+        <%= f.label :sms_enabled, 'Reminders & status updates', class: 'text-lg mr-2' %>
+        <%= f.check_box :sms_enabled, checked: current_user.sms_enabled, class: ''  %>
+      </div>
+    </div>
+
+    <%= f.submit 'Save', class: 'w-full block py-4 px-4 bg-green-500 text-white font-bold text-lg rounded sm:text-xl'%>
+    <% end %>
+  </div>
+</div>

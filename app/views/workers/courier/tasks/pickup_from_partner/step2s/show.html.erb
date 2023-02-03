@@ -1,0 +1,59 @@
+<% provide(:title, "Pickup From Washer")%>
+
+<div class="h-screen bg-gray-200">
+
+  <div class="w-full bg-gray-900 py-2">
+    <p class="font-bold text-lg text-center text-white">
+     Step 2. Pickup From Washer
+    </p>
+  </div>
+
+  <div class="w-full">
+    <% flash.each do |message_type, message| %>
+      <div class="flashWarning sm:max-w-xl sm:mx-auto">
+        <h1 class="flashWarningText">
+          <%= message %>
+        </h1>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="max-w-lg mx-auto p-4 bg-white">
+    <%= link_to "<Back", workers_courier_tasks_pickup_from_partner_step1_path(id: @order.id), class: "text-link-blue font-bold text-xl py-1 font-bold mb-2" %>  
+
+    <div class="my-8">
+      <div class="my-4">
+        <p class="flex flex-row justify-start items-center mb-2 text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4">
+            1
+          </span>
+          Locate Bags:
+        </p>
+        <p class="mb-2 text-xl font-bold">
+          <ion-icon class="text-base" name="qr-code-outline"></ion-icon>
+          <%= @order.bags_code%> (about <%=@order.bags_collected%> bags)
+        </p>
+      </div>
+
+      <div class="my-4">
+        <p class="flex flex-row justify-start items-center mb-2 text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4 ">
+            2
+          </span>
+          <%= link_to 'Print Delivery Labels', new_workers_courier_tasks_pickup_from_partner_generate_delivery_labels_path(id: @order.id),  class: 'font-bold underline text-link-blue'%>
+        </p>
+      </div>
+
+      <div class="my-4">
+        <p class="flex flex-row justify-start items-center mb-2 text-xl font-bold">
+          <span class="h-6 w-6 flex items-center justify-center bg-black text-white mr-4">
+            3
+          </span>
+          Attach labels and continue
+        </p>
+      </div>
+    </div>
+    
+    <%= link_to "Acknowledge And Scan", workers_courier_tasks_pickup_from_partner_step2_path(id: @order.id), method: :patch, class: "block w-full py-4 text-center bg-orange-500 text-gray-900 font-bold text-lg mb-4"%>
+  </div>
+</div>

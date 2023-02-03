@@ -1,0 +1,32 @@
+Hi <%= @user.first_name%>,
+
+Thank you for your booking a FreshAndTumble laundry pickup!
+
+Your Receipt:
+
+BAGS TO PICKUP: <%= @order.bag_count%>
+
+SUBTOTAL: $<%= format('%.2f', @order.subtotal)%>
+
+TAX (<%= @region.tax_rate_percentage%>%) $<%=format('%.2f', @order.tax)%>
+
+TIP $<%=format('%.2f', @order.tip)%>
+
+GRANDTOTAL $<%= "#{format('%.2f', @order.grandtotal)}" %>
+
+CHARGED WITH  <%= @user.readable_payment_method%>
+
+Your Address:
+<%= @address.full_address%>
+
+<% if @order.pickup_type == 'scheduled'%>
+  Your Laundry is scheduled to be picked up on <%= @order.readable_scheduled%>. You will receive an SMS notifcation when your Washer is on their way to you for pickup.
+<% end %>
+
+Track your order <%= link_to 'HERE', users_dashboards_new_order_flow_track_pickup_url(id: @order.ref_code)%>
+
+
+
+Thank You For Choosing FRESHANDTUMBLE.COM
+
+© <%= Date.today.year%> Fresh And Tumble LLC

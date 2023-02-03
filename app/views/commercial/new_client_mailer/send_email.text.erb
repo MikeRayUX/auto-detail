@@ -1,0 +1,33 @@
+Hi <%= @client.contact_person.titleize%>,
+
+Thank you for choosing us to provide laundry service for your distinguished customers.
+
+Here's your new account details:
+
+Business Name: <%= @client.name.titleize %>
+
+Phone: <%= @client.readable_phone %>
+
+Locations For Service(<%=@client.addresses.count%>): 
+<% @client.addresses.each do |address|%>
+  <%= address.full_address.upcase%> 
+<% end %>
+
+Price: <%= @client.readable_price_per_pound %>
+
+Pickup Window: <%= @client.readable_pickup_window %>
+
+Pickup Days: 
+<% @client.pickup_days.each do |day|%>
+  <% if day[:pickup] %>
+  <%= day[:day].capitalize%>
+  <% end %>
+<% end %>
+
+If you spot any errors, don't panic! Call us and we will fix them right away. (206)414-9538
+
+Laundry service is billed once a week on saturdays after 5pm based on your current laundry service usage for that week. 
+If you have any questions or concerns, please feel free to call us (8am-5pm) mon-sat (206)414-9538
+
+Thank You For Choosing FRESHANDTUMBLE.COM!
+© <%= Date.current.year %> Fresh And Tumble LLC

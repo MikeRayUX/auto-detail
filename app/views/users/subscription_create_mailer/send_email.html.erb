@@ -1,0 +1,127 @@
+  <body style="font-family: montserrat, arial;padding: 0;width: 100%;margin: 0;-webkit-text-size-adjust: 100%;-webkit-border-radius: 3px;border-radius: 3px;text-size-adjust: 100%;color: #201F26; padding-left; 10px;padding-right: 10px;">
+    <table style="font-family: montserrat, arial;max-width: 454px;margin: auto;text-align: left;line-height: 25px;font-size: 16px;">
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <th style="font-family: montserrat, arial;padding: 3px 0;font-weight: 400;background: #d70cf5;">
+
+        </th>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-large-top padding-medium" style="font-family: montserrat, arial;text-align: left;padding-top: 36px;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          Hi <%= @user.formatted_name%>,
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-medium" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          <span class="bold blue" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">Your Fresh & Tumble Subscription: Thank You!</span>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-medium" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px;">
+          You can start a pickup immediately by visiting your dashboard and clicking <%= link_to 'Start A Pickup', users_dashboards_homes_url, style: 'font-weight: bold; color: #d70cf5' %>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-medium" style="font-family: montserrat, arial;text-align: left;padding-bottom: 18px;padding-left: 10px; padding-right: 10px; font-weight: bold;">
+          Your Receipt:
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+              Tumble Subscription 
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            Active
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+          Activated on
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            <%= @user.readable_subscription_activated_at%>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+          Automatically renews on
+          </span>
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            <%= @user.readable_subscription_renewell_date %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+             PRICE: 
+          </span>
+
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            $<%= @subscription.price%>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+             TAX (<%= @region.tax_rate_percentage%>%)
+          </span>
+
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            $<%= @tax %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+             GRANDTOTAL
+          </span>
+
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            $<%= "#{format('%.2f', @grandtotal)}" %>
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small order-detail" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;font-size: 16px;line-height: 18px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;">
+             CHARGED WITH 
+          </span>
+
+          <span class="blue bold" style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+            <%= @user.readable_payment_method%>
+          </span>
+        </td>
+      </tr>
+      
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="padding-small" style="font-family: montserrat, arial;text-align: left;padding-bottom: 9px;padding-left: 10px; padding-right: 10px;">
+          <span style="font-family: montserrat, arial;font-weight: 700;color: #d70cf5;">
+          Thank You For Choosing FRESHANDTUMBLE.COM
+          </span>
+        </td>
+      </tr>
+
+      <tr style="font-family: montserrat, arial;text-align: center;">
+        <td class="copyright-notice" style="font-family: montserrat, arial;text-align: left;font-size: 12px;color: gray;padding-left: 10px; padding-right: 10px;">
+           © <%= Date.today.year%> Fresh And Tumble LLC
+        </td>
+      </tr>
+
+    </table>
+  </body>

@@ -1,0 +1,26 @@
+<%= tag :input, type: 'hidden', id: 'flash', value: flash.any? ? flash[:notice] : nil %>
+<%= tag :input, type: 'hidden', id: 'form_authenticity_token', value: form_authenticity_token %>
+
+<% if current_user.stripe_customer_id.present? %>
+  <div class="flex bg-white flex-row w-full py-2 px-4 border-b justify-center items-center sm:justify-between sm:px-8">
+    <h1 class="hidden text-base font-bold text-gray-900 sm:block sm:text-xl">
+      Current payment method
+    </h1>
+    <span class="text-sm text-gray-900 font-bold ml-4 py-2 px-4 rounded bg-gray-200">
+      <%= current_user.payment_method %>
+    </span>
+    </div>
+  </div>
+
+   <div class="px-6 pt-2 max-w-md mx-auto">
+    <p class="text-base font-black text-center">Update your current payment method</p>
+  </div>
+
+  <% else %>
+  <div class="px-6 py-4 max-w-md mx-auto">
+    <p class="text-base font-black text-center">Add a primary payment method</p>
+  </div>
+<% end %>
+
+
+<%= javascript_pack_tag 'src/components/users/dashboards/settings/update_payments/StripeForm'%>

@@ -1,0 +1,16 @@
+Hi <%= @user.formatted_name%>,
+
+This is a reminder that your Laundry Pickup is scheduled for today! Here's a quick summary of your appointment:
+Order ID: <%= @order.reference_code %>
+
+Appointment: <%= @order.formatted_appointment %>
+
+Address: <%= @order.full_address.upcase%>
+Before your appointment time, place your laundry in plastic bags and place them in a secure place that we will be able to easily find. We find that the front door is usually a good place. We will pickup your order at the specified appointment time.
+
+You can track your order by visiting the login page at:
+<%=  new_user_session_url %> with the email and password that you used to sign up with.
+
+Thank You For Choosing FRESHANDTUMBLE.COM!
+
+© <%= Date.current.year %> Fresh And Tumble LLC

@@ -1,0 +1,176 @@
+<div class="w-full lg:max-w-sm rounded bg-white">
+    <div class="w-full p-2">
+      <h3 class="font-black text-xs text-left flex flex-row justify-center items-center pt-1">
+        <p class="mr-2  bg-primary" style="height: 10px; width: 10px;"></p>  
+        INFO
+      </h3>
+    </div>
+
+    <div style="height: 500px" class="px-4 mb-2 lg:mb-0 overflow-y-scroll">
+      <div class="mb-2 border-b pb-2">
+        <h3 class="font-black text-xs text-left mb-1">
+          INFO 
+        </h3>
+        
+
+        <h3 class="text-xs font-bold leading-tight">
+          <%= link_to "EDIT INFO", edit_executives_dashboards_users_customer_path(@user.id), class:'text-link-blue font-black underline'%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          NAME: <%= @user.full_name.upcase%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          EMAIL: <%= @user.email.upcase %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          PHONE: <%= @user.formatted_phone %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          CREATED: <%= readable_date_with_time(@user.created_at).upcase%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ACCOUNT AGE: <%= time_ago_in_words(@user.created_at).upcase%>
+        </h3>
+
+        <% if @user.deleted_at %>
+          <h3 class="text-xs font-black leading-tight text-red-600">
+            DEACTIVATED <%= readable_date_with_time(@user.deleted_at).upcase%>
+          </h3>
+        <% else %>
+          <h3 class="text-xs font-black leading-tight text-green-600">
+            ACTIVATED
+          </h3>
+        <% end %>
+
+        <div class="my-1">
+          <% if @user.deleted_at %>
+            <%= link_to 'REACTIVATE CUSTOMER', executives_dashboards_users_ban_hammers_path(id: @user.id, ban: false), class: 'py-1 px-2 rounded text-white font-bold text-xs bg-green-600', method: :patch, data: {confirm: 'Are you sure?'}%>
+          <% else %>
+            <%= link_to 'DEACTIVATE CUSTOMER', executives_dashboards_users_ban_hammers_path(id: @user.id, ban: true), class: 'py-1 px-2 rounded text-white font-bold text-xs bg-red-600', method: :patch, data: {confirm: 'Are you sure?'}%>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="font-black text-xs text-left mb-1">
+          GENERATE BAG LABELS
+        </h3>
+
+        <%= form_for :label, url: {controller: 'executives/dashboards/users/bag_labels',action: 'create'} do |f|%>
+
+          <%= f.hidden_field :user_id, value:  @user.id %>
+
+          <div class="flex flex-row justify-between items-center w-1/2">
+            <%= f.number_field :count, placeholder: 'Number of labels', class: 'py-2 pl-2 rounded border border-gray-900 text-xs' %>
+            <%= f.submit 'Create', class: 'px-2 py-2 rounded bg-blue-600 text-white font-bold text-xs h-full ml-2'%>
+          </div>
+        <% end %>
+      </div>
+      
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="font-black text-xs text-left mb-1">
+          SUBSCRIPTION
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STATUS: <%= @user.subscription_status%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE SUBSCRIPTION ID: 
+           <% if @user.stripe_subscription_id%>
+            <%= link_to @user.stripe_subscription_id, "https://dashboard.stripe.com/subscriptions/#{@user.stripe_subscription_id}", class:'text-link-blue font-black underline'%>
+           <% else %>
+            N/A
+           <% end %>
+        </h3>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="font-black text-xs text-left mb-1">
+          ADDRESS
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          ADDRESS: 
+          
+          <% if @user.address %>
+            <%= link_to @user.address.full_address.upcase, @user.address.google_nav_link, class:'text-link-blue font-black underline' %>
+          <% else %>
+            N/A
+          <% end %>
+        </h3>
+
+        <h3 class="text-xs font-bold italic">
+          ADDRESS NOTES: 
+          <% if @user.address %>
+            <%= @user.address.pick_up_directions.present? ? @user.address.pick_up_directions : 'N/A' %>
+          <% else %>
+            N/A
+          <% end %>
+          
+        </h3>
+      </div>
+
+      <div class="mb-2 border-b pb-2">
+        <h3 class="text-xs font-black mb-1">
+          ORDERS
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          LIFETIME ORDERS: <%= @user.new_orders.count%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          DELIVERED: <%= @user.new_orders.delivered.count%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          CANCELLED: <%= @user.new_orders.cancelled.count%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          TOTAL VALUE: $<%= @user.new_orders.delivered.sum(:subtotal).round(2)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          TOTAL TIPS: $<%= @user.new_orders.delivered.sum(:tip).round(2)%>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          TOTAL REFUNDED: $<%= @user.new_orders.refunded.sum(:refunded_amount).round(2)%>
+        </h3>
+      </div>
+      
+      <div class="mb-2">
+        <h3 class="text-xs font-black mb-1">
+          STRIPE
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE CUSTOMER ID: 
+            
+          <% if @user.stripe_customer_id %>
+            <%= link_to @user.stripe_customer_id, "https://dashboard.stripe.com/customers/#{@user.stripe_customer_id}", class:'text-link-blue font-black underline'%>
+          <% else %>
+            N/A
+          <% end %>
+        </h3>
+
+        <h3 class="text-xs font-bold leading-tight">
+          STRIPE SUBSCRIPTION ID: 
+           <% if @user.stripe_subscription_id%>
+            <%= link_to @user.stripe_subscription_id, "https://dashboard.stripe.com/subscriptions/#{@user.stripe_subscription_id}", class:'text-link-blue font-black underline'%>
+           <% else %>
+            N/A
+           <% end %>
+        </h3>
+      </div>
+    </div>
+  </div>

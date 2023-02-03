@@ -1,0 +1,35 @@
+<% provide(:title, "Generate Pickup Labels")%>
+
+<!-- 
+	<%# @codes.each do |code|%>
+		<div class="smallLabelContainer">
+			<h1><%#= code[:code]%> (<%#=code[:of_count]%>)</h1>
+			<%#= code[:svg_large].html_safe %>
+			<h2><#%= code[:detergent]%></h2>
+			<h2>Softener: <%#= code[:softener_sheets]%></h2>
+		</div>
+	<%# end %>
+-->  
+
+<div class="h-screen bg-gray-200">
+
+	<div class="max-w-lg mx-auto bg-white pt-8">
+		<div class="mb-24 mx-auto w-full text-center">
+			<h1 class="font-bold text-4xl tracking-wider">
+				<%= @washer_label[:code]%> 
+				(<%=@washer_label[:bag_count]%> BAGS)
+			</h1>
+			<h1 class="text-center mb-1">
+				<%= @washer_label[:svg_large].html_safe %>
+			</h1>
+		</div>
+
+		<%= link_to 'DONE PRINTING LABELS', workers_courier_tasks_pickup_from_customer_step2_path(id: @order.id), class: 'block w-full py-4 text-center bg-yellow-500 text-gray-900 font-bold text-lg mb-4' %>
+	</div>
+
+</div>
+
+<script>
+	// center the generated svg qr code element
+	document.querySelector('svg').setAttribute('style', 'margin: 0 auto 0 auto;')
+</script>

@@ -1,0 +1,16 @@
+Subject: <%= @ticket.subject %>
+
+<% if @ticket.for_order? %>
+
+Order: <%= @ticket.order_reference_code%>
+Appointment: <%= @ticket.pick_up_appointment%>
+
+<% end %>
+Customer: <%= @ticket.customer_name%>
+Customer phone: <%= @ticket.customer_phone %>
+
+Issue experienced:
+
+<%= @ticket.body %>
+
+

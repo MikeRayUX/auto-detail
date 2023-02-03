@@ -1,0 +1,64 @@
+<% provide(:title, "Sign In")%>
+
+<%# top line %>
+<div class="w-full py-1 bg-primary "></div>
+
+<div class="w-full h-screen flex-column justify-center items-center mb-8 sm:py-20 bg-white">
+  <div class="w-full p-4 max-w-xl mx-auto bg-white flex-column sm:border  sm:rounded-lg sm:shadow-md sm:py-8 sm:px-10">
+    
+    <div class="flex flex-row justify-center items-center mb-0">
+     <%= link_to root_path do %>
+      <%= image_tag 'sign-up/new-color-icon.png', alt: 'pink fresh and tumble circle laundry logo', class:'w-10 mb-2'%>
+      <% end %>
+    </div>
+
+    <h1 class="font-regular text-2xl text-center mb-8">Sign in to your account</h1>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+      <div class="w-full">
+        <div class="w-full flex-column justify-center items-center">
+
+        <div class="w-full mb-4 sm:mr-4">
+          <%= f.label :email, class: 'hidden'%>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "Email", value: "", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+        </div>
+
+        <div class="inputItem">
+          <%= f.label :password, class: 'hidden'%>
+          <%= f.password_field :password, autcomplete: "current-password", autocomplete: "email", :placeholder => "Password", value: "", class: 'border rounded py-3 pl-3 w-full text-gray-900 placeholder-gray-600 sm:text-xl sm:py-4 appearance-none' %>
+        </div>
+        
+      <% if devise_mapping.rememberable? %>
+        <div class="my-4">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+      <div class="w-full">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:p, message, class: 'text-align text-center text-lg text-red-700 w-full py-2 rounded') %>
+        <% end %>
+      </div>
+
+      <%= f.submit 'Sign In', class: 'w-full block py-4 px-4 bg-primary text-white font-bold text-lg sm:text-xl' %>
+
+      <div class="my-4 text-center">
+        <p class="text-center text-lg">
+          <%= render "users/shared/links" %>
+        </p>
+        <p class="text-center text-lg">
+          Don't have an account? 
+          <%= link_to "Sign Up", new_users_service_areas_verify_zipcodes_path, class: 'text-lg text-link-blue font-bold' %>
+        </p>
+      </div>
+      <% end %>
+      
+    </div>
+      
+      
+      </div>
+  </div>
+</div>
+
+  
