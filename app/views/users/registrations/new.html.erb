@@ -57,18 +57,19 @@
         <% end %>
       </div>
     
+    <%= f.submit 'Create Account', class: 'w-full block py-4 px-4 bg-primary mt-4 text-white font-bold text-lg sm:text-xl cursor-pointer mb-4 rounded-lg' %>
+
     <div class="mb-2 text-base">
-      <p class="text-center text-sm sm:text-lg">
+      <p class="text-center text-base">
         By signing up, you agree to our 
         <%= link_to 'terms of service', termsofservice_path, target: '_blank', class: 'text-link-blue underline font-bold' %> and <%= link_to 'privacy policy', privacypolicy_path, target: '_blank', class: 'text-link-blue underline font-bold text-link-blue font-bold' %>
       </p>
     </div>
 
-    <%= f.submit 'Create Account', class: 'w-full block py-4 px-4 bg-primary mt-4 text-white font-bold text-lg sm:text-xl' %>
 
     <div class="mt-2">
-      <p class="text-center text-lg">Already have an account? 
-        <%= link_to "Sign In", signin_path, class: 'text-lg text-link-blue font-bold' %>
+      <p class="text-center text-base">Already have an account? 
+        <%= link_to "Sign In", signin_path, class: 'text-link-blue font-bold' %>
       </p>
     </div>
   <% end %>
