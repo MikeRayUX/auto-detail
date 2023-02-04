@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/users/subscription_create
+# Preview all emails at http://localhost:3000/rails/mailers/users/subscription_create
 class Users::SubscriptionCreatePreview < ActionMailer::Preview
   def send_email
     @user = User.new(

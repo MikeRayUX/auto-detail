@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Preview all emails at http://localhost:3001/rails/mailers/user_update_password_from_dashboard
+# Preview all emails at http://localhost:3000/rails/mailers/user_update_password_from_dashboard
 class Users::Dashboards::Settings::UserUpdatedPasswordPreview < ActionMailer::Preview
   def send_email
     @user = User.new(

@@ -584,7 +584,7 @@ class Washer < ApplicationRecord
     if Rails.env.production?
       @base_url = "https://www.freshandtumble.com/washers/stripe_connect"
     else
-      @base_url = "http://localhost:3001/washers/stripe_connect"
+      @base_url = "http://localhost:3000/washers/stripe_connect"
     end
 
     @link = Stripe::AccountLink.create({

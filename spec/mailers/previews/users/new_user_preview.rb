@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Preview all emails at http://localhost:3001/rails/mailers/users/new_user
+# Preview all emails at http://localhost:3000/rails/mailers/users/new_user
 class Users::NewUserPreview < ActionMailer::Preview
   def send_email
     @user = User.new(
@@ -11,8 +11,6 @@ class Users::NewUserPreview < ActionMailer::Preview
       password_confirmation: 'password'
     )
 
-    Users::NewUserMailer.send_email(
-      @user
-    )
+    Users::NewUserMailer.send_email(@user)
   end
 end

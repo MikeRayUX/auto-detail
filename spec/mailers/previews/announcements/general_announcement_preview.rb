@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/announcements/general_announcement
+# Preview all emails at http://localhost:3000/rails/mailers/announcements/general_announcement
 class Announcements::GeneralAnnouncementPreview < ActionMailer::Preview
 
 	def send_email

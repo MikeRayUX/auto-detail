@@ -5,7 +5,7 @@ import { getInputValue } from '../../../utilities/getValue';
 const base_url = getInputValue('base_url');
 
 // WHEN USING MOBILE BROWSER (IPV4)
-// const base_url = 'http://192.168.0.12:3001';
+// const base_url = 'http://192.168.0.12:3000';
 
 export default axios.create({
   baseURL: base_url,

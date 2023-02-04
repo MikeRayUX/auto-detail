@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/support/support_tickets/reply
+# Preview all emails at http://localhost:3000/rails/mailers/support/support_tickets/reply
 class Support::SupportTickets::ReplyPreview < ActionMailer::Preview
 
   def send_email

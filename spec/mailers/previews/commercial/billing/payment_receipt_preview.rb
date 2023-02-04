@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/commercial/billing/payment_receipt
+# Preview all emails at http://localhost:3000/rails/mailers/commercial/billing/payment_receipt
 class Commercial::Billing::PaymentReceiptPreview < ActionMailer::Preview
 
   def send_email

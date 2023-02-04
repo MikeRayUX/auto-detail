@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/users/new_order
+# Preview all emails at http://localhost:3000/rails/mailers/users/new_order
 
 class Users::NewOrderPreview < ActionMailer::Preview
   def send_email

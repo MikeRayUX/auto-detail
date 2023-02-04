@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/commercial/new_client
+# Preview all emails at http://localhost:3000/rails/mailers/commercial/new_client
 class Commercial::NewClientPreview < ActionMailer::Preview
   def send_email
     @client = Client.new(

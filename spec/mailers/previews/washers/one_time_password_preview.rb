@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/washers/one_time_password
+# Preview all emails at http://localhost:3000/rails/mailers/washers/one_time_password
 class Washers::OneTimePasswordPreview < ActionMailer::Preview
 
   def send_email

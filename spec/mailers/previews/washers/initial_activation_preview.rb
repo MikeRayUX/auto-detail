@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/washers/initial_activation
+# Preview all emails at http://localhost:3000/rails/mailers/washers/initial_activation
 class Washers::InitialActivationPreview < ActionMailer::Preview
   def send_email
     @washer = Washer.new(

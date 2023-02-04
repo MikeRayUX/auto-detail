@@ -2,7 +2,7 @@
 
 # 2. REQUIRES STRIPE-CLI RUNNING, AUTHORIZED, AND LISTENING IN ORDER TO FORWARD WEBHOOK REQUESTS FROM STRIPE TO APP ON LOCALHOST
 # example: 
-# 'stripe listen --api-key sk_test_0d4LHDkpMBhESxsqudQXGMMW --forward-to 192.168.0.12:3001/
+# 'stripe listen --api-key sk_test_0d4LHDkpMBhESxsqudQXGMMW --forward-to 192.168.0.12:3000/
 
 require 'no_transactional_fixtures'
 require 'webhook_helper'

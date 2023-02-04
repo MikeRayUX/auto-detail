@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/support/inquiry
+# Preview all emails at http://localhost:3000/rails/mailers/support/inquiry
 class Support::InquiryPreview < ActionMailer::Preview
 
   def send_email

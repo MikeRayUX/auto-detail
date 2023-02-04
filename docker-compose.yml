@@ -21,10 +21,10 @@ services:
       - tmp:/usr/src/app/tmp
       - gems:/usr/local/bundle
     ports:
-      # - 127.0.0.1:3001:3001
-      # access from LAN device with 192.168.0.12:3001 (ipconfig IPv4 Addres on windows)
+      # - 127.0.0.1:3000:3000
+      # access from LAN device with 192.168.0.12:3000 (ipconfig IPv4 Addres on windows)
       # 192.168.0.51 (ifconfig | grep inet) on mac
-      - 0.0.0.0:3001:3001
+      - 0.0.0.0:3000:3000
     depends_on:
       - db
     tty: true
@@ -57,41 +57,41 @@ services:
       # - PGTZ=America/Los_Angeles
       - TZ=GMT-8
 
-  redis:
-    platform: linux/amd64
-    image: redis:5.0
-    mem_limit: '500000000'
-    mem_reservation: '500000000'
-    volumes:
-      - redis-data:/data
-  sidekiq:
-    platform: linux/amd64
-    image: auto-detail-app:latest
-    mem_limit: '500000000'
-    mem_reservation: '500000000'
-    command: ['bundle', 'exec', 'sidekiq']
-    volumes:
-      - ./:/usr/src/app:cached
-      - tmp:/usr/src/app/tmp
-      - gems:/usr/local/bundle
-    environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - REDIS_HOST=redis
-      - RAILS_ENV
-      # fixes sync of Time.now/Time.current
-      - TZ=America/Los_Angeles
-    tty: true
-    stdin_open: true
-  mailcatcher:
-    platform: linux/amd64
-    mem_limit: '500000000'
-    mem_reservation: '500000000'
-    image: yappabe/mailcatcher
-    ports:
-      - '1025:1025'
-      - '1080:1080'
+  # redis:
+  #   platform: linux/amd64
+  #   image: redis:5.0
+  #   mem_limit: '500000000'
+  #   mem_reservation: '500000000'
+  #   volumes:
+  #     - redis-data:/data
+  # sidekiq:
+  #   platform: linux/amd64
+  #   image: auto-detail-app:latest
+  #   mem_limit: '500000000'
+  #   mem_reservation: '500000000'
+  #   command: ['bundle', 'exec', 'sidekiq']
+  #   volumes:
+  #     - ./:/usr/src/app:cached
+  #     - tmp:/usr/src/app/tmp
+  #     - gems:/usr/local/bundle
+  #   environment:
+  #     - POSTGRES_HOST=db
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=password
+  #     - REDIS_HOST=redis
+  #     - RAILS_ENV
+  #     # fixes sync of Time.now/Time.current
+  #     - TZ=America/Los_Angeles
+  #   tty: true
+  #   stdin_open: true
+  # mailcatcher:
+  #   platform: linux/amd64
+  #   mem_limit: '500000000'
+  #   mem_reservation: '500000000'
+  #   image: yappabe/mailcatcher
+  #   ports:
+  #     - '1025:1025'
+  #     - '1080:1080'
   # stripe_cli:
   #   platform: linux/amd64
   #   # will prompt to authorize via link if authorization expired

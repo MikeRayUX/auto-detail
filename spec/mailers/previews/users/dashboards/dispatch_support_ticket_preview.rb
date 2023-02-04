@@ -1,4 +1,4 @@
-# Preview all emails at http://localhost:3001/rails/mailers/users/dashboards/dispatch_support_ticket
+# Preview all emails at http://localhost:3000/rails/mailers/users/dashboards/dispatch_support_ticket
 class Users::Dashboards::DispatchSupportTicketPreview < ActionMailer::Preview
 
   def send_email

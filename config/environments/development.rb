@@ -91,4 +91,4 @@ Rails.application.configure do
   # config.middleware.use(Rack::LiveReload, host: 'localhost', source: :vendored)
 end
 
-Rails.application.routes.default_url_options[:host] = 'localhost:3001'
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'
