@@ -77,7 +77,6 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '4.8.2'
   gem 'guard-rspec'
-  gem 'mailcatcher'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
 	gem 'parallel_tests'
